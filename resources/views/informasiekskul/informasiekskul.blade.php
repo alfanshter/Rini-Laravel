@@ -15,37 +15,31 @@
                         </div>
                     @endif
 
-                    @error('username')
+                    @error('kode_pelatih')
                     <div class="alert alert-danger mt-2" role="alert">
                         {{$message}}  
                     </div>                        
                     @enderror
 
-                    @error('name')
+                    @error('tempat_ekskul')
                     <div class="alert alert-danger mt-2" role="alert">
                         {{$message}}  
                     </div>                        
                     @enderror
 
-                    @error('nim')
+                    @error('jam')
                     <div class="alert alert-danger mt-2" role="alert">
                         {{$message}}  
                     </div>                        
                     @enderror
 
-                    @error('alamat')
+                    @error('jadwal')
                     <div class="alert alert-danger mt-2" role="alert">
                         {{$message}}  
                     </div>                        
                     @enderror
 
-                    @error('nohp')
-                    <div class="alert alert-danger mt-2" role="alert">
-                        {{$message}}  
-                    </div>                        
-                    @enderror
-
-                    @error('password')
+                    @error('kode_ekskul')
                     <div class="alert alert-danger mt-2" role="alert">
                         {{$message}}  
                     </div>                        
@@ -67,34 +61,41 @@
                                         @csrf
                                       <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Nama:</label>
-                                        <select class="form-select" aria-label="Default select example">
+                                        <select class="form-control" aria-label="Default select example" name="kode_ekskul" id="kode_ekskul">
                                             @foreach ($data_ekskul as $data)
-                                            <option value="{{$data->nama}}">{{$data->nama}}</option>
-                                                
+                                            <option value="{{$data->kode}}">{{$data->nama}}</option>                                                
                                             @endforeach
-                                          </select>
+                                        </select>
                                       </div>
                                       <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Kode Kepala Sekolah:</label>
-                                        <input type="text" class="form-control" id="nim" required name="nim" value="{{old('nim')}}">
+                                        <label for="recipient-name" class="col-form-label">Jadwal:</label>
+                                        <select class="form-control" aria-label="Default select example" name="jadwal" id="jadwal">
+                                            <option value="Senin">Senin</option>                                                
+                                            <option value="Selasa">Selasa</option>                                                
+                                            <option value="Rabu">Rabu</option>                                                
+                                            <option value="Kamis">Kamis</option>                                                
+                                            <option value="Jumat">Jumat</option>                                                
+                                            <option value="Sabtu">Sabtu</option>                                                
+                                            <option value="Minggu">Minggu</option>                                                
+                                        </select>
                                       </div>
                                       <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Nomor HP:</label>
-                                        <input type="number" class="form-control" id="nohp" required name="nohp" value="{{old('nim')}}">
+                                        <label for="recipient-name" class="col-form-label">Pukul:</label>
+                                        <input type="time" class="form-control" id="jam" required name="jam" value="{{old('jam')}}">
                                       </div>
 
                                       <div class="mb-3">
-                                        <label for="message-text" class="col-form-label">Alamat:</label>
-                                        <textarea class="form-control" id="alamat" required name="alamat" value="{{old('alamat')}}"></textarea>
+                                        <label for="message-text" class="col-form-label">Tempat:</label>
+                                        <textarea class="form-control" id="tempat_ekskul" required name="tempat_ekskul" value="{{old('tempat_ekskul')}}"></textarea>
                                       </div>
                                       <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Username:</label>
-                                        <input type="text" class="form-control" id="username" required name="username" value="{{old('username')}}">
-                                      </div>
+                                        <label for="recipient-name" class="col-form-label">Pelatih:</label>
+                                        <select class="form-control" aria-label="Default select example" name="kode_pelatih" id="kode_pelatih">
+                                            @foreach ($data_pelatih as $data)
+                                            <option value="{{$data->nim}}">{{$data->name}}</option>                                                
+                                            @endforeach
+                                        </select>
 
-                                      <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Password:</label>
-                                        <input type="text" class="form-control" id="password" required name="password">
                                       </div>
 
                                       <div class="modal-footer">
@@ -122,6 +123,7 @@
                                             <th>No</th>
                                             <th>Nama</th>
                                             <th>Jadwal</th>
+                                            <th>Jam</th>
                                             <th>Tempat</th>
                                             <th>Pelatih</th>
                                             <th>Action</th>
@@ -131,12 +133,11 @@
                                         @foreach ($informasiekskul as $data)
                                             <tr>
                                                 <td>{{$loop->iteration}}</td>                                        
+                                                <td>{{$data->nama}}</td>                                        
+                                                <td>{{$data->jadwal}}</td>                                        
+                                                <td>{{$data->jam}}</td>                                        
+                                                <td>{{$data->tempat_ekskul}}</td>                                        
                                                 <td>{{$data->name}}</td>                                        
-                                                <td>{{$data->alamat}}</td>                                        
-                                                <td>{{$data->username}}</td>                                        
-                                                <td>{{$data->nim}}</td>                                        
-                                                <td>{{$data->nohp}}</td>                                        
-                                                <td>{{$data->created_at}}</td>
                                                 <td class="align-middle text-center">
                                                 <div class="d-flex justify-content-sm-center mt-2">
                                                     

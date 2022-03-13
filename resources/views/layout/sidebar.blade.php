@@ -35,16 +35,20 @@
                     <span>Data Kepala Sekolah</span></a>
             </li>
 
-            <li class="nav-item {{Request::is('dataekskul') ? 'active' : ''}} ">
-                <a class="nav-link" href="/dataekskul">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Data Ekskul</span></a>
-            </li>
-
-            <li class="nav-item {{Request::is('informasiekskul') ? 'active' : ''}}" >
-                <a class="nav-link" href="/informasiekskul">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Informasi Ekskul</span></a>
+            <li class="nav-item {{Request::is('dataekskul') ? 'active' : ''}} {{Request::is('informasiekskul') ? 'active' : ''}}">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Ekskul</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Menu Ekskul:</h6>
+                        <a class="collapse-item" href="/dataekskul">Data Ekskul</a>
+                        <a class="collapse-item" href="/informasiekskul">Informasi Ekskul</a>
+                    </div>
+                </div>
             </li>
 
             <li class="nav-item">

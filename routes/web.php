@@ -65,3 +65,7 @@ Route::delete('/kepalasekolah/hapuskepalasekolah/{id}', [KepalaSekolahController
 
 //Informasi Ekskul
 Route::get('/informasiekskul', [InformasiEkskulController::class,'index'])->middleware('auth');
+Route::post('/informasiekskul', [InformasiEkskulController::class,'store'])->middleware('auth');
+Route::get('/informasiekskul/editinformasiekskul/{id}', [InformasiEkskulController::class,'edit'])->middleware('auth');
+Route::post('/informasiekskul/updateinformasiekskul', [InformasiEkskulController::class,'update'])->middleware('auth');
+Route::delete('/informasiekskul/hapusinformasiekskul/{id}', [InformasiEkskulController::class,'destroy'])->middleware('auth');
