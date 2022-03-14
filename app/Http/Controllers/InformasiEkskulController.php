@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataEkskul;
+use App\Models\Ekskul;
 use App\Models\InformasiEkskul;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,15 +12,30 @@ class InformasiEkskulController extends Controller
 {
     public function index()
     {
-        $get_data_ekskul = DataEkskul::all();
-        $data = DataEkskul::join('informasi_ekskuls', 'informasi_ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
-                            ->join('users','users.nim', '=', 'informasi_ekskuls.kode_pelatih')
-                            ->get(['data_ekskuls.nama','informasi_ekskuls.*','users.name']);
-        return view('informasiekskul.informasiekskul',[
-            'informasiekskul' => $data,
-            'data_ekskul' => $get_data_ekskul,
-            'data_pelatih' => User::where('role',2)->get()
-        ]);
+        if (auth()->user()->role == 1) {
+            $get_data_ekskul = DataEkskul::all();
+            $data = DataEkskul::join('informasi_ekskuls', 'informasi_ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
+                                ->join('users','users.nim', '=', 'informasi_ekskuls.kode_pelatih')
+                                ->get(['data_ekskuls.nama','informasi_ekskuls.*','users.name']);
+                    
+            return view('informasiekskul.informasiekskul',[
+                'informasiekskul' => $data,
+                'data_ekskul' => $get_data_ekskul,
+                'data_pelatih' => User::where('role',2)->get()
+            ]);
+    
+        }else if (auth()->user()->role == 0) {
+            $get_data_ekskul = DataEkskul::all();
+            $data = DataEkskul::join('informasi_ekskuls', 'informasi_ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
+                                ->join('users','users.nim', '=', 'informasi_ekskuls.kode_pelatih')
+                                ->get(['data_ekskuls.nama','informasi_ekskuls.*','users.name']);
+            return view('informasiekskul.informasiekskul',[
+                'informasiekskul' => $data,
+                'data_ekskul' => $get_data_ekskul,
+                'data_pelatih' => User::where('role',2)->get()
+            ]);
+    
+        }
 
     }
 

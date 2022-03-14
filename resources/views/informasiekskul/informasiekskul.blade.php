@@ -69,16 +69,7 @@
                                       </div>
                                       <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Jadwal:</label>
-                                        <select class="form-control" aria-label="Default select example" name="jadwal" id="jadwal">
-                                            <option value="Senin">Senin</option>                                                
-                                            <option value="Selasa">Selasa</option>                                                
-                                            <option value="Rabu">Rabu</option>                                                
-                                            <option value="Kamis">Kamis</option>                                                
-                                            <option value="Jumat">Jumat</option>                                                
-                                            <option value="Sabtu">Sabtu</option>                                                
-                                            <option value="Minggu">Minggu</option>                                                
-                                        </select>
-                                      </div>
+                                        <input type="text" class="form-control" id="jadwal" required name="jadwal" value="{{old('jadwal')}}">                                      </div>
                                       <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Pukul:</label>
                                         <input type="time" class="form-control" id="jam" required name="jam" value="{{old('jam')}}">
@@ -126,7 +117,13 @@
                                             <th>Jam</th>
                                             <th>Tempat</th>
                                             <th>Pelatih</th>
-                                            <th>Action</th>
+                                            @if (auth()->user()->role ==0)
+                                            <th>Action</th>                                                
+                                            @endif
+                                            @if (auth()->user()->role ==1)
+                                            <th>Action</th>                                                
+                                            @endif
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -137,7 +134,8 @@
                                                 <td>{{$data->jadwal}}</td>                                        
                                                 <td>{{$data->jam}}</td>                                        
                                                 <td>{{$data->tempat_ekskul}}</td>                                        
-                                                <td>{{$data->name}}</td>                                        
+                                                <td>{{$data->name}}</td>
+                                                @if (auth()->user()->role ==0)                                        
                                                 <td class="align-middle text-center">
                                                 <div class="d-flex justify-content-sm-center mt-2">
                                                     
@@ -149,7 +147,17 @@
                                                     </form>
 
                                                 </div>
-                                                </td>                                        
+                                                </td>               
+                                                @endif                         
+
+                                                @if (auth()->user()->role ==1)                                        
+                                                <td class="align-middle text-center">
+                                                <div class="d-flex justify-content-sm-center mt-2">
+                                                    <a href="ekskul/pendaftaran/{{$data->id}}" class="btn btn-primary">Register</a>
+                                                </div>
+                                                </td>               
+                                                @endif                         
+
 
                                             </tr>
                                         @endforeach

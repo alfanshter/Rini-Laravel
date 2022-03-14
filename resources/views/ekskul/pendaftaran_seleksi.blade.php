@@ -5,7 +5,7 @@
 
     
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Data Ekskul</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Pendaftaran Seleksi</h1>
                     @if (auth()->user()->role ==0)
                     <button class="btn btn-primary"  data-toggle="modal" data-target="#tambahsiswa">Tambah Ekskul</button>                        
                     @endif
@@ -35,16 +35,16 @@
                                 <div class="modal-body">
                                     <form action="/dataekskul" method="POST">
                                         @csrf
+                                      <div class="mb-3">
+                                        <label for="recipient-name" class="col-form-label">Nama:</label>
+                                        <input type="text" required class="form-control" id="nama" name="nama" value="{{old('nama')}}">
+                                      </div>
                                     
                                       <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Kode:</label>
                                         <input type="text" required class="form-control" id="kode" name="kode" value="{{old('kode')}}">
                                       </div>
 
-                                      <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Nama:</label>
-                                        <input type="text" required class="form-control" id="nama" name="nama" value="{{old('nama')}}">
-                                      </div>
 
                                       <div class="modal-footer">
                                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
@@ -69,27 +69,35 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Kode</th>
                                             <th>Nama</th>
-                                            <th>Tanggal Daftar</th>
+                                            <th>Kelas</th>
+                                            <th>Nama Ekskul</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($dataekskul as $data)
+                                        @foreach ($pendaftaran_seleksi as $data)
                                             <tr>
                                                 <td>{{$loop->iteration}}</td>                                        
-                                                <td>{{$data->kode}}</td>                                        
-                                                <td>{{$data->nama}}</td>                                        
-                                                <td>{{$data->created_at}}</td>                                        
+                                                <td>{{$data->name}}</td>                                        
+                                                <td>{{$data->kelas}}</td>                                        
+                                                <td>{{$data->nama_ekskul}}</td>                                        
                                                 <td class="align-middle text-center">
                                                 <div class="d-flex justify-content-sm-center mt-2">
                                                     
-                                                    <a href="dataekskul/editekskul/{{$data->id}}" class="btn btn-warning">Edit</a>
-                                                    <form action="/datasiswa/hapussiswa/{{$data->id}}" method="post">
-                                                        @method('delete')
+                                                    <form action="/pendaftaran_seleksi/updatestatus" method="post">
+                                                        @method('put')
                                                         @csrf
-                                                        <button class="btn btn-danger ml-2" onclick="return confirm('Apakah anda akan menghapus data ?')">Hapus</button>
+                                                        <input type="hidden" name="id" id="id" value="{{$data->id}}">
+                                                        <input type="hidden" name="is_status" id="is_status" value="2">
+                                                        <button class="btn btn-primary ml-2" onclick="return confirm('Apakah anda menyetujui ?')">Lulus</button>
+                                                    </form>
+                                                    <form action="/pendaftaran_seleksi/updatestatus" method="post">
+                                                        @method('put')
+                                                        @csrf
+                                                        <input type="hidden" name="id" id="id" value="{{$data->id}}">
+                                                        <input type="hidden" name="is_status" id="is_status" value="3">
+                                                        <button class="btn btn-danger ml-2" onclick="return confirm('Apakah anda menyetujui ?')">Tidak</button>
                                                     </form>
 
                                                 </div>

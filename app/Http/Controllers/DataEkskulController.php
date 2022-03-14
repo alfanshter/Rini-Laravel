@@ -67,9 +67,11 @@ class DataEkskulController extends Controller
      * @param  \App\Models\DataEkskul  $dataEkskul
      * @return \Illuminate\Http\Response
      */
-    public function edit(DataEkskul $dataEkskul)
+    public function edit($id)
     {
-        //
+        return view('ekskul.editekskul',[
+            'data_ekskul' => DataEkskul::where('id',$id)->first()
+        ]);
     }
 
     /**
@@ -79,9 +81,25 @@ class DataEkskulController extends Controller
      * @param  \App\Models\DataEkskul  $dataEkskul
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDataEkskulRequest $request, DataEkskul $dataEkskul)
+    public function update(Request $request)
     {
-        //
+        $rule = [
+            'kode' => 'required|max:255',
+            'nama' => ['required']
+         ];
+        //Apakah Kode sama ? 
+        $getekskul = DataEkskul::where('id',$request->id)->first();
+        if ($request->kode !=$getekskul->kode) {
+            $rule['kode'] = 'required|unique:data_ekskuls';
+        }
+
+        $validation = $request->validate($rule);
+
+        DataEkskul::where('id',$request->id)
+            ->update($validation);
+
+        return redirect('/dataekskul')->with('success','Update Informasi Ekskul Berhasil');
+
     }
 
     /**

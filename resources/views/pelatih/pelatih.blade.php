@@ -65,7 +65,7 @@
                                       </div>
                                       <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Nomor Pelatih:</label>
-                                        <input type="number" class="form-control" id="nim" name="nim" value="{{old('nim')}}">
+                                        <input type="text" class="form-control" id="nim" name="nim" value="{{old('nim')}}">
                                       </div>
                                       <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Nomor HP:</label>

@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataEkskulController;
 use App\Http\Controllers\DataPelatihController;
 use App\Http\Controllers\DataSiswaController;
+use App\Http\Controllers\EkskulController;
 use App\Http\Controllers\InformasiEkskulController;
 use App\Http\Controllers\KepalaSekolahController;
 use App\Http\Controllers\LoginController;
@@ -54,6 +55,8 @@ Route::delete('/datapelatih/hapuspelatih/{id}', [DataPelatihController::class,'d
 
 //Data Eksul
 Route::resource('/dataekskul',DataEkskulController::class)->middleware('auth');
+Route::get('/dataekskul/editekskul/{id}', [DataEkskulController::class,'edit'])->middleware('auth');
+Route::post('/dataekskul/updateekskul', [DataEkskulController::class,'update'])->middleware('auth');
 Route::get('/nilaisiswa', [NilaiSiswaController::class,'index'])->middleware('auth');
 
 //Kepala Sekolah
@@ -69,3 +72,9 @@ Route::post('/informasiekskul', [InformasiEkskulController::class,'store'])->mid
 Route::get('/informasiekskul/editinformasiekskul/{id}', [InformasiEkskulController::class,'edit'])->middleware('auth');
 Route::post('/informasiekskul/updateinformasiekskul', [InformasiEkskulController::class,'update'])->middleware('auth');
 Route::delete('/informasiekskul/hapusinformasiekskul/{id}', [InformasiEkskulController::class,'destroy'])->middleware('auth');
+
+//Eksul
+Route::get('/ekskul/pendaftaran/{id}', [EkskulController::class,'register'])->middleware('auth');
+Route::get('/pendaftaran_seleksi', [EkskulController::class,'pendaftaran_seleksi'])->middleware('auth');
+Route::post('/ekskul/pendaftaran', [EkskulController::class,'store'])->middleware('auth');
+Route::put('/pendaftaran_seleksi/updatestatus', [EkskulController::class,'update'])->middleware('auth');

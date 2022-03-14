@@ -2,11 +2,24 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Admin</div>
+                @if (auth()->user()->role ==0)
+                <div class="sidebar-brand-text mx-3">Admin</div>                    
+                @endif
+                @if (auth()->user()->role ==1)
+                <div class="sidebar-brand-text mx-3">Siswa</div>                    
+                @endif
+                @if (auth()->user()->role ==2)
+                <div class="sidebar-brand-text mx-3">Pelatih</div>                    
+                @endif
+                @if (auth()->user()->role ==3)
+                <div class="sidebar-brand-text mx-3">Kepala Sekolah</div>                    
+                @endif
+
+
             </a>
 
             <!-- Divider -->
@@ -97,10 +110,16 @@
                     <span>Biodata Siswa</span></a>
             </li>
 
-            <li class="nav-item {{Request::is('ekskul') ? 'active' : ''}} ">
-                <a class="nav-link" href="/ekskul">
+            <li class="nav-item {{Request::is('informasiekskul') ? 'active' : ''}} ">
+                <a class="nav-link" href="/informasiekskul">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Ekskul</span></a>
+                    <span>Informasi Ekskul</span></a>
+            </li>
+
+            <li class="nav-item {{Request::is('hasilseleksi') ? 'active' : ''}} ">
+                <a class="nav-link" href="/hasilseleksi">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Hasil Seleksi</span></a>
             </li>
 
             @endif
@@ -113,7 +132,19 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Biodata Pelatih</span></a>
             </li>
-                
+
+            <li class="nav-item {{Request::is('pendaftaran_seleksi') ? 'active' : ''}} ">
+                <a class="nav-link" href="/pendaftaran_seleksi">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Pendaftaran Seleksi</span></a>
+            </li>
+
+            <li class="nav-item {{Request::is('dataseleksi') ? 'active' : ''}} ">
+                <a class="nav-link" href="/dataseleksi">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Peserta Ekskul</span></a>
+            </li>
+
             @endif
             {{-- ==================== END PELATIH ===================== --}}
 
