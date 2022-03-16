@@ -72,6 +72,7 @@
                                             <th>Nama</th>
                                             <th>Kelas</th>
                                             <th>Nama Ekskul</th>
+                                            <th>Alasan</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -82,6 +83,7 @@
                                                 <td>{{$data->name}}</td>                                        
                                                 <td>{{$data->kelas}}</td>                                        
                                                 <td>{{$data->nama_ekskul}}</td>                                        
+                                                <td>{{$data->alasan}}</td>                                        
                                                 <td class="align-middle text-center">
                                                 <div class="d-flex justify-content-sm-center mt-2">
                                                     

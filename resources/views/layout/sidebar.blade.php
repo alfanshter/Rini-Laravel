@@ -116,8 +116,8 @@
                     <span>Informasi Ekskul</span></a>
             </li>
 
-            <li class="nav-item {{Request::is('hasilseleksi') ? 'active' : ''}} ">
-                <a class="nav-link" href="/hasilseleksi">
+            <li class="nav-item {{Request::is('hasil_seleksi') ? 'active' : ''}} ">
+                <a class="nav-link" href="/hasil_seleksi">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Hasil Seleksi</span></a>
             </li>
@@ -139,8 +139,8 @@
                     <span>Pendaftaran Seleksi</span></a>
             </li>
 
-            <li class="nav-item {{Request::is('dataseleksi') ? 'active' : ''}} ">
-                <a class="nav-link" href="/dataseleksi">
+            <li class="nav-item {{Request::is('daftar_ekskul') ? 'active' : ''}} ">
+                <a class="nav-link" href="/daftar_ekskul">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Peserta Ekskul</span></a>
             </li>

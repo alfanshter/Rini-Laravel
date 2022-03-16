@@ -28,6 +28,7 @@ return new class extends Migration
             $table->foreignId('id_informasi');
             $table->foreign('id_informasi')->references('id')->on('informasi_ekskuls')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('is_status')->default(0);
+            $table->string('alasan');
             $table->timestamps();
 
         });

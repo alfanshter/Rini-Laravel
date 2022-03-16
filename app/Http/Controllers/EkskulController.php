@@ -6,6 +6,7 @@ use App\Models\Ekskul;
 use App\Http\Requests\StoreEkskulRequest;
 use App\Http\Requests\UpdateEkskulRequest;
 use App\Models\DataEkskul;
+use App\Models\InformasiEkskul;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -78,13 +79,52 @@ class EkskulController extends Controller
 
     }
 
+    public function daftar_ekskul()
+    {
+   
+        $ekskul = InformasiEkskul::join('data_ekskuls','data_ekskuls.kode', '=','informasi_ekskuls.kode_ekskul')
+        ->where('informasi_ekskuls.kode_pelatih',auth()->user()->nim)
+        ->get();
+        return view('ekskul.daftar_ekskul',['ekskul' =>$ekskul]);
+    }
+
+    public function daftar_peserta($kode_ekskul)
+    {
+        $getpeserta = Ekskul::join('users','users.nim', '=' ,'ekskuls.nim_siswa')
+        ->join('data_ekskuls','data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
+        ->where('kode_ekskul',$kode_ekskul)
+        ->where('kode_pelatih', auth()->user()->nim)
+        ->where('is_status', 2)
+        ->get(['users.name','users.kelas','users.nim','data_ekskuls.nama','data_ekskuls.kode','ekskuls.id']);
+
+        return view('ekskul.daftar_peserta',['peserta'=>$getpeserta]);
+
+    }
+
+    public function delete_peserta(Request $request)
+    {
+       $delete = Ekskul::where('id',$request->id)->delete();
+
+        return redirect('/daftar_peserta/'.$request->kode)->with('success','Peserta dihapus');
+
+    }
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    
+    public function hasil_seleksi()
+    {
+        $hasil_seleksi =  Ekskul::join('users','users.nim','=','ekskuls.nim_siswa')
+            ->join('data_ekskuls','data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
+            ->where('nim_siswa',auth()->user()->nim)
+            ->get(['users.*','ekskuls.*','data_ekskuls.nama']);
+
+        return view('hasilseleksi.hasilseleksi',['hasil_seleksi'=> $hasil_seleksi]);
+    }
+     public function create()
     {
         //
     }
