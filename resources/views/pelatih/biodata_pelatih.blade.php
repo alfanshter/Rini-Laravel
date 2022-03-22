@@ -24,7 +24,7 @@
     <input type="text" class="form-control" id="name" name="name" value="{{old('name',$datapelatih->name)}}" disabled>
   </div>
   <div class="mb-3">
-    <label for="recipient-name" class="col-form-label">Nomor Pelatih:</label>
+    <label for="recipient-name" class="col-form-label">Kode Pelatih:</label>
     <input type="number" class="form-control" id="nim" name="nim" value="{{old('nim',$datapelatih->nim)}}" disabled>
   </div>
 

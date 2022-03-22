@@ -64,7 +64,7 @@
                                         <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}">
                                       </div>
                                       <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Nomor Pelatih:</label>
+                                        <label for="recipient-name" class="col-form-label">Kode Pelatih:</label>
                                         <input type="text" class="form-control" id="nim" name="nim" value="{{old('nim')}}">
                                       </div>
                                       <div class="mb-3">
@@ -112,7 +112,7 @@
                                             <th>Nama</th>
                                             <th>Alamat</th>
                                             <th>Username</th>
-                                            <th>Nomor Pelatih</th>
+                                            <th>Kode Pelatih</th>
                                             <th>Nomor HP</th>
                                             <th>Tanggal Daftar</th>
                                             <th>Action</th>

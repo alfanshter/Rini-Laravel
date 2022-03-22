@@ -101,7 +101,7 @@ class DataPelatihController extends Controller
     {
 
         User::destroy($id);
-        return redirect('/pelatih')->with('success', 'Pelatih berhasil di hapus ');
+            return redirect('/pelatih')->with('success', 'Pelatih berhasil di hapus ');
     }
 
 
