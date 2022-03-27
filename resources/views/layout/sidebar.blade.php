@@ -129,6 +129,12 @@
                     <span>Agenda</span></a>
             </li>
 
+            <li class="nav-item {{Request::is('prestasi') ? 'active' : ''}}"  >
+                <a class="nav-link" href="/prestasi">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Prestasi</span></a>
+            </li>
+
             @endif
             {{-- ==================== END SISWA ===================== --}}
 

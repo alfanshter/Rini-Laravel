@@ -23,6 +23,12 @@ class PrestasiController extends Controller
         if (auth()->user()->role == 0) {
             return view('prestasi.prestasi');
         }
+        else if (auth()->user()->role ==1) {
+            $prestasi = Prestasi::where('nama_peserta',auth()->user()->name)
+            ->get();
+            return view('prestasi.daftar_prestasi',['dataprestasi' =>$prestasi]);    
+        }
+
         else if (auth()->user()->role ==2) {
             $ekskul = InformasiEkskul::join('data_ekskuls','data_ekskuls.kode', '=','informasi_ekskuls.kode_ekskul')
             ->where('informasi_ekskuls.kode_pelatih',auth()->user()->nim)
