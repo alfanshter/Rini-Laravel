@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('alamat');
             $table->string('nohp')->nullable();
+            $table->string('jenis_kelamin')->nullable();
             $table->string('kelas')->nullable();
             $table->integer('role');
             $table->timestamp('email_verified_at')->nullable();

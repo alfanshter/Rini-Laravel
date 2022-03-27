@@ -64,20 +64,21 @@
                 </div>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="/datasiswa">
+            <li class="nav-item {{Request::is('hasil_seleksi') ? 'active' : ''}}">
+                <a class="nav-link" href="/hasil_seleksi">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Hasil Seleksi</span></a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="/datasiswa">
+            <li class="nav-item {{Request::is('daftar_agenda') ? 'active' : ''}} ">
+                <a class="nav-link" href="/daftar_agenda">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Agenda</span></a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="/datasiswa">
+
+            <li class="nav-item {{Request::is('prestasi') ? 'active' : ''}}"  >
+                <a class="nav-link" href="/prestasi">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Prestasi</span></a>
             </li>
@@ -122,6 +123,12 @@
                     <span>Hasil Seleksi</span></a>
             </li>
 
+            <li class="nav-item {{Request::is('daftar_agenda') ? 'active' : ''}} ">
+                <a class="nav-link" href="/daftar_agenda">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Agenda</span></a>
+            </li>
+
             @endif
             {{-- ==================== END SISWA ===================== --}}
 
@@ -143,6 +150,19 @@
                 <a class="nav-link" href="/daftar_ekskul">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Peserta Ekskul</span></a>
+            </li>
+
+            <li class="nav-item {{Request::is('daftar_agenda') ? 'active' : ''}} ">
+                <a class="nav-link" href="/daftar_agenda">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Agenda</span></a>
+            </li>
+
+            
+            <li class="nav-item {{Request::is('prestasi') ? 'active' : ''}}"  >
+                <a class="nav-link" href="/prestasi">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Prestasi</span></a>
             </li>
 
             @endif

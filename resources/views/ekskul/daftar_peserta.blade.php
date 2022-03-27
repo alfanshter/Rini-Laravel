@@ -23,8 +23,13 @@
                     
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4 mt-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Ekskul</h6>
+                        <div class="card-header py-3 d-flex">
+                            <h6 class="m-0 font-weight-bold text-primary p-2">Data Ekskul</h6>
+                            <form action="/cetakpdf_peserta" class=" ml-auto p-2" method="post">
+                            @csrf
+                            <input type="hidden" name="kode" id="kode" value="{{$kode_ekskul}}">
+                            <button type="submit"  class="btn btn-primary">Cetak Pdf</button>
+                            </form>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -34,6 +39,7 @@
                                             <th class="align-middle text-center">No</th>
                                             <th class="align-middle text-center">Nama</th>
                                             <th class="align-middle text-center">Kelas</th>
+                                            <th class="align-middle text-center">J/K</th>
                                             <th class="align-middle text-center">NISN</th>
                                             <th class="align-middle text-center">Nama Ekskul</th>
                                             <th class="align-middle text-center">Action</th>
@@ -45,6 +51,7 @@
                                             <td class="align-middle text-center">{{$loop->iteration}}</td>                                        
                                             <td class="align-middle text-center">{{$data->name}}</td>
                                             <td class="align-middle text-center">{{$data->kelas}}</td>
+                                            <td class="align-middle text-center">{{$data->jenis_kelamin}}</td>
                                             <td class="align-middle text-center">{{$data->nim}}</td>
                                             <td class="align-middle text-center">{{$data->nama}}</td>
                                             <td class="align-middle text-center">

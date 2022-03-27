@@ -25,6 +25,7 @@ class DataSiswaController extends Controller
             'kelas' => ['required'],
             'nim' => ['required','unique:users'],
             'password' => ['required','min:5'],
+            'jenis_kelamin' => ['required']
         ]);
 
         $validatedData['password'] = Hash::make($validatedData['password']);

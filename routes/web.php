@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataEkskulController;
 use App\Http\Controllers\DataPelatihController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\InformasiEkskulController;
 use App\Http\Controllers\KepalaSekolahController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NilaiSiswaController;
+use App\Http\Controllers\PrestasiController;
 use App\Http\Controllers\RegisterController;
 use App\Models\DataEkskul;
 use Illuminate\Support\Facades\Route;
@@ -82,3 +84,16 @@ Route::get('/daftar_peserta/{kode_ekskul}', [EkskulController::class,'daftar_pes
 Route::post('/ekskul/pendaftaran', [EkskulController::class,'store'])->middleware('auth');
 Route::post('/delete_peserta', [EkskulController::class,'delete_peserta'])->middleware('auth');
 Route::put('/pendaftaran_seleksi/updatestatus', [EkskulController::class,'update'])->middleware('auth');
+Route::post('/cetakpdf_peserta', [EkskulController::class,'peserta_cetakpdf'])->middleware('auth');
+
+//Agenda
+Route::get('/daftar_agenda/{nama}', [AgendaController::class,'index'])->middleware('auth');
+Route::post('/post_agenda', [AgendaController::class,'store'])->middleware('auth');
+Route::post('/updateagenda', [AgendaController::class,'updateagenda'])->middleware('auth');
+Route::get('/agenda/{id}', [AgendaController::class,'edit'])->middleware('auth');
+Route::delete('/agenda/hapusagenda/{id}', [AgendaController::class,'destroy'])->middleware('auth');
+Route::get('/daftar_agenda', [AgendaController::class,'daftar_agenda'])->middleware('auth');
+Route::get('/cetakpdf_agenda_pelatih/{nama}', [AgendaController::class,'cetakpdf_agenda_pelatih'])->middleware('auth');
+
+//Prestasi
+Route::get('/prestasi', [PrestasiController::class,'index'])->middleware('auth');

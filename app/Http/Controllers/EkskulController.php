@@ -10,7 +10,7 @@ use App\Models\InformasiEkskul;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 class EkskulController extends Controller
 {
     /**
@@ -30,7 +30,7 @@ class EkskulController extends Controller
         ->join('users','users.nim', '=', 'ekskuls.nim_siswa')
         ->where('ekskuls.kode_pelatih',auth()->user()->nim)
         ->where('ekskuls.is_status',1)
-        ->get(['users.name','users.kelas','informasi_ekskuls.*','data_ekskuls.nama as nama_ekskul','ekskuls.*']);
+        ->get(['users.name','users.kelas','users.jenis_kelamin','informasi_ekskuls.*','data_ekskuls.nama as nama_ekskul','ekskuls.*']);
         return view('ekskul.pendaftaran_seleksi',[
             'pendaftaran_seleksi' => $pendaftaran_seleksi
         ]);
@@ -95,10 +95,25 @@ class EkskulController extends Controller
         ->where('kode_ekskul',$kode_ekskul)
         ->where('kode_pelatih', auth()->user()->nim)
         ->where('is_status', 2)
+        ->get(['users.name','users.kelas','users.nim','users.jenis_kelamin','data_ekskuls.nama','data_ekskuls.kode','ekskuls.id']);
+        
+        return view('ekskul.daftar_peserta',['peserta'=>$getpeserta,'kode_ekskul'=> $kode_ekskul]);
+
+    }
+
+    public function peserta_cetakpdf(Request $request)
+    {
+        $getpeserta = Ekskul::join('users','users.nim', '=' ,'ekskuls.nim_siswa')
+        ->join('data_ekskuls','data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
+        ->where('kode_ekskul',$request->kode)
+        ->where('kode_pelatih', auth()->user()->nim)
+        ->where('is_status', 2)
         ->get(['users.name','users.kelas','users.nim','data_ekskuls.nama','data_ekskuls.kode','ekskuls.id']);
-
-        return view('ekskul.daftar_peserta',['peserta'=>$getpeserta]);
-
+      
+        $pdf = PDF::loadview('ekskul.peserta_cetakpdf',[
+            'peserta'=>$getpeserta        
+        ]);
+        return $pdf->stream();
     }
 
     public function delete_peserta(Request $request)
@@ -117,12 +132,21 @@ class EkskulController extends Controller
     
     public function hasil_seleksi()
     {
-        $hasil_seleksi =  Ekskul::join('users','users.nim','=','ekskuls.nim_siswa')
+        if (auth()->user()->role==1) {
+            $hasil_seleksi =  Ekskul::join('users','users.nim','=','ekskuls.nim_siswa')
             ->join('data_ekskuls','data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
             ->where('nim_siswa',auth()->user()->nim)
             ->get(['users.*','ekskuls.*','data_ekskuls.nama']);
 
         return view('hasilseleksi.hasilseleksi',['hasil_seleksi'=> $hasil_seleksi]);
+        }else if ( auth()->user()->role ==0){
+            $hasil_seleksi =  Ekskul::join('users','users.nim','=','ekskuls.nim_siswa')
+            ->join('data_ekskuls','data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
+            ->get(['users.*','ekskuls.*','data_ekskuls.nama']);
+
+        return view('hasilseleksi.hasilseleksi',['hasil_seleksi'=> $hasil_seleksi]);
+
+        }
     }
      public function create()
     {

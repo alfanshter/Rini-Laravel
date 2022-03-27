@@ -33,6 +33,12 @@
                     </div>                        
                     @enderror
 
+                    @error('jenis_kelamin')
+                    <div class="alert alert-danger mt-2" role="alert">
+                        {{$message}}  
+                    </div>                        
+                    @enderror
+
                     @error('alamat')
                     <div class="alert alert-danger mt-2" role="alert">
                         {{$message}}  
@@ -77,6 +83,15 @@
                                         <label for="message-text" class="col-form-label">Alamat:</label>
                                         <textarea class="form-control" id="alamat" name="alamat" value="{{old('alamat')}}"></textarea>
                                       </div>
+
+                                      <div class="mb-3">
+                                        <label for="message-text" class="col-form-label">Jenis Kelamin:</label>
+                                        <select class="form-control" aria-label="Default select example" name="jenis_kelamin" id="jenis_kelamin">
+                                            <option value="P">P</option>                                                
+                                            <option value="L">L</option>                                                
+                                        </select>
+                                      </div>
+
                                       <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Username:</label>
                                         <input type="text" class="form-control" id="username" name="username" value="{{old('username')}}">
@@ -115,6 +130,7 @@
                                             <th>Username</th>
                                             <th>Kelas</th>
                                             <th>NISN</th>
+                                            <th>JK</th>
                                             <th>Tanggal Daftar</th>
                                             <th>Action</th>
                                         </tr>
@@ -128,6 +144,7 @@
                                                 <td>{{$data->username}}</td>                                        
                                                 <td>{{$data->kelas}}</td>                                        
                                                 <td>{{$data->nim}}</td>                                        
+                                                <td>{{$data->jenis_kelamin}}</td>                                        
                                                 <td>{{$data->created_at}}</td>
                                                 <td class="align-middle text-center">
                                                 <div class="d-flex justify-content-sm-center mt-2">
