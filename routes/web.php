@@ -97,3 +97,8 @@ Route::get('/cetakpdf_agenda_pelatih/{nama}', [AgendaController::class,'cetakpdf
 
 //Prestasi
 Route::get('/prestasi', [PrestasiController::class,'index'])->middleware('auth');
+Route::get('/daftar_prestasi/{nama}', [PrestasiController::class,'daftar_prestasi'])->middleware('auth');
+Route::post('/prestasi', [PrestasiController::class,'store'])->middleware('auth');
+Route::post('/update_prestasi', [PrestasiController::class,'update'])->middleware('auth');
+Route::get('/prestasi/{id}', [PrestasiController::class,'edit'])->middleware('auth');
+Route::delete('/prestasi/hapusprestasi/{id}', [PrestasiController::class,'destroy'])->middleware('auth');

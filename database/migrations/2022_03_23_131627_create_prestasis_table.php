@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('prestasi');
             $table->string('nama_pelatih');
             $table->string('id_pelatih');
-            $table->foreign('id_pelatih')->references('nim')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->date('tanggal');
             $table->timestamps();
         });
