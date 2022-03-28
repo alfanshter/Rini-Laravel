@@ -10,6 +10,7 @@ use App\Http\Controllers\InformasiEkskulController;
 use App\Http\Controllers\KepalaSekolahController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NilaiSiswaController;
+use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\PrestasiController;
 use App\Http\Controllers\RegisterController;
 use App\Models\DataEkskul;
@@ -102,3 +103,10 @@ Route::post('/prestasi', [PrestasiController::class,'store'])->middleware('auth'
 Route::post('/update_prestasi', [PrestasiController::class,'update'])->middleware('auth');
 Route::get('/prestasi/{id}', [PrestasiController::class,'edit'])->middleware('auth');
 Route::delete('/prestasi/hapusprestasi/{id}', [PrestasiController::class,'destroy'])->middleware('auth');
+
+//Pengumuman
+Route::get('/pengumuman', [PengumumanController::class,'index'])->middleware('auth');
+Route::get('/pengumuman/{id}', [PengumumanController::class,'edit'])->middleware('auth');
+Route::post('/pengumuman', [PengumumanController::class,'store'])->middleware('auth');
+Route::post('/pengumuman/update', [PengumumanController::class,'update'])->middleware('auth');
+Route::post('/pengumuman/delete', [PengumumanController::class,'delete'])->middleware('auth');
