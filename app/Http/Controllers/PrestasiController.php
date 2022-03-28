@@ -21,7 +21,9 @@ class PrestasiController extends Controller
     public function index()
     {
         if (auth()->user()->role == 0) {
-            return view('prestasi.prestasi');
+            $ekskul = InformasiEkskul::join('data_ekskuls','data_ekskuls.kode', '=','informasi_ekskuls.kode_ekskul')
+            ->get();
+            return view('prestasi.prestasi',['prestasi' =>$ekskul]);    
         }
         else if (auth()->user()->role ==1) {
             $prestasi = Prestasi::where('nama_peserta',auth()->user()->name)
@@ -71,12 +73,30 @@ class PrestasiController extends Controller
             ]);
         }
         else if (auth()->user()->role ==0) {
-            $data_agenda = Agenda::join('data_ekskuls','data_ekskuls.nama','=','agendas.nama_ekskul')
-            ->join('users','users.nim','=','agendas.id_pelatih')
-            ->where('agendas.nama_ekskul',$nama)
+            //idpelatih
+            $namapelatih = DB::table('data_ekskuls')
+                            ->select(['ekskuls.kode_pelatih as id_pelatih','users.nim as nama_pelatih'])
+                            ->join('ekskuls','ekskuls.kode_ekskul','=','data_ekskuls.kode')
+                            ->join('users','users.nim','=','ekskuls.kode_pelatih')
+                            ->where('data_ekskuls.nama',$nama)
+                            ->first();
+
+            //nama peserta
+            $nama_peserta = Ekskul::join('users','users.nim', '=' ,'ekskuls.nim_siswa')
+            ->join('data_ekskuls','data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
+            ->where('data_ekskuls.nama',$nama)
+            ->where('data_ekskuls.nama', $nama)
+            ->where('is_status', 2)
+            ->get(['users.name']);
+
+            $data_prestasi = Prestasi::where('nama_ekskuls',$nama)
             ->get();
-            return view('agenda.agenda',[
-                'dataagenda' => $data_agenda
+
+            return view('prestasi.daftar_prestasi',[
+                'dataprestasi' => $data_prestasi,
+                'nama_ekskul' => $nama,
+                'nama_peserta' => $nama_peserta,
+                'pelatih' => $namapelatih
             ]);
         }
 

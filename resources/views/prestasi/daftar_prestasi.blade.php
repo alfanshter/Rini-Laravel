@@ -65,6 +65,71 @@
                     </div>
                     </div>
                     @endif
+
+                    @if (auth()->user()->role ==0)
+                    <button class="btn btn-primary"  data-toggle="modal" data-target="#tambahmateri">Tambah Prestasi</button>                        
+                    <!-- Tambah Prestasi-->
+                    <div class="modal fade" id="tambahmateri" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Tambah Prestasi ?</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/prestasi" method="POST">
+                                    @csrf
+                                    @if (auth()->user()->role ==2)
+                                    <input type="hidden" name="id_pelatih" value="{{auth()->user()->nim}}" id="id_pelatih">
+                                    <input type="hidden" name="nama_ekskuls" value="{{$nama_ekskul}}" id="nama_ekskuls">
+                                    <input type="hidden" name="nama_pelatih" value="{{auth()->user()->name}}" id="nama_pelatih">
+                                    @endif
+                                    @if (auth()->user()->role ==0)
+                                    <input type="hidden" name="id_pelatih" value="{{$pelatih->id_pelatih}}" id="id_pelatih">
+                                    <input type="hidden" name="nama_ekskuls" value="{{$nama_ekskul}}" id="nama_ekskuls">
+                                    <input type="hidden" name="nama_pelatih" value="{{$pelatih->nama_pelatih}}" id="nama_pelatih">                                        
+                                    @endif
+                                    <div class="mb-3">
+                                    <label for="recipient-name" class="col-form-label">Nama Peserta:</label>
+                                    <select class="form-control" aria-label="Default select example" name="nama_peserta" id="nama_peserta">
+                                        @foreach ($nama_peserta as $data)
+                                        <option value="{{$data->name}}">{{$data->name}}</option>                                                
+                                        @endforeach
+                                    </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="recipient-name" class="col-form-label">Prestasi:</label>
+                                        <input type="text" class="form-control" id="prestasi" required name="prestasi" value="{{old('prestasi')}}">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="recipient-name" class="col-form-label">Tanggal:</label>
+                                        <input type="date" class="form-control" id="tanggal" required name="tanggal" value="{{old('tanggal')}}">
+    
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="recipient-name" class="col-form-label">Nama Lomba:</label>
+                                        <input type="text" class="form-control" id="nama_lomba" required name="nama_lomba" value="{{old('nama_lomba')}}">
+                                    </div>
+
+                                    <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Tambah</button>
+
+                                </div>
+                                </form>
+                                </div>
+                            
+
+                        </div>
+                    </div>
+                    </div>
+                    @endif
                  
 
                     @if (session()->has('success'))
