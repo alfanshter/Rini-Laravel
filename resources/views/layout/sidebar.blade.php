@@ -135,6 +135,13 @@
                     <span>Prestasi</span></a>
             </li>
 
+            
+            <li class="nav-item {{Request::is('pengumuman') ? 'active' : ''}}"  >
+                <a class="nav-link" href="/pengumuman">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Pengumuman</span></a>
+            </li>
+
             @endif
             {{-- ==================== END SISWA ===================== --}}
 
