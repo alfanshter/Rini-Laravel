@@ -138,6 +138,22 @@
                                         @endforeach
                                     </tbody>
                                     @endif
+
+                                    @if (auth()->user()->role ==2)
+                                    <tbody>
+                                        @foreach ($pengumuman as $data)
+                                        <tr>
+                                            <td>{{$loop->iteration}}</td>
+                                            <td>{{$data->keterangan}}</td>
+                                            <td>{{$data->nama_pengumuman}}</td>
+                                            <td><a href="{{asset('storage/'.$data->file_pdf)}}" download="{{$data->file_pdf}}">
+                                                <p>Download Pdf</p>
+                                              </a>
+                                            </td>
+                                        </tr>                                            
+                                        @endforeach
+                                    </tbody>
+                                    @endif
                                 </table>
                             </div>
                         </div>
