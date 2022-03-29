@@ -25,6 +25,17 @@ class NilaiController extends Controller
 
         }
 
+        else if (auth()->user()->role ==1) {
+            $ekskul = DB::table('ekskuls')
+                ->join('data_ekskuls','data_ekskuls.kode','=','ekskuls.kode_ekskul')
+                ->where('nim_siswa',auth()->user()->nim)
+                ->where('is_status',2)
+                ->get();
+            
+        return view('nilai.daftarnilai',['ekskul' =>$ekskul]);    
+
+        }
+
     }
 
     public function store(Request $request)
@@ -64,24 +75,35 @@ class NilaiController extends Controller
 
     public function daftar_nilai($nama_ekskul)
     {
-         //nama siswa
-         $nama_siswa = Ekskul::join('users','users.nim', '=' ,'ekskuls.nim_siswa')
-         ->join('data_ekskuls','data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
-         ->where('data_ekskuls.nama',$nama_ekskul)
-         ->where('kode_pelatih', auth()->user()->nim)
-         ->where('is_status', 2)
-         ->get(['users.name','users.nim']);
+        if (auth()->user()->role ==2) {
+            //nama siswa
+            $nama_siswa = Ekskul::join('users','users.nim', '=' ,'ekskuls.nim_siswa')
+            ->join('data_ekskuls','data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
+            ->where('data_ekskuls.nama',$nama_ekskul)
+            ->where('kode_pelatih', auth()->user()->nim)
+            ->where('is_status', 2)
+            ->get(['users.name','users.nim']);
 
-        $nilai = DB::table('nilais')
-                ->where('id_pelatih', auth()->user()->nim)
-                ->where('nama_ekskul', $nama_ekskul)
-                ->get();
-            
-        return view('nilai.nilai',
-            ['nilai' =>$nilai,
-            'nama_siswa' => $nama_siswa,
-            'nama_ekskul' => $nama_ekskul
-            ]);    
+            $nilai = DB::table('nilais')
+                    ->where('id_pelatih', auth()->user()->nim)
+                    ->where('nama_ekskul', $nama_ekskul)
+                    ->get();
+                
+            return view('nilai.nilai',
+                ['nilai' =>$nilai,
+                'nama_siswa' => $nama_siswa,
+                'nama_ekskul' => $nama_ekskul
+                ]);   
+        } else if (auth()->user()->role ==1){
+            $nilai = DB::table('nilais')
+            ->where('id_siswa', auth()->user()->nim)
+            ->where('nama_ekskul', $nama_ekskul)
+            ->get();
+
+            return view('nilai.nilai',
+            ['nilai' =>$nilai            ]);   
+
+        }
     }
 
     public function destroy($id)

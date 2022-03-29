@@ -165,7 +165,6 @@
                                             @endif
                                         </tr>
                                     </thead>
-                                    @if (auth()->user()->role ==2)
                                     <tbody>
                                         @foreach ($nilai as $data)
                                         <tr>
@@ -188,6 +187,7 @@
                                             </td>
                                             <td>{{$data->tahun_ajaran}}</td>
                                             <td>{{$data->semester}}</td>
+                                            @if (auth()->user()->role ==2)
                                             <td class="align-middle text-center">
                                                 <div class="d-flex justify-content-sm-center mt-2">
                                                 
@@ -203,10 +203,11 @@
                                                 </td>                                        
 
 
+
+                                            @endif
                                         </tr>                                            
                                         @endforeach
                                     </tbody>
-                                    @endif
 
                                
                                 </table>
