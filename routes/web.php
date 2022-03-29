@@ -119,3 +119,4 @@ Route::post('/nilai', [NilaiController::class,'store'])->middleware('auth');
 Route::get('/data_nilai/{nama_ekskul}', [NilaiController::class,'daftar_nilai'])->middleware('auth');
 Route::delete('/hapusnilai/{id}', [NilaiController::class,'destroy'])->middleware('auth');
 Route::post('/update_nilai', [NilaiController::class,'update'])->middleware('auth');
+Route::get('/cetakpdf_nilai/{nama}', [NilaiController::class,'cetakpdf_nilai'])->middleware('auth');

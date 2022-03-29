@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateNilaiRequest;
 use App\Models\DataEkskul;
 use App\Models\Ekskul;
 use App\Models\InformasiEkskul;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -116,6 +117,22 @@ class NilaiController extends Controller
     
         }
 
+    }
+
+    public function cetakpdf_nilai($nama_ekskul)
+    {
+        if (auth()->user()->role == 2) {
+
+            $nilai = Nilai::where('nama_ekskul',$nama_ekskul)
+                    ->select(['nilais.*','users.kelas'])
+                    ->join('users','users.nim','=','nilais.id_siswa')
+                    ->get();
+
+            $pdf = Pdf::loadview('nilai.nilai_cetakpdf',[
+                'nilai'=>$nilai        
+            ]);
+            return $pdf->stream();
+        }
     }
 
 
