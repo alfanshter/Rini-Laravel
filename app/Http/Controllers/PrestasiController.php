@@ -26,8 +26,8 @@ class PrestasiController extends Controller
             return view('prestasi.prestasi',['prestasi' =>$ekskul]);    
         }
         else if (auth()->user()->role ==1) {
-            $prestasi = Prestasi::where('nama_peserta',auth()->user()->name)
-            ->get();
+            $prestasi = Prestasi::all();
+        
             return view('prestasi.daftar_prestasi',['dataprestasi' =>$prestasi]);    
         }
 

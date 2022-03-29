@@ -9,6 +9,7 @@ use App\Http\Controllers\EkskulController;
 use App\Http\Controllers\InformasiEkskulController;
 use App\Http\Controllers\KepalaSekolahController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\NilaiSiswaController;
 use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\PrestasiController;
@@ -110,3 +111,6 @@ Route::get('/pengumuman/{id}', [PengumumanController::class,'edit'])->middleware
 Route::post('/pengumuman', [PengumumanController::class,'store'])->middleware('auth');
 Route::post('/pengumuman/update', [PengumumanController::class,'update'])->middleware('auth');
 Route::post('/pengumuman/delete', [PengumumanController::class,'delete'])->middleware('auth');
+
+//Nilai
+Route::get('/nilai', [NilaiController::class,'index'])->middleware('auth');

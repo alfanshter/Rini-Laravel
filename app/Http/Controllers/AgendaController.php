@@ -147,15 +147,28 @@ class AgendaController extends Controller
 
     public function cetakpdf_agenda_pelatih($nama)
     {
-        $data_agenda = Agenda::join('users','users.nim','=','agendas.id_pelatih')
+        if (auth()->user()->role == 2) {
+            $data_agenda = Agenda::join('users','users.nim','=','agendas.id_pelatih')
             ->where('id_pelatih',auth()->user()->nim)
             ->where('nama_ekskul',$nama)
             ->get(['users.name','agendas.*']);
     
-        $pdf = PDF::loadview('agenda.agenda_cetakpdf',[
-            'agenda'=>$data_agenda        
-        ]);
-        return $pdf->stream();
+            $pdf = PDF::loadview('agenda.agenda_cetakpdf',[
+                'agenda'=>$data_agenda        
+            ]);
+            return $pdf->stream();
+        }else if (auth()->user()->role == 0) {
+            $data_agenda = Agenda::join('users','users.nim','=','agendas.id_pelatih')
+            ->where('nama_ekskul',$nama)
+            ->get(['users.name','agendas.*']);
+    
+            $pdf = PDF::loadview('agenda.agenda_cetakpdf',[
+                'agenda'=>$data_agenda        
+            ]);
+            return $pdf->stream();
+
+        }
+
     }
     
 

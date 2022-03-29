@@ -83,8 +83,8 @@
                     <span>Prestasi</span></a>
             </li>
 
-            <li class="nav-item {{Request::is('nilaisiswa') ? 'active' : ''}}">
-                <a class="nav-link" href="/nilaisiswa">
+            <li class="nav-item {{Request::is('nilai') ? 'active' : ''}}"  >
+                <a class="nav-link" href="/nilai">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Nilai</span></a>
             </li>

@@ -118,7 +118,7 @@
       </tr>
       <br><br><br><br>
       <tr>
-        <td id="tabel1" style="text-align: center">Dra. Yeni Haryanti</td>
+        <td id="tabel1" style="text-align: center">Dra. Rini</td>
       </tr>
       <tr>
         <td id="tabel1" style="text-align: center">NIP.196612071993032007</td>
