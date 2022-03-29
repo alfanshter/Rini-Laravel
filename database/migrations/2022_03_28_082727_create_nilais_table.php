@@ -18,10 +18,12 @@ return new class extends Migration
             $table->integer('nilai');
             $table->string('id_pelatih');
             $table->string('nama_pelatih');
-            $table->integer('id_ekskul');
+            $table->string('id_ekskul');
             $table->string('nama_ekskul');
             $table->string('id_siswa');
             $table->string('nama_siswa');
+            $table->string('tahun_ajaran');
+            $table->string('semester');
             $table->timestamps();
         });
     }
