@@ -214,6 +214,34 @@
             @endif
             {{-- ==================== END PELATIH ===================== --}}
 
+            {{-- ==================== KEPALA SEKOLAH ===================== --}}
+            @if (auth()->user()->role ==3)
+            <li class="nav-item {{Request::is('absen') ? 'active' : ''}}"  >
+                <a class="nav-link" href="/absen">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Absen</span></a>
+            </li>     
+
+            <li class="nav-item {{Request::is('nilai') ? 'active' : ''}}"  >
+                <a class="nav-link" href="/nilai">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Nilai</span></a>
+            </li>
+
+            
+            <li class="nav-item {{Request::is('daftar_agenda') ? 'active' : ''}} ">
+                <a class="nav-link" href="/daftar_agenda">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Agenda</span></a>
+            </li>
+
+
+                
+            @endif
+
+            {{-- ==================== END KEPALA SEKOLAH ===================== --}}
+
+
                         <!-- Nav Item - Pages Collapse Menu -->
 
 

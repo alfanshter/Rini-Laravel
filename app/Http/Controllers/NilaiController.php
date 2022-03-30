@@ -25,7 +25,14 @@ class NilaiController extends Controller
 
         }
 
-        if (auth()->user()->role ==0) {
+        else if (auth()->user()->role ==0) {
+            $ekskul = InformasiEkskul::join('data_ekskuls','data_ekskuls.kode', '=','informasi_ekskuls.kode_ekskul')
+            ->get();
+            return view('nilai.daftarnilai',['ekskul' =>$ekskul]);    
+
+        }
+
+        else if (auth()->user()->role ==3) {
             $ekskul = InformasiEkskul::join('data_ekskuls','data_ekskuls.kode', '=','informasi_ekskuls.kode_ekskul')
             ->get();
             return view('nilai.daftarnilai',['ekskul' =>$ekskul]);    
@@ -184,6 +191,39 @@ class NilaiController extends Controller
             ['nilai' =>$nilai            ]);   
 
         }
+
+        else if (auth()->user()->role ==3) {
+            //idpelatih
+            $namapelatih = DB::table('data_ekskuls')
+            ->select(['ekskuls.kode_pelatih as id_pelatih','users.name as nama_pelatih'])
+            ->join('ekskuls','ekskuls.kode_ekskul','=','data_ekskuls.kode')
+            ->join('users','users.nim','=','ekskuls.kode_pelatih')
+            ->where('data_ekskuls.nama',$nama_ekskul)
+            ->first();
+           
+           //nama siswa
+           $nama_siswa = Ekskul::join('users','users.nim', '=' ,'ekskuls.nim_siswa')
+           ->join('data_ekskuls','data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
+           ->where('data_ekskuls.nama',$nama_ekskul)
+           ->where('data_ekskuls.nama', $nama_ekskul)
+           ->where('is_status', 2)
+           ->get(['users.name','users.nim']);
+           
+
+
+           $nilai = DB::table('nilais')
+                   ->where('id_pelatih',$namapelatih->id_pelatih)
+                   ->where('nama_ekskul', $nama_ekskul)
+                   ->get();
+
+               
+           return view('nilai.nilai',
+               ['nilai' =>$nilai,
+               'nama_siswa' => $nama_siswa,
+               'namapelatih' => $namapelatih,
+               'nama_ekskul' => $nama_ekskul
+               ]);   
+       }
     }
 
     public function destroy($id)

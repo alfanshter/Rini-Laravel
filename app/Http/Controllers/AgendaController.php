@@ -50,6 +50,17 @@ class AgendaController extends Controller
             ]);
         }
 
+        else if (auth()->user()->role ==3) {
+            $data_agenda = Agenda::join('data_ekskuls','data_ekskuls.nama','=','agendas.nama_ekskul')
+            ->join('users','users.nim','=','agendas.id_pelatih')
+            ->where('agendas.nama_ekskul',$nama)
+            ->get();
+            return view('agenda.agenda',[
+                'dataagenda' => $data_agenda
+            ]);
+        }
+
+
 
     }
 
@@ -143,6 +154,13 @@ class AgendaController extends Controller
             return view('agenda.daftar_agenda',['agenda' =>$ekskul]);    
         }
 
+        else if (auth()->user()->role ==3) {
+            $ekskul = InformasiEkskul::join('data_ekskuls','data_ekskuls.kode', '=','informasi_ekskuls.kode_ekskul')
+            ->get();
+            return view('agenda.daftar_agenda',['agenda' =>$ekskul]);    
+        }
+
+
     }
 
     public function cetakpdf_agenda_pelatih($nama)
@@ -157,7 +175,7 @@ class AgendaController extends Controller
                 'agenda'=>$data_agenda        
             ]);
             return $pdf->stream();
-        }else if (auth()->user()->role == 0) {
+        }else if (auth()->user()->role == 0 || auth()->user()->role == 3) {
             $data_agenda = Agenda::join('users','users.nim','=','agendas.id_pelatih')
             ->where('nama_ekskul',$nama)
             ->get(['users.name','agendas.*']);
