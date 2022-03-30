@@ -238,7 +238,11 @@
                                         <tr>
                                             <td>{{$loop->iteration}}</td>
                                             <td>{{$data->nama_siswa}}</td>
-                                            <td>{{$data->kelas}}</td>
+                                            @if (auth()->user()->role ==1)
+                                            <td>{{auth()->user()->kelas}}</td>
+                                            @else
+                                            <td>{{$data->kelas}}</td>                                                
+                                            @endif
                                             @if ($data->absen == 1)
                                             <td>Masuk</td>                                                
                                             @endif

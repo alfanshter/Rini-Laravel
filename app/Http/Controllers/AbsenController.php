@@ -25,6 +25,17 @@ class AbsenController extends Controller
             return view('absen.daftarabsen',['ekskul' =>$ekskul]);    
         }
 
+        else if (auth()->user()->role ==1) {
+            $ekskul = DB::table('ekskuls')
+            ->join('data_ekskuls','data_ekskuls.kode','=','ekskuls.kode_ekskul')
+            ->where('nim_siswa',auth()->user()->nim)
+            ->where('is_status',2)
+            ->get();
+
+            return view('absen.daftarabsen',['ekskul' =>$ekskul]);    
+        }
+
+
    
     }
 
@@ -88,7 +99,20 @@ class AbsenController extends Controller
                 'nama_ekskul' => $nama_ekskul
                 ]);   
 
+       }
+       else if (auth()->user()->role ==1){
+        $absen = DB::table('absens')
+        ->where('id_siswa', auth()->user()->nim)
+        ->where('nama_ekskul', $nama_ekskul)
+        ->get();
+
+        return view('absen.absen',
+        ['absen' =>$absen,
+        'nama_ekskul' => $nama_ekskul
+        ]);   
+
     }
+
 
     }
 
