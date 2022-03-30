@@ -15,6 +15,7 @@ use App\Http\Controllers\NilaiSiswaController;
 use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\PrestasiController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\WaliKelasController;
 use App\Models\DataEkskul;
 use Illuminate\Support\Facades\Route;
 
@@ -70,6 +71,13 @@ Route::post('/kepalasekolah', [KepalaSekolahController::class,'tambahkepalasekol
 Route::get('/kepalasekolah/editkepalasekolah/{id}', [KepalaSekolahController::class,'edit'])->middleware('auth');
 Route::post('/kepalasekolah/updatekepalasekolah', [KepalaSekolahController::class,'update'])->middleware('auth');
 Route::delete('/kepalasekolah/hapuskepalasekolah/{id}', [KepalaSekolahController::class,'destroy'])->middleware('auth');
+
+//Wali kelas
+Route::get('/walikelas', [WaliKelasController::class,'index'])->middleware('auth');
+Route::post('/walikelas', [WaliKelasController::class,'tambahwalikelas']);
+Route::get('/walikelas/editwalikelas/{id}', [WaliKelasController::class,'edit'])->middleware('auth');
+Route::post('/walikelas/updatewalikelas', [WaliKelasController::class,'update'])->middleware('auth');
+Route::delete('/walikelas/hapuswalikelas/{id}', [WaliKelasController::class,'destroy'])->middleware('auth');
 
 //Informasi Ekskul
 Route::get('/informasiekskul', [InformasiEkskulController::class,'index'])->middleware('auth');

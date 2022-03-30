@@ -18,6 +18,10 @@
                 @if (auth()->user()->role ==3)
                 <div class="sidebar-brand-text mx-3">Kepala Sekolah</div>                    
                 @endif
+                @if (auth()->user()->role ==4)
+                <div class="sidebar-brand-text mx-3">Wali Kelass</div>                    
+                @endif
+
 
 
             </a>
@@ -46,6 +50,12 @@
                 <a class="nav-link" href="/kepalasekolah">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Data Kepala Sekolah</span></a>
+            </li>
+
+            <li class="nav-item {{Request::is('walikelas') ? 'active' : ''}} ">
+                <a class="nav-link" href="/walikelas">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Data Wali Kelas</span></a>
             </li>
 
             <li class="nav-item {{Request::is('dataekskul') ? 'active' : ''}} {{Request::is('informasiekskul') ? 'active' : ''}}">
@@ -240,6 +250,15 @@
             @endif
 
             {{-- ==================== END KEPALA SEKOLAH ===================== --}}
+
+            {{-- ==================== WALI KELAS ===================== --}}
+            <li class="nav-item {{Request::is('nilai') ? 'active' : ''}}"  >
+                <a class="nav-link" href="/nilai">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Nilai</span></a>
+            </li>
+
+            {{-- ==================== END WALI KELAS ===================== --}}
 
 
                         <!-- Nav Item - Pages Collapse Menu -->

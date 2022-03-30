@@ -32,7 +32,7 @@ class NilaiController extends Controller
 
         }
 
-        else if (auth()->user()->role ==3) {
+        else if (auth()->user()->role ==3 || auth()->user()->role ==4) {
             $ekskul = InformasiEkskul::join('data_ekskuls','data_ekskuls.kode', '=','informasi_ekskuls.kode_ekskul')
             ->get();
             return view('nilai.daftarnilai',['ekskul' =>$ekskul]);    
@@ -192,7 +192,7 @@ class NilaiController extends Controller
 
         }
 
-        else if (auth()->user()->role ==3) {
+        else if (auth()->user()->role ==3 || auth()->user()->role ==4) {
             //idpelatih
             $namapelatih = DB::table('data_ekskuls')
             ->select(['ekskuls.kode_pelatih as id_pelatih','users.name as nama_pelatih'])
