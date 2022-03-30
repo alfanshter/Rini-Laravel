@@ -95,11 +95,11 @@
                     <span>Pengumuman</span></a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="/datasiswa">
+            <li class="nav-item {{Request::is('absen') ? 'active' : ''}}"  >
+                <a class="nav-link" href="/absen">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Absen</span></a>
-            </li>         
+            </li>     
             @endif
             {{-- ==================== END ADMIN ===================== --}}
 

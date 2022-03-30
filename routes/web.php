@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataEkskulController;
@@ -120,3 +121,12 @@ Route::get('/data_nilai/{nama_ekskul}', [NilaiController::class,'daftar_nilai'])
 Route::delete('/hapusnilai/{id}', [NilaiController::class,'destroy'])->middleware('auth');
 Route::post('/update_nilai', [NilaiController::class,'update'])->middleware('auth');
 Route::get('/cetakpdf_nilai/{nama}', [NilaiController::class,'cetakpdf_nilai'])->middleware('auth');
+
+//ABSEN
+Route::get('/absen', [AbsenController::class,'index'])->middleware('auth');
+Route::get('/absen/{id}', [AbsenController::class,'edit'])->middleware('auth');
+Route::post('/absen', [AbsenController::class,'store'])->middleware('auth');
+Route::get('/data_absen/{nama_ekskul}', [AbsenController::class,'daftar_absen'])->middleware('auth');
+Route::delete('/hapusabsen/{id}', [AbsenController::class,'destroy'])->middleware('auth');
+Route::post('/update_absen', [AbsenController::class,'update'])->middleware('auth');
+
