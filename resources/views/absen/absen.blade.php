@@ -122,6 +122,11 @@
                                             </div>
 
                                             <div class="mb-3">
+                                                <label for="recipient-name" class="col-form-label">Tanggal:</label>
+                                                <input type="date" class="form-control" id="tanggal" name="tanggal" value="{{old('tanggal')}}">
+                                            </div>
+    
+                                            <div class="mb-3">
                                                 <label for="recipient-name" class="col-form-label">Semester:</label>
                                                 <select class="form-control" aria-label="Default select example" name="semester" id="semester">
                                                     <option value="ganjil">
@@ -141,8 +146,21 @@
                                             </div>
 
                                             <div class="mb-3">
-                                                <label for="recipient-name" class="col-form-label">absen</label>
-                                                <input type="number" class="form-control" id="absen" name="absen" value="{{old('absen')}}">
+                                                <label for="recipient-name" class="col-form-label">Absen:</label>
+                                                <select class="form-control" aria-label="Default select example" name="absen" id="absen">
+                                                    <option value="2">
+                                                        A
+                                                    </option>                                                
+                                                    <option value="3">
+                                                        I
+                                                    </option>                                               
+                                                    <option value="4">
+                                                        S
+                                                    </option>                                                
+                                                    <option value="1">
+                                                        M
+                                                    </option>                                                  
+                                                </select>
                                             </div>
                                             <div class="modal-footer">
                                             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>

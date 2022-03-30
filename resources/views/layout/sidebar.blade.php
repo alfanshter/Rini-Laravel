@@ -196,7 +196,13 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Nilai</span></a>
             </li>
-
+           
+            <li class="nav-item {{Request::is('absen') ? 'active' : ''}}"  >
+                <a class="nav-link" href="/absen">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Absen</span></a>
+            </li>     
+ 
 
             @endif
             {{-- ==================== END PELATIH ===================== --}}
