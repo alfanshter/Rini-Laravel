@@ -25,9 +25,9 @@
                                         <input type="hidden" name="nama_ekskul" id="nama_ekskul" value="{{$nama_ekskul}}">
                                         <div class="mb-3">
                                             <label for="recipient-name" class="col-form-label">Nama Siswa:</label>
-                                            <select class="form-control" aria-label="Default select example" name="id_siswa" id="id_siswa">
+                                            <select class="form-control" aria-label="Default select example" name="user_id" id="user_id">
                                                 @foreach ($nama_siswa as $data)
-                                                <option value="{{$data->nim}}">
+                                                <option value="{{$data->id}}">
                                                     {{$data->name}}
                                                 </option>                                                
                                                 @endforeach
@@ -38,17 +38,17 @@
                                             <label for="recipient-name" class="col-form-label">Absen:</label>
                                             <select class="form-control" aria-label="Default select example" name="absen" id="absen">
                                                 <option value="2">
-                                                    A
+                                                    Alfa
                                                 </option>                                                
                                                 <option value="3">
-                                                    I
+                                                    Ijin
                                                 </option>                                               
                                                 <option value="4">
-                                                    S
+                                                    Sakit
                                                 </option>                                                
                                                 <option value="1">
-                                                    M
-                                                </option>                                                  
+                                                    Hadir
+                                                </option>                                                             
                                             </select>
                                         </div>
 
@@ -112,9 +112,9 @@
                                             <input type="hidden" name="nama_ekskul" id="nama_ekskul" value="{{$nama_ekskul}}">
                                             <div class="mb-3">
                                                 <label for="recipient-name" class="col-form-label">Nama Siswa:</label>
-                                                <select class="form-control" aria-label="Default select example" name="id_siswa" id="id_siswa">
+                                                <select class="form-control" aria-label="Default select example" name="user_id" id="user_id">
                                                     @foreach ($nama_siswa as $data)
-                                                    <option value="{{$data->nim}}">
+                                                    <option value="{{$data->id}}">
                                                         {{$data->name}}
                                                     </option>                                                
                                                     @endforeach
@@ -149,16 +149,16 @@
                                                 <label for="recipient-name" class="col-form-label">Absen:</label>
                                                 <select class="form-control" aria-label="Default select example" name="absen" id="absen">
                                                     <option value="2">
-                                                        A
+                                                        Alfa
                                                     </option>                                                
                                                     <option value="3">
-                                                        I
+                                                        Ijin
                                                     </option>                                               
                                                     <option value="4">
-                                                        S
+                                                        Sakit
                                                     </option>                                                
                                                     <option value="1">
-                                                        M
+                                                        Hadir
                                                     </option>                                                  
                                                 </select>
                                             </div>
@@ -200,7 +200,7 @@
                     </div>                        
                     @enderror
                     
-                    @error('id_siswa')
+                    @error('user_id')
                     <div class="alert alert-danger mt-2" role="alert">
                         {{$message}}  
                     </div>                        
@@ -209,7 +209,7 @@
                     <div class="card shadow mb-4 mt-4">
                         <div class="card-header py-3 d-flex">
                             <h6 class="m-0 font-weight-bold text-primary p-2">Absen</h6>
-                            @if (auth()->user()->role==0 || auth()->user()->role==2)
+                            @if (auth()->user()->role==0 || auth()->user()->role==2 || auth()->user()->role==3)
                             <form class="ml-auto" action="/cetakpdf_absen/{{$nama_ekskul}}" method="GET">
                                 @csrf
                                 <button type="submit" class="btn btn-primary">Cetak PDF</button>

@@ -26,9 +26,10 @@ return new class extends Migration
             $table->string('nama_pelatih');
             $table->string('id_ekskul');
             $table->string('nama_ekskul');
-            $table->string('id_siswa');
+            $table->integer('user_id');
             $table->string('nama_siswa');
             $table->string('tahun_ajaran');
+            $table->string('bulan');
             $table->string('semester');
             $table->date('tanggal');
             $table->timestamps();

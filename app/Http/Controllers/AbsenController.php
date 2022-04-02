@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Absen;
 use App\Models\Ekskul;
 use App\Models\InformasiEkskul;
+use App\Models\User;
+use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 
 class AbsenController extends Controller
 {
@@ -62,13 +66,14 @@ class AbsenController extends Controller
            ->where('data_ekskuls.nama',$nama_ekskul)
            ->where('data_ekskuls.nama', $nama_ekskul)
            ->where('is_status', 2)
-           ->get(['users.name','users.kelas','users.nim']);
+           ->get(['users.name','users.kelas','users.nim','users.id']);
+           
            
 
 
            $absen = DB::table('absens')
                     ->select(['absens.*','users.kelas','users.name'])
-                   ->join('users','users.nim', '=', 'absens.id_siswa')
+                   ->join('users','users.id', '=', 'absens.user_id')
                    ->where('id_pelatih',$namapelatih->id_pelatih)
                    ->where('nama_ekskul', $nama_ekskul)
                    ->get();
@@ -93,7 +98,7 @@ class AbsenController extends Controller
 
         $absen = DB::table('absens')
                 ->select(['absens.*','users.kelas','users.name'])
-                ->join('users','users.nim', '=', 'absens.id_siswa')
+                ->join('users','users.id', '=', 'absens.user_id')
                 ->where('id_pelatih', auth()->user()->nim)
                 ->where('nama_ekskul', $nama_ekskul)
                 ->get();
@@ -107,8 +112,9 @@ class AbsenController extends Controller
 
        }
        else if (auth()->user()->role ==1){
+           
         $absen = DB::table('absens')
-        ->where('id_siswa', auth()->user()->nim)
+        ->where('user_id', auth()->user()->id)
         ->where('nama_ekskul', $nama_ekskul)
         ->get();
 
@@ -135,12 +141,10 @@ class AbsenController extends Controller
        ->where('data_ekskuls.nama', $nama_ekskul)
        ->where('is_status', 2)
        ->get(['users.name','users.kelas','users.nim']);
-       
-
 
        $absen = DB::table('absens')
                 ->select(['absens.*','users.kelas','users.name'])
-               ->join('users','users.nim', '=', 'absens.id_siswa')
+               ->join('users','users.id', '=', 'absens.user_id')
                ->where('id_pelatih',$namapelatih->id_pelatih)
                ->where('nama_ekskul', $nama_ekskul)
                ->get();
@@ -162,13 +166,16 @@ class AbsenController extends Controller
     {
         $validatedData = $request->validate([
             'nama_ekskul' => 'required|max:255',
-            'id_siswa' => ['required'],
+            'user_id' => ['required'],
             'absen' => ['required'],
             'tanggal' => ['required'],
             'tahun_ajaran' => ['required'],
             'semester' => ['required']
         ]);
 
+        
+
+        $bulan = Carbon::parse($request->tanggal)->isoFormat('MMMM');
         if (auth()->user()->role ==0) {
             //getid ekskul
             $getekskul = DB::table('data_ekskuls')
@@ -177,7 +184,7 @@ class AbsenController extends Controller
 
             //Nama Siswa
             $siswa = DB::table('users')
-                ->where('nim', $request->id_siswa)
+                ->where('id', $request->user_id)
                 ->first();
         
             //Nama Pelatih
@@ -192,6 +199,7 @@ class AbsenController extends Controller
             $validatedData['id_pelatih'] = $namapelatih->id_pelatih;
             $validatedData['id_ekskul'] = $getekskul->kode;
             $validatedData['nama_siswa'] = $siswa->name;
+            $validatedData['bulan'] = $bulan;
 
 
             Absen::create($validatedData);
@@ -207,14 +215,14 @@ class AbsenController extends Controller
 
         //Nama Siswa
         $siswa = DB::table('users')
-            ->where('nim', $request->id_siswa)
+            ->where('nim', $request->user_id)
             ->first();
     
         $validatedData['nama_pelatih'] = auth()->user()->name;
         $validatedData['id_pelatih'] = auth()->user()->nim;
         $validatedData['id_ekskul'] = $getekskul->kode;
         $validatedData['nama_siswa'] = $siswa->name;
-
+        $validatedData['bulan'] = $bulan;
 
         Absen::create($validatedData);
     
@@ -249,6 +257,50 @@ class AbsenController extends Controller
             return redirect("/absen")->with('success','Nilai berhasil di Edit');
 
     }
+
+    public function cetakpdf_absen($nama_ekskul)
+    {
+
+          //idpelatih
+          $namapelatih = DB::table('data_ekskuls')
+          ->select(['ekskuls.kode_pelatih as id_pelatih','users.name as nama_pelatih'])
+          ->join('ekskuls','ekskuls.kode_ekskul','=','data_ekskuls.kode')
+          ->join('users','users.nim','=','ekskuls.kode_pelatih')
+          ->where('data_ekskuls.nama',$nama_ekskul)
+          ->first();
+         
+
+        $users = User::where('role','1')
+                    ->get();
+        $absen = Absen::where('nama_ekskul',$nama_ekskul)
+                    ->select(['absens.*','users.kelas'])
+                    ->join('users','users.id','=','absens.user_id')
+                    ->get();
+            $jumlahabsen = count($absen);
+
+            $nama_siswa = Absen::where('nama_ekskul',$nama_ekskul)
+                ->select(['absens.*','users.kelas','users.id'])
+                ->join('users','users.id','=','absens.user_id')
+                ->groupBy('user_id')
+                ->get();
+
+
+
+
+
+            $pdf = Pdf::loadview('absen.absen_cetakpdf',[
+                'absen'=>$absen,
+                'jumlahabsen'=>$jumlahabsen,
+                'nama_siswa'=>$nama_siswa,
+                'users'=>$users,
+                'namapelatih'=>$namapelatih
+            ])->setPaper('a4', 'landscape');
+            return $pdf->stream();
+    }
+
+ 
+
+
 
 
 }

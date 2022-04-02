@@ -21,8 +21,8 @@
                                 <div class="modal-body">
                                     <form action="/post_agenda" method="POST">
                                         @csrf
-                                        <input type="hidden" name="id_pelatih" value="{{$dataagenda[0]->id_pelatih}}" id="id_pelatih">
-                                        <input type="hidden" name="nama_ekskul" value="{{$dataagenda[0]->nama_ekskul}}" id="nama_ekskul">
+                                        <input type="hidden" name="id_pelatih" value="{{$pelatih->id_pelatih}}" id="id_pelatih">                                        
+                                        <input type="hidden" name="nama_ekskul" value="{{$nama_ekskul}}" id="nama_ekskul">
                                         <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Nama Materi:</label>
                                         <input type="text" class="form-control" id="nama_materi" required name="nama_materi" value="{{old('nama_materi')}}">                                      </div>
@@ -112,7 +112,7 @@
                         <div class="card-header py-3 d-flex">
                             <h6 class="m-0 font-weight-bold text-primary p-2">Agenda</h6>
                             @if (auth()->user()->role==0 || auth()->user()->role==2 ||  auth()->user()->role==3)
-                            <form class="ml-auto" action="/cetakpdf_agenda_pelatih/{{$dataagenda[0]->nama_ekskul}}" method="GET">
+                            <form class="ml-auto" action="/cetakpdf_agenda_pelatih/{{$nama_ekskul}}" method="GET">
                                 @csrf
                                 <button type="submit" class="btn btn-primary">Cetak PDF</button>
                             </form>                                

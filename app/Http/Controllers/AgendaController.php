@@ -9,6 +9,7 @@ use App\Models\Ekskul;
 use App\Models\InformasiEkskul;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,6 +18,7 @@ class AgendaController extends Controller
 
     public function index($nama)
     {
+        
         if (auth()->user()->role ==2) {
     
            $data_agenda = Agenda::join('users','users.nim','=','agendas.id_pelatih')
@@ -41,12 +43,22 @@ class AgendaController extends Controller
             ]);
         }
         else if (auth()->user()->role ==0) {
+                 //idpelatih
+            $namapelatih = DB::table('data_ekskuls')
+                            ->select(['ekskuls.kode_pelatih as id_pelatih','users.nim as nama_pelatih'])
+                            ->join('ekskuls','ekskuls.kode_ekskul','=','data_ekskuls.kode')
+                            ->join('users','users.nim','=','ekskuls.kode_pelatih')
+                            ->where('data_ekskuls.nama',$nama)
+                            ->first();
+            
             $data_agenda = Agenda::join('data_ekskuls','data_ekskuls.nama','=','agendas.nama_ekskul')
             ->join('users','users.nim','=','agendas.id_pelatih')
             ->where('agendas.nama_ekskul',$nama)
             ->get();
             return view('agenda.agenda',[
-                'dataagenda' => $data_agenda
+                'dataagenda' => $data_agenda,
+                'nama_ekskul' => $nama,
+                'pelatih' => $namapelatih
             ]);
         }
 
@@ -101,7 +113,10 @@ class AgendaController extends Controller
                 'nama_ekskul' => ['required'],
                 'id_pelatih' => ['required']
             ]);
-    
+            setlocale(LC_TIME, 'id_ID');
+            Carbon::setLocale('id');
+            $bulan = Carbon::parse($request->tanggal)->isoFormat('dddd');
+            $validatedData['hari'] = $bulan;
             Agenda::create($validatedData);
     
             return redirect("/daftar_agenda/$request->nama_ekskul")->with('success','Tambah Materi Berhasil');
@@ -133,6 +148,7 @@ class AgendaController extends Controller
     
     public function daftar_agenda()
     {
+
         if (auth()->user()->role ==0) {
             $ekskul = InformasiEkskul::join('data_ekskuls','data_ekskuls.kode', '=','informasi_ekskuls.kode_ekskul')
             ->get();

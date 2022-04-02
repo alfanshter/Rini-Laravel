@@ -43,17 +43,17 @@
     <label for="recipient-name" class="col-form-label">Absen:</label>
     <select class="form-control" aria-label="Default select example" name="absen" id="absen">
         <option value="2">
-            A
-        </option>                                                
-        <option value="3">
-            I
-        </option>                                               
-        <option value="4">
-            S
-        </option>                                                
-        <option value="1">
-            M
-        </option>                                                  
+          Alfa
+      </option>                                                
+      <option value="3">
+          Ijin
+      </option>                                               
+      <option value="4">
+          Sakit
+      </option>                                                
+      <option value="1">
+          Hadir
+      </option>            
     </select>
 </div>
 
