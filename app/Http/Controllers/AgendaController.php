@@ -72,13 +72,27 @@ class AgendaController extends Controller
         }
 
         else if (auth()->user()->role ==3) {
+            $namapelatih = DB::table('data_ekskuls')
+                        ->select(['ekskuls.kode_pelatih as id_pelatih','users.nim as nama_pelatih'])
+                        ->join('ekskuls','ekskuls.kode_ekskul','=','data_ekskuls.kode')
+                        ->join('users','users.nim','=','ekskuls.kode_pelatih')
+                        ->where('data_ekskuls.nama',$nama)
+                        ->first();
+            if ($namapelatih == null) {
+            return redirect('/daftar_agenda')->with('success','Belum ada peserta');
+            }else{
+
             $data_agenda = Agenda::join('data_ekskuls','data_ekskuls.nama','=','agendas.nama_ekskul')
             ->join('users','users.nim','=','agendas.id_pelatih')
             ->where('agendas.nama_ekskul',$nama)
-            ->get();
+            ->get(['agendas.*','users.name']);
             return view('agenda.agenda',[
-                'dataagenda' => $data_agenda
+                'dataagenda' => $data_agenda,
+                'nama_ekskul' => $nama,
+                'pelatih' => $namapelatih
             ]);
+            }
+
         }
 
 

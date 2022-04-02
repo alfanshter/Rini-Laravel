@@ -163,7 +163,7 @@
                                             <th>Tanggal</th>
                                             <th>Nama Lomba</th>
                                             <th>Nama Pelatih</th>
-                                            @if (auth()->user()->role ==2)
+                                            @if (auth()->user()->role ==2 || auth()->user()->role ==0)
                                             <th>Action</th>                                                
                                             @endif
                                         </tr>
@@ -178,7 +178,7 @@
                                             <td>{{$data->tanggal}}</td>    
                                             <td>{{$data->nama_lomba}}</td>    
                                             <td>{{$data->nama_pelatih}}</td>    
-                                            @if (auth()->user()->role ==2)
+                                            @if (auth()->user()->role ==2 || auth()->user()->role ==0)
                                             <td class="align-middle text-center">
                                                 <div class="d-flex justify-content-sm-center mt-2">                                                    
                                                         <a href="/prestasi/{{$data->id}}" class="btn btn-warning ml-2">Edit</a>
