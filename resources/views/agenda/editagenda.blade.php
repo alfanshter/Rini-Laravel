@@ -30,16 +30,6 @@
   <label for="recipient-name" class="col-form-label">Tanggal:</label>
   <input type="date" class="form-control" id="tanggal" required name="tanggal" value="{{old('tanggal',$dataagenda->tanggal)}}">
   </div>
-  <div class="mb-3">
-  <label for="recipient-name" class="col-form-label">Nama Ekskul:</label>
-  <select class="form-control" aria-label="Default select example" name="nama_ekskul" id="nama_ekskul">
-    <option value="{{$dataagenda->nama_ekskul}}">{{$dataagenda->nama_ekskul}}</option>
-      @foreach ($data_ekskuls as $data)
-      <option value="{{$data->nama}}">{{$data->nama}}</option>                                                
-      @endforeach
-  </select>
-
-  </div>
 
   <div class="modal-footer">
   <a href="/agenda" class="btn btn-secondary" >Cancel</a>

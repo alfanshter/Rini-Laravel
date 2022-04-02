@@ -87,8 +87,8 @@
                                       <div class="mb-3">
                                         <label for="message-text" class="col-form-label">Jenis Kelamin:</label>
                                         <select class="form-control" aria-label="Default select example" name="jenis_kelamin" id="jenis_kelamin">
-                                            <option value="P">P</option>                                                
-                                            <option value="L">L</option>                                                
+                                            <option value="Perempuan">Perempuan</option>                                                
+                                            <option value="Laki - laki">Laki - laki</option>                                                
                                         </select>
                                       </div>
 

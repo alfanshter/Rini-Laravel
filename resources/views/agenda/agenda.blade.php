@@ -61,21 +61,13 @@
                                     <form action="/post_agenda" method="POST">
                                         @csrf
                                         <input type="hidden" name="id_pelatih" value="{{auth()->user()->nim}}" id="id_pelatih">
+                                        <input type="hidden" name="nama_ekskul" value="{{$nama_ekskul}}" id="nama_ekskul">
                                         <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Nama Materi:</label>
                                         <input type="text" class="form-control" id="nama_materi" required name="nama_materi" value="{{old('nama_materi')}}">                                      </div>
                                         <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Tanggal:</label>
                                         <input type="date" class="form-control" id="tanggal" required name="tanggal" value="{{old('tangga')}}">
-                                        </div>
-                                        <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Nama Ekskul:</label>
-                                        <select class="form-control" aria-label="Default select example" name="nama_ekskul" id="nama_ekskul">
-                                            @foreach ($dataagenda as $data)
-                                            <option value="{{$data->nama_ekskul}}">{{$data->nama_ekskul}}</option>                                                
-                                            @endforeach
-                                        </select>
-
                                         </div>
 
                                         <div class="modal-footer">
@@ -128,7 +120,7 @@
                                             <th>Nama Ekskul</th>
                                             <th>Pelatih</th>
                                             <th>Tanggal</th>
-                                            @if (auth()->user()->role ==2)
+                                            @if (auth()->user()->role ==2 || auth()->user()->role ==0)
                                             <th>Action</th>                                                
                                             @endif
                                         </tr>
@@ -141,7 +133,7 @@
                                             <td>{{$data->nama_ekskul}}</td>
                                             <td>{{$data->name}}</td>
                                             <td>{{$data->tanggal}}</td>    
-                                            @if (auth()->user()->role ==2)
+                                            @if (auth()->user()->role ==2 || auth()->user()->role ==0)
                                             <td class="align-middle text-center">
                                                 <div class="d-flex justify-content-sm-center mt-2">                                                    
                                                         <a href="/agenda/{{$data->id}}" class="btn btn-warning ml-2">Edit</a>

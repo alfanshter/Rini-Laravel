@@ -25,11 +25,14 @@ class AgendaController extends Controller
             ->where('id_pelatih',auth()->user()->nim)
             ->where('nama_ekskul',$nama)
             ->get(['users.name','agendas.*']);
-    
+  
+                return view('agenda.agenda',[
+                    'dataagenda' => $data_agenda,
+                    'nama_ekskul' => $nama
+                ]);
+                    
             
-            return view('agenda.agenda',[
-                'dataagenda' => $data_agenda
-            ]);
+            
         }
         else if (auth()->user()->role ==1) {
             $data_agenda = Ekskul::join('agendas','agendas.id_pelatih','=','ekskuls.kode_pelatih')
@@ -44,22 +47,28 @@ class AgendaController extends Controller
         }
         else if (auth()->user()->role ==0) {
                  //idpelatih
+
             $namapelatih = DB::table('data_ekskuls')
                             ->select(['ekskuls.kode_pelatih as id_pelatih','users.nim as nama_pelatih'])
                             ->join('ekskuls','ekskuls.kode_ekskul','=','data_ekskuls.kode')
                             ->join('users','users.nim','=','ekskuls.kode_pelatih')
                             ->where('data_ekskuls.nama',$nama)
                             ->first();
+            if ($namapelatih == null) {
+                return redirect('/daftar_agenda')->with('success','Belum ada peserta');
+            }else{
+
+                $data_agenda = Agenda::join('data_ekskuls','data_ekskuls.nama','=','agendas.nama_ekskul')
+                ->join('users','users.nim','=','agendas.id_pelatih')
+                ->where('agendas.nama_ekskul',$nama)
+                ->get(['agendas.*','users.name']);
+                return view('agenda.agenda',[
+                    'dataagenda' => $data_agenda,
+                    'nama_ekskul' => $nama,
+                    'pelatih' => $namapelatih
+                ]);
+            }
             
-            $data_agenda = Agenda::join('data_ekskuls','data_ekskuls.nama','=','agendas.nama_ekskul')
-            ->join('users','users.nim','=','agendas.id_pelatih')
-            ->where('agendas.nama_ekskul',$nama)
-            ->get();
-            return view('agenda.agenda',[
-                'dataagenda' => $data_agenda,
-                'nama_ekskul' => $nama,
-                'pelatih' => $namapelatih
-            ]);
         }
 
         else if (auth()->user()->role ==3) {
@@ -78,30 +87,18 @@ class AgendaController extends Controller
 
     public function edit($id)
     {  
-        if (auth()->user()->role ==2) {
-            $data_ekskul =  InformasiEkskul::join('data_ekskuls','data_ekskuls.kode','=','informasi_ekskuls.kode_ekskul')
-            ->where('kode_pelatih',auth()->user()->nim)
-            ->get(['data_ekskuls.nama']);
-    
-            $data_agenda = Agenda::where('id',$id)->first();
-            return view('agenda.editagenda',['data_ekskuls' => $data_ekskul,'dataagenda'=> $data_agenda]);
-    
-        }
+        $data_agenda = Agenda::where('id',$id)->first();
+        return view('agenda.editagenda',['dataagenda'=> $data_agenda]);
     }
 
     public function updateagenda(Request $request)
     {
-        if (auth()->user()->role ==2) {
-            $status= $request->is_status;
-            $update = DB::table('agendas')->where('id',$request->id)->update([
-                'tanggal' => $request->tanggal,
-                'nama_materi' => $request->nama_materi,
-                'nama_ekskul' => $request->nama_ekskul ]);
+        $update = DB::table('agendas')->where('id',$request->id)->update([
+            'tanggal' => $request->tanggal,
+            'nama_materi' => $request->nama_materi]);
+
+        return redirect("/daftar_agenda/$request->nama_ekskul")->with('success','Update selesai');
     
-            return redirect("/daftar_agenda/$request->nama_ekskul")->with('success','Update selesai');
-    
-        }
-        
     }
 
     public function store(Request $request)
@@ -129,7 +126,11 @@ class AgendaController extends Controller
                 'nama_ekskul' => ['required'],
                 'id_pelatih' => ['required']
             ]);
-    
+            setlocale(LC_TIME, 'id_ID');
+            Carbon::setLocale('id');
+            $bulan = Carbon::parse($request->tanggal)->isoFormat('dddd');
+            $validatedData['hari'] = $bulan;
+
             Agenda::create($validatedData);
     
             return redirect("/daftar_agenda/$request->nama_ekskul")->with('success','Tambah Materi Berhasil');
@@ -139,10 +140,9 @@ class AgendaController extends Controller
 
     public function destroy($id)
     {
-        if (auth()->user()->role ==2) {
-            Agenda::destroy($id);
-            return redirect('/daftar_agenda')->with('success', 'AgendaS berhasil di hapus ');            
-        }
+        Agenda::destroy($id);
+        return redirect('/daftar_agenda')->with('success', 'AgendaS berhasil di hapus ');            
+
     }
 
     
