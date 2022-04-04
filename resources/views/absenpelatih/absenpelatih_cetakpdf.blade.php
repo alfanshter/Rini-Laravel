@@ -62,9 +62,9 @@ td.center {
 
     <center>
         <div>
-                <p style=" font-weight: bold;text-transform:uppercase">DAFTAR HADIR PESERTA KEGIATAN EKTRAKULIKULER {{$absen[0]->nama_ekskul}}</p>
+                <p style=" font-weight: bold;text-transform:uppercase">DAFTAR HADIR PESERTA KEGIATAN EKTRAKULIKULER {{$nama_ekskul}}</p>
                 <p style=" font-weight: bold;text-transform:uppercase">SMA NEGERI 16 JAKARTA</p>
-                <p style=" font-weight: bold;text-transform:uppercase">tahun pelajaran {{$absen[0]->tahun_ajaran}}</p>
+                <p style=" font-weight: bold;text-transform:uppercase">tahun pelajaran 2021-2022</p>
         </div>
         <br>
     
@@ -75,46 +75,37 @@ td.center {
 <table style="width: 100%">
   <thead>
       <tr>
-          <th scope="col">#</th>
-          <th scope="col">Nama</th>
-          <th scope="col">Kelas</th>
+          <th scope="col">No</th>
+          <th scope="col">Nama Pelatih</th>
+          <th scope="col">Ekstrakulikuler</th>
           <th scope="col">Tanggal</th>
-          <th scope="col">Absen</th>
+          <th scope="col">Keterangan</th>
       </tr>
   </thead>
   <tbody>
-      @foreach ($users as $user)
-      <tr>
-          <th scope="row">{{ $loop->iteration }}</th>
-          <td>{{ $user->name }}</td>
-          <td>{{$user->kelas}}</td>
-          <td>
-              <ul type="none">
-                  @foreach ($user->absensi()->where('absens.nama_ekskul','=','Basket')->get() as $i)
-                  <li>{{ $i->tanggal}}</li>
-                  @endforeach
-              </ul>
-          </td>
-          <td>
-              <ul type="none">
-                  @foreach ($user->absensi()->where('absens.nama_ekskul','=','Basket')->get() as $i)
-                  @if ($i->absen==1)
-                  <li>Hadir</li>                      
-                  @endif
-                  @if ($i->absen==2)
-                  <li>Alfa</li>                      
-                  @endif
-                  @if ($i->absen==3)
-                  <li>Ijin</li>                      
-                  @endif
-                  @if ($i->absen==4)
-                  <li>Sakit</li>                      
-                  @endif
-                  @endforeach
-              </ul>
-          </td>
-      </tr>
-      @endforeach
+    @foreach ($datapelatih->absensi_pelatih()->get() as $i)
+    <tr>
+      <th scope="row">{{ $loop->iteration }}</th>
+        <td>{{ $namapelatih }}</td>
+        <td>{{ $nama_ekskul }}</td>
+        <td>{{ $i->tanggal }}</td>
+        @if ($i->absen == 1)
+        <td>Masuk</td>                                                
+        @endif
+        @if ($i->absen == 2)
+        <td>A</td>                                                
+        @endif
+        @if ($i->absen == 3)
+        <td>Ijin</td>                                                
+        @endif
+        @if ($i->absen == 4)
+        <td>Sakit</td>                                                
+        @endif
+    
+    </tr>
+
+    @endforeach
+
   </tbody>
 </table>
 <br><br><br><br>
@@ -130,7 +121,7 @@ td.center {
     </tr>
     <br><br><br><br>
     <tr>
-      <td id="tabel1" style="text-align: center">{{$namapelatih->nama_pelatih}}</td>
+      <td id="tabel1" style="text-align: center">{{$namapelatih}}</td>
     </tr>
   </table>
 

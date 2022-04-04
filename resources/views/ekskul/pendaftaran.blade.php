@@ -32,7 +32,7 @@
 
 <div class="mb-3">
   <label for="recipient-name" class="col-form-label">Alasan:</label>
-  <input type="text" class="form-control"  required  name="alasan" id="alasan">                   
+  <input type="text" class="form-control"  required  name="alasan" id="alasan"  value="{{$data_ekskul->alasan}}">                   
 
 </div>
 

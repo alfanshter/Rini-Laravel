@@ -170,7 +170,7 @@
                     <div class="card shadow mb-4 mt-4">
                         <div class="card-header py-3 d-flex">
                             <h6 class="m-0 font-weight-bold text-primary p-2">Agenda</h6>
-                            @if (auth()->user()->role==0 || auth()->user()->role==2 || auth()->user()->role==3)
+                            @if (auth()->user()->role==0 || auth()->user()->role==2 || auth()->user()->role==3  ||  auth()->user()->role ==4)
                             <form class="ml-auto" action="/cetakpdf_nilai/{{$nama_ekskul}}" method="GET">
                                 @csrf
                                 <button type="submit" class="btn btn-primary">Cetak PDF</button>
@@ -215,7 +215,7 @@
                                             </td>
                                             <td>{{$data->tahun_ajaran}}</td>
                                             <td>{{$data->semester}}</td>
-                                            @if (auth()->user()->role ==2 || auth()->user()->role ==0)
+                                            @if (auth()->user()->role ==2 || auth()->user()->role ==0 )
                                             <td class="align-middle text-center">
                                                 <div class="d-flex justify-content-sm-center mt-2">
                                                 

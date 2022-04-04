@@ -45,9 +45,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
+    public function absen(){
+        return $this->belongsTo('App\Models\AbsenPelatih');
+    }
+
     public function absensi()
     {
         return $this->hasMany(Absen::class);
+    }
+
+    public function absensi_pelatih()
+    {
+        return $this->hasMany(AbsenPelatih::class);
     }
  
 }

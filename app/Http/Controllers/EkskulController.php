@@ -69,11 +69,11 @@ class EkskulController extends Controller
         ]);
         
         if ($status == 2) {
-            return redirect('/pendaftaran_seleksi')->with('success','Peserta diterima');
+            return redirect('/pendaftaran_seleksi')->with('success','Pendaftar diterima');
 
         }
         else if ($status == 3) {
-            return redirect('/pendaftaran_seleksi')->with('success','Peserta ditolak');
+            return redirect('/pendaftaran_seleksi')->with('success','Pendaftar ditolak');
 
         }
 

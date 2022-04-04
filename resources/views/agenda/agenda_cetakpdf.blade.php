@@ -12,6 +12,11 @@
 </head>
 <style type="text/css">
 
+div.absolute {
+  position: absolute;
+  right: 0;
+}
+
     table, th, td {
       border: 1px solid black;
       border-collapse: collapse;
@@ -22,7 +27,7 @@
       border-collapse: collapse;
 }
   
-   #flex {
+#flex {
      display: inline-flex;
    }
 
@@ -79,8 +84,12 @@
     @endforeach
   </table>
   <br><br><br><br>
-  <div id="flex">
-    <table id="tabel1" style="border: 0ch">
+  
+  <div id="flex" class="absolute">
+    <table id="tabel1" style="border: 0ch" >
+      <tr id="tabel1">
+        <td id="tabel1">Jakarta  {{\Carbon\Carbon::now()->isoFormat('D MMMM Y')}}</td>
+      </tr>
       <tr id="tabel1">
         <td id="tabel1">Pelatih Ekstrakulikuler</td>
       </tr>
@@ -92,7 +101,7 @@
   
   </div>
 
-  <div id="flex" style="margin-left: 200px">
+  {{-- <div id="flex" style="margin-left: 200px">
     <table id="tabel1" style="border: 0ch">
       <tr id="tabel1">
         <td id="tabel1">Jakarta  {{\Carbon\Carbon::now()->isoFormat('D MMMM Y')}}</td>
@@ -126,7 +135,7 @@
 
     </table>
   
-  </div>
+  </div> --}}
 
 </body>
 </html>

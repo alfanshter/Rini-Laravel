@@ -46,7 +46,7 @@
                     <span>Data Pelatih</span></a>
             </li>
 
-            <li class="nav-item {{Request::is('kepalasekolah') ? 'active' : ''}} ">
+            {{-- <li class="nav-item {{Request::is('kepalasekolah') ? 'active' : ''}} ">
                 <a class="nav-link" href="/kepalasekolah">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Data Kepala Sekolah</span></a>
@@ -56,7 +56,7 @@
                 <a class="nav-link" href="/walikelas">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Data Wali Kelas</span></a>
-            </li>
+            </li> --}}
 
             <li class="nav-item {{Request::is('dataekskul') ? 'active' : ''}} {{Request::is('informasiekskul') ? 'active' : ''}}">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
@@ -109,6 +109,12 @@
                 <a class="nav-link" href="/absen">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Absen</span></a>
+            </li>     
+
+            <li class="nav-item {{Request::is('absen') ? 'active' : ''}}"  >
+                <a class="nav-link" href="/absenpelatih">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Absen Pelatih</span></a>
             </li>     
             @endif
             {{-- ==================== END ADMIN ===================== --}}

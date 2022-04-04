@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AbsenController;
+use App\Http\Controllers\AbsenPelatihController;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataEkskulController;
@@ -139,3 +140,12 @@ Route::delete('/hapusabsen/{id}', [AbsenController::class,'destroy'])->middlewar
 Route::post('/update_absen', [AbsenController::class,'update'])->middleware('auth');
 Route::get('/cetakpdf_absen/{nama}', [AbsenController::class,'cetakpdf_absen'])->middleware('auth');
 
+
+//ABSENPelatih
+Route::get('/absenpelatih', [AbsenPelatihController::class,'index'])->middleware('auth');
+Route::get('/absenpelatih/{id}', [AbsenPelatihController::class,'edit'])->middleware('auth');
+Route::get('/data_absenpelatih/{nama_ekskul}', [AbsenPelatihController::class,'daftar_absenpelatih'])->middleware('auth');
+Route::post('/absenpelatih', [AbsenPelatihController::class,'store'])->middleware('auth');
+Route::get('/cetakpdf_absenpelatih/{nama}', [AbsenPelatihController::class,'cetakpdf_absenpelatih'])->middleware('auth');
+Route::post('/update_absenpelatih', [AbsenPelatihController::class,'update'])->middleware('auth');
+Route::delete('/hapusabsenpelatih/{id}', [AbsenPelatihController::class,'destroy'])->middleware('auth');

@@ -59,6 +59,9 @@ class AbsenController extends Controller
             ->join('users','users.nim','=','ekskuls.kode_pelatih')
             ->where('data_ekskuls.nama',$nama_ekskul)
             ->first();
+            if ($namapelatih ==null) {
+               return redirect('/absen')->with('success','Peserta tidak ada');
+            }
            
            //nama siswa
            $nama_siswa = Ekskul::join('users','users.nim', '=' ,'ekskuls.nim_siswa')
@@ -133,7 +136,15 @@ class AbsenController extends Controller
         ->join('users','users.nim','=','ekskuls.kode_pelatih')
         ->where('data_ekskuls.nama',$nama_ekskul)
         ->first();
-       
+        if ($namapelatih ==null) {
+            return redirect('/absen')->with('success','Peserta tidak ada');
+         }
+
+        if ($namapelatih == null)
+        {
+            return redirect('/absen')->with('success','Belum ada peserta');
+        }
+
        //nama siswa
        $nama_siswa = Ekskul::join('users','users.nim', '=' ,'ekskuls.nim_siswa')
        ->join('data_ekskuls','data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
@@ -269,10 +280,10 @@ class AbsenController extends Controller
           ->where('data_ekskuls.nama',$nama_ekskul)
           ->first();
          
-
         $users = User::where('role','1')
                     ->get();
-        $absen = Absen::where('nama_ekskul',$nama_ekskul)
+
+                    $absen = Absen::where('nama_ekskul',$nama_ekskul)
                     ->select(['absens.*','users.kelas'])
                     ->join('users','users.id','=','absens.user_id')
                     ->get();
@@ -284,15 +295,12 @@ class AbsenController extends Controller
                 ->groupBy('user_id')
                 ->get();
 
-
-
-
-
             $pdf = Pdf::loadview('absen.absen_cetakpdf',[
                 'absen'=>$absen,
                 'jumlahabsen'=>$jumlahabsen,
                 'nama_siswa'=>$nama_siswa,
                 'users'=>$users,
+                'nama_ekskul'=>$nama_ekskul,
                 'namapelatih'=>$namapelatih
             ])->setPaper('a4', 'landscape');
             return $pdf->stream();

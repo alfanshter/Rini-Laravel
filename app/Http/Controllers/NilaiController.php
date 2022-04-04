@@ -137,7 +137,10 @@ class NilaiController extends Controller
              ->join('users','users.nim','=','ekskuls.kode_pelatih')
              ->where('data_ekskuls.nama',$nama_ekskul)
              ->first();
-            
+             if ($namapelatih == null)
+             {
+                 return redirect('/nilai')->with('success','Belum ada peserta');
+             }
             //nama siswa
             $nama_siswa = Ekskul::join('users','users.nim', '=' ,'ekskuls.nim_siswa')
             ->join('data_ekskuls','data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
@@ -201,6 +204,11 @@ class NilaiController extends Controller
             ->where('data_ekskuls.nama',$nama_ekskul)
             ->first();
            
+            if ($namapelatih == null)
+            {
+                return redirect('/nilai')->with('success','Belum ada peserta');
+            }
+
            //nama siswa
            $nama_siswa = Ekskul::join('users','users.nim', '=' ,'ekskuls.nim_siswa')
            ->join('data_ekskuls','data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
