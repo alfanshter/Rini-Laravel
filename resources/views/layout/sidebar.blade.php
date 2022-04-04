@@ -111,7 +111,7 @@
                     <span>Absen</span></a>
             </li>     
 
-            <li class="nav-item {{Request::is('absen') ? 'active' : ''}}"  >
+            <li class="nav-item {{Request::is('absenpelatih') ? 'active' : ''}}"  >
                 <a class="nav-link" href="/absenpelatih">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Absen Pelatih</span></a>
@@ -224,6 +224,12 @@
                 <a class="nav-link" href="/absen">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Absen</span></a>
+            </li>     
+
+            <li class="nav-item {{Request::is('absenpelatih') ? 'active' : ''}}"  >
+                <a class="nav-link" href="/absenpelatih">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Absen Pelatih</span></a>
             </li>     
  
 

@@ -22,6 +22,14 @@ class AbsenPelatihController extends Controller
             return view('absenpelatih.daftarabsenpelatih',['ekskul' =>$ekskul]);    
         }
 
+        if (auth()->user()->role ==2) {
+            $ekskul = InformasiEkskul::join('data_ekskuls','data_ekskuls.kode', '=','informasi_ekskuls.kode_ekskul')
+            ->where('informasi_ekskuls.kode_pelatih',auth()->user()->nim)
+            ->get();
+
+            return view('absenpelatih.daftarabsenpelatih',['ekskul' =>$ekskul]);    
+        }
+
     }
 
     public function daftar_absenpelatih($nama_ekskul)
@@ -47,6 +55,14 @@ class AbsenPelatihController extends Controller
                'data_pelatih' => $datapelatih
                ]);   
        }
+       else if (auth()->user()->role ==2) {
+        $datapelatih = User::where('id',auth()->user()->id)->first();
+        
+       return view('absenpelatih.absenpelatih',
+           ['nama_ekskul' => $nama_ekskul,
+           'data_pelatih' => $datapelatih
+           ]);   
+   }
 
     }
 
