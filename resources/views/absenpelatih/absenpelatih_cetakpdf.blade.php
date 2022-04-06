@@ -64,7 +64,7 @@ td.center {
         <div>
                 <p style=" font-weight: bold;text-transform:uppercase">DAFTAR HADIR PESERTA KEGIATAN EKTRAKULIKULER {{$nama_ekskul}}</p>
                 <p style=" font-weight: bold;text-transform:uppercase">SMA NEGERI 16 JAKARTA</p>
-                <p style=" font-weight: bold;text-transform:uppercase">tahun pelajaran 2021-2022</p>
+                <p style=" font-weight: bold;text-transform:uppercase">tahun pelajaran {{$tahun_ajaran}}</p>
         </div>
         <br>
     
@@ -83,7 +83,7 @@ td.center {
       </tr>
   </thead>
   <tbody>
-    @foreach ($datapelatih->absensi_pelatih()->get() as $i)
+    @foreach ($datapelatih->absensi_pelatih()->where('tahun_ajaran',$tahun_ajaran)->where('semester',$semester)->get() as $i)
     <tr>
       <th scope="row">{{ $loop->iteration }}</th>
         <td>{{ $namapelatih }}</td>

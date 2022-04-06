@@ -11,6 +11,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Svg\Tag\Rect;
 
 class AbsenPelatihController extends Controller
 {
@@ -109,26 +110,27 @@ class AbsenPelatihController extends Controller
 
     }
 
-    public function cetakpdf_absenpelatih($nama_ekskul)
+    public function cetakpdf_absenpelatih(Request $request)
     {
-
+        $nama_ekskul = $request->input('nama_ekskul');
           //idpelatih
-   //idpelatih
-   $namapelatih = DB::table('data_ekskuls')
-   ->select(['ekskuls.kode_pelatih as id_pelatih','users.name as nama_pelatih','users.id as user_id'])
-   ->join('ekskuls','ekskuls.kode_ekskul','=','data_ekskuls.kode')
-   ->join('users','users.nim','=','ekskuls.kode_pelatih')
-   ->where('data_ekskuls.nama',$nama_ekskul)
-   ->first();
+        //idpelatih
+        $namapelatih = DB::table('data_ekskuls')
+        ->select(['ekskuls.kode_pelatih as id_pelatih','users.name as nama_pelatih','users.id as user_id'])
+        ->join('ekskuls','ekskuls.kode_ekskul','=','data_ekskuls.kode')
+        ->join('users','users.nim','=','ekskuls.kode_pelatih')
+        ->where('data_ekskuls.nama',$nama_ekskul)
+        ->first();
    
-   $datapelatih = User::where('id',$namapelatih->user_id)->first();
-   
-            $pdf = Pdf::loadview('absenpelatih.absenpelatih_cetakpdf',[
-                'datapelatih'=>$datapelatih,
-                'nama_ekskul'=>$nama_ekskul,
-                'namapelatih'=>$namapelatih->nama_pelatih
-                ])->setPaper('a4', 'landscape');
-            return $pdf->stream();
+        $datapelatih = User::where('id',$namapelatih->user_id)->first();
+        $pdf = Pdf::loadview('absenpelatih.absenpelatih_cetakpdf',[
+                        'datapelatih'=>$datapelatih,
+                        'nama_ekskul'=>$nama_ekskul,
+                        'namapelatih'=>$namapelatih->nama_pelatih,
+                        'tahun_ajaran'=>$request->input('tahun_ajaran'),
+                        'semester'=>$request->input('semester')
+                        ])->setPaper('a4', 'landscape');
+                    return $pdf->stream();
     }
 
     

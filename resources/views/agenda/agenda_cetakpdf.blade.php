@@ -54,14 +54,14 @@ div.absolute {
                 <p style=" font-weight: bold;text-transform:uppercase">PROGRAM KEGIATAN EKSTRAKULIKULER {{$agenda[0]->nama_ekskul}}</p>
                 <p style=" font-weight: bold;text-transform:uppercase">SMA NEGERI 16 JAKARTA</p>
                 <p style=" font-weight: bold;text-transform:uppercase">tahun pelajaran 2021/2022</p>
-                <p style=" font-weight: bold;text-transform:uppercase">
+                {{-- <p style=" font-weight: bold;text-transform:uppercase">
                   BULAN : 
                   @foreach ($agenda as $data)
                   {{\Carbon\Carbon::parse($data->tanggal)->isoFormat('MMMM')}}
                   @endforeach
                   {{\Carbon\Carbon::parse($data->tanggal)->isoFormat('Y')}}
                   
-                </p>                    
+                </p>                     --}}
 
         </div>
         <br>

@@ -119,10 +119,72 @@
                         <div class="card-header py-3 d-flex">
                             <h6 class="m-0 font-weight-bold text-primary p-2">Absen</h6>
                             @if (auth()->user()->role==0)
-                            <form class="ml-auto" action="/cetakpdf_absenpelatih/{{$nama_ekskul}}" method="GET">
-                                @csrf
-                                <button type="submit" class="btn btn-primary">Cetak PDF</button>
-                            </form>                                
+                            <button class="btn btn-primary ml-auto"  data-toggle="modal" data-target="#cetakpdf">Cetak PDF</button>
+                           
+                                    <div class="modal fade" id="cetakpdf" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Cetak PDF?</h5>
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="/cetakpdf_absenpelatih" method="GET">
+                                                        @csrf
+                                                        <input type="hidden" name="user_id" id="user_id" value="{{$namapelatih->user_id}}">
+                                                        <input type="hidden" name="nama_ekskul" id="nama_ekskul" value="{{$nama_ekskul}}">
+
+                                                        <div class="mb-3">
+                                                            <label for="recipient-name" class="col-form-label">Semester:</label>
+                                                            <select class="form-control" aria-label="Default select example" name="semester" id="semester">
+                                                                <option value="ganjil">
+                                                                    GANJIL
+                                                                </option>                                                
+                                                                <option value="genap">
+                                                                    GENAP
+                                                                </option>                                                
+
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="recipient-name" class="col-form-label">Tahun Ajaran:</label>
+                                                            <input type="text" class="form-control" required id="tahun_ajaran" name="tahun_ajaran" value="{{old('tahun_ajaran')}}">
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                                        <button type="submit" class="btn btn-primary">Cetak</button>
+                    
+                                                    </div>
+                                                    </form>
+                                                </div>
+                                                
+
+                                            </div>
+                                        </div>
+                                    </div>
+                            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                             @endif
                         </div>
                         <div class="card-body">

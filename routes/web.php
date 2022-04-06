@@ -146,6 +146,6 @@ Route::get('/absenpelatih', [AbsenPelatihController::class,'index'])->middleware
 Route::get('/absenpelatih/{id}', [AbsenPelatihController::class,'edit'])->middleware('auth');
 Route::get('/data_absenpelatih/{nama_ekskul}', [AbsenPelatihController::class,'daftar_absenpelatih'])->middleware('auth');
 Route::post('/absenpelatih', [AbsenPelatihController::class,'store'])->middleware('auth');
-Route::get('/cetakpdf_absenpelatih/{nama}', [AbsenPelatihController::class,'cetakpdf_absenpelatih'])->middleware('auth');
+Route::get('/cetakpdf_absenpelatih/{user_id?&nama_ekskul?&tahun_ajaran?&semester?}', [AbsenPelatihController::class,'cetakpdf_absenpelatih'])->middleware('auth');
 Route::post('/update_absenpelatih', [AbsenPelatihController::class,'update'])->middleware('auth');
 Route::delete('/hapusabsenpelatih/{id}', [AbsenPelatihController::class,'destroy'])->middleware('auth');
