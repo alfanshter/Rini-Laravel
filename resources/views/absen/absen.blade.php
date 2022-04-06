@@ -5,7 +5,7 @@
 
     
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">absen</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Absen Siswa</h1>
                     @if (auth()->user()->role ==0)
                     <button class="btn btn-primary"  data-toggle="modal" data-target="#tambahpengumuman">Tambah absen</button>                        
                         <!-- Pengumuman Modal-->

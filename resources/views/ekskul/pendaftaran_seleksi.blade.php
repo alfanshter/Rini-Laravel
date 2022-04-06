@@ -74,6 +74,7 @@
                                             <th>J/K</th>
                                             <th>Nama Ekskul</th>
                                             <th>Alasan</th>
+                                            <th>Prestasi yang pernah di raih</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -86,6 +87,7 @@
                                                 <td>{{$data->jenis_kelamin}}</td>                                        
                                                 <td>{{$data->nama_ekskul}}</td>                                        
                                                 <td>{{$data->alasan}}</td>                                        
+                                                <td>{{$data->prestasi_pernah_diraih}}</td>                                        
                                                 <td class="align-middle text-center">
                                                 <div class="d-flex justify-content-sm-center mt-2">
                                                     

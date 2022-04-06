@@ -33,8 +33,14 @@
 <div class="mb-3">
   <label for="recipient-name" class="col-form-label">Alasan:</label>
   <input type="text" class="form-control"  required  name="alasan" id="alasan"  value="{{$data_ekskul->alasan}}">                   
+</div>
+
+<div class="mb-3">
+  <label for="recipient-name" class="col-form-label">Prestasi yang pernah di raih:</label>
+  <input type="text" class="form-control"  required  name="prestasi_pernah_diraih" id="prestasi_pernah_diraih"  value="{{$data_ekskul->prestasi}}">                   
 
 </div>
+
 
 
 <div class="modal-footer">

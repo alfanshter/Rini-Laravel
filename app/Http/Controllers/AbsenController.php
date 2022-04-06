@@ -71,7 +71,7 @@ class AbsenController extends Controller
            ->where('is_status', 2)
            ->get(['users.name','users.kelas','users.nim','users.id']);
            
-           
+
 
 
            $absen = DB::table('absens')
@@ -97,7 +97,7 @@ class AbsenController extends Controller
         ->where('data_ekskuls.nama',$nama_ekskul)
         ->where('kode_pelatih', auth()->user()->nim)
         ->where('is_status', 2)
-        ->get(['users.name','users.nim']);
+        ->get(['users.name','users.nim','users.id']);
 
         $absen = DB::table('absens')
                 ->select(['absens.*','users.kelas','users.name'])
@@ -175,6 +175,7 @@ class AbsenController extends Controller
 
     public function store(Request $request)
     {
+
         $validatedData = $request->validate([
             'nama_ekskul' => 'required|max:255',
             'user_id' => ['required'],
@@ -226,7 +227,7 @@ class AbsenController extends Controller
 
         //Nama Siswa
         $siswa = DB::table('users')
-            ->where('nim', $request->user_id)
+            ->where('id', $request->user_id)
             ->first();
     
         $validatedData['nama_pelatih'] = auth()->user()->name;
@@ -237,7 +238,7 @@ class AbsenController extends Controller
 
         Absen::create($validatedData);
     
-        return redirect("/data_absen/$request->nama_ekskul")->with('success','Nilai berhasil di input');
+        return redirect("/data_absen/$request->nama_ekskul")->with('success','Absen berhasil di input');
 
         }
     }

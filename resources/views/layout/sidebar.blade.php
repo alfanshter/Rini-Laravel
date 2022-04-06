@@ -4,6 +4,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
                 <div class="sidebar-brand-icon rotate-n-15">
+                    {{-- ICON SEBELAH TEXT --}}
                     <i class="fas fa-laugh-wink"></i>
                 </div>
                 @if (auth()->user()->role ==0)
@@ -108,7 +109,7 @@
             <li class="nav-item {{Request::is('absen') ? 'active' : ''}}"  >
                 <a class="nav-link" href="/absen">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Absen</span></a>
+                    <span>Absen Siswa</span></a>
             </li>     
 
             <li class="nav-item {{Request::is('absenpelatih') ? 'active' : ''}}"  >
