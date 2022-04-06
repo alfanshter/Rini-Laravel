@@ -260,16 +260,32 @@ class NilaiController extends Controller
 
     }
 
-    public function cetakpdf_nilai($nama_ekskul)
+    public function cetakpdf_nilai(Request $request)
     {
+        $nama_ekskul = $request->input('nama_ekskul');
+        
+          //idpelatih
+          $namapelatih = DB::table('data_ekskuls')
+          ->select(['ekskuls.kode_pelatih as id_pelatih','users.name as nama_pelatih'])
+          ->join('ekskuls','ekskuls.kode_ekskul','=','data_ekskuls.kode')
+          ->join('users','users.nim','=','ekskuls.kode_pelatih')
+          ->where('data_ekskuls.nama',$nama_ekskul)
+          ->first();
 
             $nilai = Nilai::where('nama_ekskul',$nama_ekskul)
                     ->select(['nilais.*','users.kelas'])
                     ->join('users','users.nim','=','nilais.id_siswa')
+                    ->where('tahun_ajaran',$request->input('tahun_ajaran'))
+                    ->where('semester',$request->input('semester'))
                     ->get();
 
             $pdf = Pdf::loadview('nilai.nilai_cetakpdf',[
-                'nilai'=>$nilai        
+                'nilai'=>$nilai        ,
+                'tahun_ajaran'=>$request->input('tahun_ajaran'),
+                'semester'=>$request->input('semester'),
+                'nama_ekskul'=>$nama_ekskul,
+                'namapelatih'=>$namapelatih
+
             ]);
             return $pdf->stream();
     }

@@ -57,9 +57,9 @@ td.center {
     <center>
         <div>
                 <p style=" font-weight: bold;text-transform:uppercase">SMA NEGERI 16 JAKARTA</p>
-                <p style=" font-weight: bold;text-transform:uppercase">DAFTAR NILAI PESERTA EKSTRAKULIKULER {{$nilai[0]->nama_ekskul}}</p>
-                <p style=" font-weight: bold;text-transform:uppercase">semester {{$nilai[0]->semester}} </p>
-                <p style=" font-weight: bold;text-transform:uppercase">tahun pelajaran {{$nilai[0]->tahun_ajaran}}</p>
+                <p style=" font-weight: bold;text-transform:uppercase">DAFTAR NILAI PESERTA EKSTRAKULIKULER {{$nama_ekskul}}</p>
+                <p style=" font-weight: bold;text-transform:uppercase">semester {{$semester}} </p>
+                <p style=" font-weight: bold;text-transform:uppercase">tahun pelajaran {{$tahun_ajaran}}</p>
         </div>
         <br>
     
@@ -109,7 +109,7 @@ td.center {
       </tr>
       <br><br><br><br>
       <tr>
-        <td id="tabel1" style="text-align: center">{{$nilai[0]->nama_pelatih}}</td>
+        <td id="tabel1" style="text-align: center">{{$namapelatih->nama_pelatih}}</td>
       </tr>
     </table>
   
