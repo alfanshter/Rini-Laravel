@@ -138,7 +138,7 @@ Route::post('/absen', [AbsenController::class,'store'])->middleware('auth');
 Route::get('/data_absen/{nama_ekskul}', [AbsenController::class,'daftar_absen'])->middleware('auth');
 Route::delete('/hapusabsen/{id}', [AbsenController::class,'destroy'])->middleware('auth');
 Route::post('/update_absen', [AbsenController::class,'update'])->middleware('auth');
-Route::get('/cetakpdf_absen/{nama}', [AbsenController::class,'cetakpdf_absen'])->middleware('auth');
+Route::get('/cetakpdf_absen/{nama_ekskul?&tahun_ajaran?&semester?}', [AbsenController::class,'cetakpdf_absen'])->middleware('auth');
 
 
 //ABSENPelatih

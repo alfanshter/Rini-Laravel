@@ -62,9 +62,9 @@ td.center {
 
     <center>
         <div>
-                <p style=" font-weight: bold;text-transform:uppercase">DAFTAR HADIR PESERTA KEGIATAN EKTRAKULIKULER {{$absen[0]->nama_ekskul}}</p>
+                <p style=" font-weight: bold;text-transform:uppercase">DAFTAR HADIR PESERTA KEGIATAN EKTRAKULIKULER {{$nama_ekskul}}</p>
                 <p style=" font-weight: bold;text-transform:uppercase">SMA NEGERI 16 JAKARTA</p>
-                <p style=" font-weight: bold;text-transform:uppercase">tahun pelajaran {{$absen[0]->tahun_ajaran}}</p>
+                <p style=" font-weight: bold;text-transform:uppercase">tahun pelajaran {{$tahun_ajaran}}</p>
         </div>
         <br>
     
@@ -90,14 +90,14 @@ td.center {
           <td>{{$user->kelas}}</td>
           <td>
               <ul type="none">
-                  @foreach ($user->absensi()->where('absens.nama_ekskul','=','Basket')->get() as $i)
+                  @foreach ($user->absensi()->where('absens.nama_ekskul','=',$nama_ekskul)->where('tahun_ajaran',$tahun_ajaran)->where('semester',$semester)->get() as $i)
                   <li>{{ $i->tanggal}}</li>
                   @endforeach
               </ul>
           </td>
           <td>
               <ul type="none">
-                  @foreach ($user->absensi()->where('absens.nama_ekskul','=','Basket')->get() as $i)
+                  @foreach ($user->absensi()->where('absens.nama_ekskul','=',$nama_ekskul)->where('tahun_ajaran',$tahun_ajaran)->where('semester',$semester)->get() as $i)
                   @if ($i->absen==1)
                   <li>Hadir</li>                      
                   @endif

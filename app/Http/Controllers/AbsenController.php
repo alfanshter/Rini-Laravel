@@ -269,8 +269,10 @@ class AbsenController extends Controller
 
     }
 
-    public function cetakpdf_absen($nama_ekskul)
+    public function cetakpdf_absen(Request $request)
     {
+        $nama_ekskul = $request->input('nama_ekskul');
+
 
           //idpelatih
           $namapelatih = DB::table('data_ekskuls')
@@ -279,10 +281,11 @@ class AbsenController extends Controller
           ->join('users','users.nim','=','ekskuls.kode_pelatih')
           ->where('data_ekskuls.nama',$nama_ekskul)
           ->first();
+
+
          
         $users = User::where('role','1')
                     ->get();
-
                     $absen = Absen::where('nama_ekskul',$nama_ekskul)
                     ->select(['absens.*','users.kelas'])
                     ->join('users','users.id','=','absens.user_id')
@@ -300,6 +303,8 @@ class AbsenController extends Controller
                 'jumlahabsen'=>$jumlahabsen,
                 'nama_siswa'=>$nama_siswa,
                 'users'=>$users,
+                'tahun_ajaran'=>$request->input('tahun_ajaran'),
+                'semester'=>$request->input('semester'),
                 'nama_ekskul'=>$nama_ekskul,
                 'namapelatih'=>$namapelatih
             ])->setPaper('a4', 'landscape');

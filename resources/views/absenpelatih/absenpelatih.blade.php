@@ -121,6 +121,7 @@
                             @if (auth()->user()->role==0)
                             <button class="btn btn-primary ml-auto"  data-toggle="modal" data-target="#cetakpdf">Cetak PDF</button>
                            
+                            {{-- CETAK PDF --}}
                                     <div class="modal fade" id="cetakpdf" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                         aria-hidden="true">
                                         <div class="modal-dialog" role="document">
@@ -167,7 +168,7 @@
                                             </div>
                                         </div>
                                     </div>
-                            
+                            {{-- END CETAK PDF --}}
 
 
 
