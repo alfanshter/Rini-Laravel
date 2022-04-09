@@ -51,7 +51,7 @@ div.absolute {
 
     <center>
         <div>
-                <p style=" font-weight: bold;text-transform:uppercase">PROGRAM KEGIATAN EKSTRAKULIKULER {{$agenda[0]->nama_ekskul}}</p>
+                <p style=" font-weight: bold;text-transform:uppercase">PROGRAM KEGIATAN EKSTRAKULIKULER {{$nama_ekskul}}</p>
                 <p style=" font-weight: bold;text-transform:uppercase">SMA NEGERI 16 JAKARTA</p>
                 <p style=" font-weight: bold;text-transform:uppercase">tahun pelajaran 2021/2022</p>
                 {{-- <p style=" font-weight: bold;text-transform:uppercase">
@@ -95,7 +95,7 @@ div.absolute {
       </tr>
       <br><br><br><br>
       <tr>
-        <td id="tabel1" style="text-align: center">{{$agenda[0]->name}}</td>
+        <td id="tabel1" style="text-align: center">{{$nama_pelatih->nama_pelatih}}</td>
       </tr>
     </table>
   

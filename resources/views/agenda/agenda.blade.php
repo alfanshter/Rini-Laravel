@@ -24,11 +24,30 @@
                                         <input type="hidden" name="id_pelatih" value="{{$pelatih->id_pelatih}}" id="id_pelatih">                                        
                                         <input type="hidden" name="nama_ekskul" value="{{$nama_ekskul}}" id="nama_ekskul">
                                         <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Nama Materi:</label>
-                                        <input type="text" class="form-control" id="nama_materi" required name="nama_materi" value="{{old('nama_materi')}}">                                      </div>
+                                            <label for="recipient-name" class="col-form-label">Nama Materi:</label>
+                                            <input type="text" class="form-control" id="nama_materi" required name="nama_materi" value="{{old('nama_materi')}}">                                     
+                                        </div>
                                         <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Tanggal:</label>
-                                        <input type="date" class="form-control" id="tanggal" required name="tanggal" value="{{old('tangga')}}">
+                                            <label for="recipient-name" class="col-form-label">Semester:</label>
+                                            <select class="form-control" aria-label="Default select example" name="semester" id="semester">
+                                                <option value="ganjil">
+                                                    GANJIL
+                                                </option>                                                
+                                                <option value="genap">
+                                                    GENAP
+                                                </option>                                                
+
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="recipient-name" class="col-form-label">Tahun Ajaran:</label>
+                                            <input type="text" class="form-control" id="tahun_ajaran" name="tahun_ajaran" value="{{old('tahun_ajaran')}}">
+                                            <p>Cara penulisan : 2022-2021</p>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="recipient-name" class="col-form-label">Tanggal:</label>
+                                            <input type="date" class="form-control" id="tanggal" required name="tanggal" value="{{old('tangga')}}">
                                         </div>
                                         <div class="modal-footer">
                                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
@@ -63,11 +82,31 @@
                                         <input type="hidden" name="id_pelatih" value="{{auth()->user()->nim}}" id="id_pelatih">
                                         <input type="hidden" name="nama_ekskul" value="{{$nama_ekskul}}" id="nama_ekskul">
                                         <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Nama Materi:</label>
-                                        <input type="text" class="form-control" id="nama_materi" required name="nama_materi" value="{{old('nama_materi')}}">                                      </div>
+                                            <label for="recipient-name" class="col-form-label">Nama Materi:</label>
+                                            <input type="text" class="form-control" id="nama_materi" required name="nama_materi" value="{{old('nama_materi')}}">                                     
+                                        </div>
                                         <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Tanggal:</label>
-                                        <input type="date" class="form-control" id="tanggal" required name="tanggal" value="{{old('tangga')}}">
+                                            <label for="recipient-name" class="col-form-label">Semester:</label>
+                                            <select class="form-control" aria-label="Default select example" name="semester" id="semester">
+                                                <option value="ganjil">
+                                                    GANJIL
+                                                </option>                                                
+                                                <option value="genap">
+                                                    GENAP
+                                                </option>                                                
+
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="recipient-name" class="col-form-label">Tahun Ajaran:</label>
+                                            <input type="text" class="form-control" id="tahun_ajaran" name="tahun_ajaran" value="{{old('tahun_ajaran')}}">
+                                            <p>Cara penulisan : 2022-2021</p>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="recipient-name" class="col-form-label">Tanggal:</label>
+                                            <input type="date" class="form-control" id="tanggal" required name="tanggal" value="{{old('tangga')}}">
                                         </div>
 
                                         <div class="modal-footer">
@@ -104,10 +143,60 @@
                         <div class="card-header py-3 d-flex">
                             <h6 class="m-0 font-weight-bold text-primary p-2">Agenda</h6>
                             @if (auth()->user()->role==0 || auth()->user()->role==2 ||  auth()->user()->role==3)
-                            <form class="ml-auto" action="/cetakpdf_agenda_pelatih/{{$nama_ekskul}}" method="GET">
+                            {{-- <form class="ml-auto" action="/cetakpdf_agenda_pelatih/{{$nama_ekskul}}" method="GET">
                                 @csrf
                                 <button type="submit" class="btn btn-primary">Cetak PDF</button>
-                            </form>                                
+                            </form>          --}}
+                            <button type="submit" class="btn btn-primary ml-auto" data-toggle="modal" data-target="#cetakpdf">Cetak PDF</button>
+                            
+                            {{-- CETAK PDF --}}
+                                    <div class="modal fade" id="cetakpdf" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Cetak PDF?</h5>
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="/cetakpdf_agenda_pelatih" method="GET">
+                                                        @csrf
+                                                        <input type="hidden" name="nama_ekskul" id="nama_ekskul" value="{{$nama_ekskul}}">  
+
+                                                        <div class="mb-3">
+                                                            <label for="recipient-name" class="col-form-label">Semester:</label>
+                                                            <select class="form-control" aria-label="Default select example" name="semester" id="semester">
+                                                                <option value="ganjil">
+                                                                    GANJIL
+                                                                </option>                                                
+                                                                <option value="genap">
+                                                                    GENAP
+                                                                </option>                                                
+
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="recipient-name" class="col-form-label">Tahun Ajaran:</label>
+                                                            <input type="text" class="form-control" required id="tahun_ajaran" name="tahun_ajaran" value="{{old('tahun_ajaran')}}">
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                                        <button type="submit" class="btn btn-primary">Cetak</button>
+                    
+                                                    </div>
+                                                    </form>
+                                                </div>
+                                                
+
+                                            </div>
+                                        </div>
+                                    </div>
+                            {{-- END CETAK PDF --}}
+                       
                             @endif
                         </div>
                         <div class="card-body">
@@ -119,6 +208,8 @@
                                             <th>Materi</th>
                                             <th>Nama Ekskul</th>
                                             <th>Pelatih</th>
+                                            <th>Tahun Ajaran</th>
+                                            <th>Semester</th>
                                             <th>Tanggal</th>
                                             @if (auth()->user()->role ==2 || auth()->user()->role ==0)
                                             <th>Action</th>                                                
@@ -132,6 +223,8 @@
                                             <td>{{$data->nama_materi}}</td>
                                             <td>{{$data->nama_ekskul}}</td>
                                             <td>{{$data->name}}</td>
+                                            <td>{{$data->tahun_ajaran}}</td>
+                                            <td>{{$data->semester}}</td>
                                             <td>{{$data->tanggal}}</td>    
                                             @if (auth()->user()->role ==2 || auth()->user()->role ==0)
                                             <td class="align-middle text-center">

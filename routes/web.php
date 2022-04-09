@@ -105,7 +105,7 @@ Route::post('/updateagenda', [AgendaController::class,'updateagenda'])->middlewa
 Route::get('/agenda/{id}', [AgendaController::class,'edit'])->middleware('auth');
 Route::delete('/agenda/hapusagenda/{id}', [AgendaController::class,'destroy'])->middleware('auth');
 Route::get('/daftar_agenda', [AgendaController::class,'daftar_agenda'])->middleware('auth');
-Route::get('/cetakpdf_agenda_pelatih/{nama}', [AgendaController::class,'cetakpdf_agenda_pelatih'])->middleware('auth');
+Route::get('/cetakpdf_agenda_pelatih/{nama_ekskul?&tahun_ajaran?&semester?}', [AgendaController::class,'cetakpdf_agenda_pelatih'])->middleware('auth');
 
 //Prestasi
 Route::get('/prestasi', [PrestasiController::class,'index'])->middleware('auth');

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->date('tanggal');
             $table->string('hari');
+            $table->string('tahun_ajaran');
+            $table->string('semester');
             $table->string('nama_materi');
             $table->string('nama_ekskul');
             $table->string('id_pelatih');

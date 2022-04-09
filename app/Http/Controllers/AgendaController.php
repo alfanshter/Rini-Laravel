@@ -20,16 +20,37 @@ class AgendaController extends Controller
     {
         
         if (auth()->user()->role ==2) {
-    
-           $data_agenda = Agenda::join('users','users.nim','=','agendas.id_pelatih')
-            ->where('id_pelatih',auth()->user()->nim)
-            ->where('nama_ekskul',$nama)
-            ->get(['users.name','agendas.*']);
-  
+            $namapelatih = DB::table('data_ekskuls')
+            ->select(['ekskuls.kode_pelatih as id_pelatih','users.nim as nama_pelatih'])
+            ->join('ekskuls','ekskuls.kode_ekskul','=','data_ekskuls.kode')
+            ->join('users','users.nim','=','ekskuls.kode_pelatih')
+            ->where('data_ekskuls.nama',$nama)
+            ->first();
+
+            if ($namapelatih == null) {
+                return redirect('/daftar_agenda')->with('success','Belum ada peserta');
+            }else{
+
+                $data_agenda = Agenda::join('data_ekskuls','data_ekskuls.nama','=','agendas.nama_ekskul')
+                ->join('users','users.nim','=','agendas.id_pelatih')
+                ->where('agendas.nama_ekskul',$nama)
+                ->get(['agendas.*','users.name']);
                 return view('agenda.agenda',[
                     'dataagenda' => $data_agenda,
-                    'nama_ekskul' => $nama
+                    'nama_ekskul' => $nama,
+                    'pelatih' => $namapelatih
                 ]);
+            }
+            
+        //    $data_agenda = Agenda::join('users','users.nim','=','agendas.id_pelatih')
+        //     ->where('id_pelatih',auth()->user()->nim)
+        //     ->where('nama_ekskul',$nama)
+        //     ->get(['users.name','agendas.*']);
+  
+        //         return view('agenda.agenda',[
+        //             'dataagenda' => $data_agenda,
+        //             'nama_ekskul' => $nama
+        //         ]);
                     
             
             
@@ -122,7 +143,9 @@ class AgendaController extends Controller
                 'tanggal' => ['required'],
                 'nama_materi' => ['required'],
                 'nama_ekskul' => ['required'],
-                'id_pelatih' => ['required']
+                'id_pelatih' => ['required'],
+                'tahun_ajaran' => ['required'],
+                'semester' => ['required']
             ]);
             setlocale(LC_TIME, 'id_ID');
             Carbon::setLocale('id');
@@ -138,7 +161,9 @@ class AgendaController extends Controller
                 'tanggal' => ['required'],
                 'nama_materi' => ['required'],
                 'nama_ekskul' => ['required'],
-                'id_pelatih' => ['required']
+                'id_pelatih' => ['required'],
+                'tahun_ajaran' => ['required'],
+                'semester' => ['required']
             ]);
             setlocale(LC_TIME, 'id_ID');
             Carbon::setLocale('id');
@@ -193,25 +218,42 @@ class AgendaController extends Controller
 
     }
 
-    public function cetakpdf_agenda_pelatih($nama)
+    public function cetakpdf_agenda_pelatih(Request $request)
     {
+        $nama = $request->input('nama_ekskul');
+           //idpelatih
+          $namapelatih = DB::table('data_ekskuls')
+          ->select(['ekskuls.kode_pelatih as id_pelatih','users.name as nama_pelatih'])
+          ->join('ekskuls','ekskuls.kode_ekskul','=','data_ekskuls.kode')
+          ->join('users','users.nim','=','ekskuls.kode_pelatih')
+          ->where('data_ekskuls.nama',$nama)
+          ->first();
         if (auth()->user()->role == 2) {
             $data_agenda = Agenda::join('users','users.nim','=','agendas.id_pelatih')
             ->where('id_pelatih',auth()->user()->nim)
             ->where('nama_ekskul',$nama)
+            ->where('tahun_ajaran',$request->input('tahun_ajaran'))
+            ->where('semester',$request->input('semester'))
             ->get(['users.name','agendas.*']);
     
             $pdf = PDF::loadview('agenda.agenda_cetakpdf',[
-                'agenda'=>$data_agenda        
+                'agenda'=>$data_agenda ,       
+                'nama_ekskul'=>$nama   ,
+                'nama_pelatih'=>$namapelatih   
             ]);
             return $pdf->stream();
         }else if (auth()->user()->role == 0 || auth()->user()->role == 3) {
             $data_agenda = Agenda::join('users','users.nim','=','agendas.id_pelatih')
             ->where('nama_ekskul',$nama)
+            ->where('tahun_ajaran',$request->input('tahun_ajaran'))
+            ->where('semester',$request->input('semester'))
             ->get(['users.name','agendas.*']);
     
             $pdf = PDF::loadview('agenda.agenda_cetakpdf',[
-                'agenda'=>$data_agenda        
+                'agenda'=>$data_agenda,
+                'nama_ekskul'=>$nama   ,
+                'nama_pelatih'=>$namapelatih   
+        
             ]);
             return $pdf->stream();
 
