@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('id_ekskul');
             $table->string('nama_ekskul');
             $table->string('id_siswa');
+            $table->foreign('id_siswa')->references('nim')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('nama_siswa');
             $table->string('tahun_ajaran');
             $table->string('semester');

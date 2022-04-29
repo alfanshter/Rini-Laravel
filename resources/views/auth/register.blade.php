@@ -63,10 +63,7 @@
                                         @enderror
                                 </div>
 
-                                <div class="form-group">
-                                    <input type="text" name="alamat" class="form-control form-control-user  @error('alamat') is-invalid @enderror" required id="alamat"
-                                        placeholder="Alamat admin" value="{{old('alamat')}}">
-                                </div>
+                              
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
                                         <input type="password" name="password" required class="form-control form-control-user @error('password') is-invalid @enderror"

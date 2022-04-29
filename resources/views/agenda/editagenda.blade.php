@@ -23,6 +23,7 @@
 <form action="/updateagenda" method="POST">
   @csrf
   <input type="hidden" name="id" value="{{$dataagenda->id}}" id="id">
+  <input type="hidden" name="nama_ekskul" value="{{$dataagenda->nama_ekskul}}" id="nama_ekskul">
   <div class="mb-3">
   <label for="recipient-name" class="col-form-label">Nama Materi:</label>
   <input type="text" class="form-control" id="nama_materi" required name="nama_materi" value="{{old('nama_materi',$dataagenda->nama_materi)}}">                                      </div>
@@ -32,7 +33,7 @@
   </div>
 
   <div class="modal-footer">
-  <a href="/agenda" class="btn btn-secondary" >Cancel</a>
+  <a href="{{url()->previous()}}" class="btn btn-secondary" >Cancel</a>
   <button type="submit" class="btn btn-primary">Edit</button>
 
 </div>

@@ -23,6 +23,7 @@
 <form action="/update_nilai" method="POST">
   @csrf
   <input type="hidden" name="id" value="{{$nilai->id}}" id="id">
+  <input type="hidden" name="nama_ekskul" value="{{$nilai->nama_ekskul}}" id="nama_ekskul">
 
   <div class="mb-3">
     <label for="recipient-name" class="col-form-label">Nama Siswa:</label>

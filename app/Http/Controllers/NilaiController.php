@@ -249,14 +249,13 @@ class NilaiController extends Controller
 
     public function update(Request $request)
     {
-           
             $update = DB::table('nilais')->
                 where('id',$request->id)->update([
                 'tahun_ajaran' => $request->tahun_ajaran,
                 'nilai' => $request->nilai
             ]);
     
-            return redirect("/nilai/$request->id")->with('success','Nilai berhasil di Edit');
+            return redirect("/data_nilai/$request->nama_ekskul")->with('success','Nilai berhasil di Edit');
 
     }
 

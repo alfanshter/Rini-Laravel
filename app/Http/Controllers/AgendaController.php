@@ -180,7 +180,7 @@ class AgendaController extends Controller
     public function destroy($id)
     {
         Agenda::destroy($id);
-        return redirect('/daftar_agenda')->with('success', 'AgendaS berhasil di hapus ');            
+        return redirect(url()->previous())->with('success', 'Agenda berhasil di hapus ');            
 
     }
 

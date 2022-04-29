@@ -93,10 +93,18 @@ class DataSiswaController extends Controller
             'password' => ['required','min:5']
         ]);
         
+         //cek password lama
+        //Apakah Nim sama ? 
+        $getuser = User::where('id',$request->id)->first();
+        $password_lama = $request->password_lama;
+        if (!Hash::check($password_lama , $getuser->password )) {
+            return redirect('/biodata')->with('error','Password lama salah');
+        }
         $validatedData['password'] = Hash::make($validatedData['password']);
 
         User::where('id',$request->id)
             ->update($validatedData);
+
 
         return redirect('/biodata')->with('success','Update Password Berhasil');
 

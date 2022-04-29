@@ -23,15 +23,15 @@
                                 <form action="/prestasi" method="POST">
                                     @csrf
                                     <input type="hidden" name="id_pelatih" value="{{auth()->user()->nim}}" id="id_pelatih">
-                                    <input type="hidden" name="nama_ekskuls" value="{{$nama_ekskul}}" id="nama_ekskuls">
+                                    <input type="hidden" name="kode_ekskul" value="{{$kode_ekskul}}" id="kode_ekskul">
                                     <input type="hidden" name="nama_pelatih" value="{{auth()->user()->name}}" id="nama_pelatih">
                                     <input type="hidden" name="id_pelatih" value="{{auth()->user()->nim}}" id="id_pelatih">
 
                                     <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Nama Peserta:</label>
-                                    <select class="form-control" aria-label="Default select example" name="nama_peserta" id="nama_peserta">
+                                    <select class="form-control" aria-label="Default select example" name="nim" id="nama_peserta">
                                         @foreach ($nama_peserta as $data)
-                                        <option value="{{$data->name}}">{{$data->name}}</option>                                                
+                                        <option value="{{$data->nim}}">{{$data->name}}</option>                                                
                                         @endforeach
                                     </select>
                                     </div>
@@ -84,19 +84,19 @@
                                     @csrf
                                     @if (auth()->user()->role ==2)
                                     <input type="hidden" name="id_pelatih" value="{{auth()->user()->nim}}" id="id_pelatih">
-                                    <input type="hidden" name="nama_ekskuls" value="{{$nama_ekskul}}" id="nama_ekskuls">
+                                    <input type="hidden" name="kode_ekskul" value="{{$kode_ekskul}}" id="kode_ekskul">
                                     <input type="hidden" name="nama_pelatih" value="{{auth()->user()->name}}" id="nama_pelatih">
                                     @endif
                                     @if (auth()->user()->role ==0)
                                     <input type="hidden" name="id_pelatih" value="{{$pelatih->id_pelatih}}" id="id_pelatih">
-                                    <input type="hidden" name="nama_ekskuls" value="{{$nama_ekskul}}" id="nama_ekskuls">
+                                    <input type="hidden" name="kode_ekskul" value="{{$kode_ekskul}}" id="kode_ekskul">
                                     <input type="hidden" name="nama_pelatih" value="{{$pelatih->nama_pelatih}}" id="nama_pelatih">                                        
                                     @endif
                                     <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Nama Peserta:</label>
-                                    <select class="form-control" aria-label="Default select example" name="nama_peserta" id="nama_peserta">
+                                    <select class="form-control" aria-label="Default select example" name="nim" id="nim">
                                         @foreach ($nama_peserta as $data)
-                                        <option value="{{$data->name}}">{{$data->name}}</option>                                                
+                                        <option value="{{$data->nim}}">{{$data->name}}</option>                                                
                                         @endforeach
                                     </select>
                                     </div>
@@ -162,7 +162,6 @@
                                             <th>Prestasi</th>
                                             <th>Tanggal</th>
                                             <th>Nama Lomba</th>
-                                            <th>Nama Pelatih</th>
                                             @if (auth()->user()->role ==2 || auth()->user()->role ==0)
                                             <th>Action</th>                                                
                                             @endif
@@ -172,12 +171,11 @@
                                         @foreach ($dataprestasi as $data)
                                         <tr>
                                             <td>{{$loop->iteration}}</td>
-                                            <td>{{$data->nama_peserta}}</td>
-                                            <td>{{$data->nama_ekskuls}}</td>
+                                            <td>{{$data->user->name}}</td>
+                                            <td>{{$data->ekskul->nama}}</td>
                                             <td>{{$data->prestasi}}</td>
                                             <td>{{$data->tanggal}}</td>    
                                             <td>{{$data->nama_lomba}}</td>    
-                                            <td>{{$data->nama_pelatih}}</td>    
                                             @if (auth()->user()->role ==2 || auth()->user()->role ==0)
                                             <td class="align-middle text-center">
                                                 <div class="d-flex justify-content-sm-center mt-2">                                                    

@@ -38,7 +38,12 @@
   </div>
 
   <div class="mb-3">
-    <label for="recipient-name" class="col-form-label">password:</label>
+    <label for="recipient-name" class="col-form-label">password lama:</label>
+    <input type="password" class="form-control" id="password_lama" name="password_lama" required>
+  </div>
+  
+  <div class="mb-3">
+    <label for="recipient-name" class="col-form-label">password baru:</label>
     <input type="password" class="form-control" id="password" name="password" required>
   </div>
 

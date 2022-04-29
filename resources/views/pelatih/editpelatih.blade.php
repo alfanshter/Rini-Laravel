@@ -35,8 +35,8 @@
     <input type="text" class="form-control" id="name" name="name" value="{{old('name',$datapelatih->name)}}">
   </div>
   <div class="mb-3">
-    <label for="recipient-name" class="col-form-label">Nomor Pelatih:</label>
-    <input type="number" class="form-control" id="nim" name="nim" value="{{old('nim',$datapelatih->nim)}}">
+    <label for="recipient-name" class="col-form-label">Kode Pelatih:</label>
+    <input type="text" oninvalid="this.setCustomValidity('Kode pelatih wajib diisi')" class="form-control" id="nim" required name="nim" value="{{old('nim',$datapelatih->nim)}}">
   </div>
   <div class="mb-3">
     <label for="message-text" class="col-form-label">Alamat:</label>
@@ -53,11 +53,16 @@
     <input type="text" class="form-control" id="username" name="username" value="{{old('username',$datapelatih->username)}}">
   </div>
 
+  <div class="mb-3">
+    <label for="recipient-name" class="col-form-label">Password:</label>
+    <input type="password" class="form-control" id="password" name="password">
+  </div>
+
 
 
 
   <div class="modal-footer">
-    <button type="submit" class="btn btn-primary">Update</button>
+    <button type="submit" class="btn btn-primary">Edit</button>
 
 </div>
 </form> 

@@ -108,8 +108,9 @@ class DataEkskulController extends Controller
      * @param  \App\Models\DataEkskul  $dataEkskul
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DataEkskul $dataEkskul)
+    public function destroy($id)
     {
-        //
+        $hapus = DataEkskul::where('id',$id)->delete();
+        return redirect('/dataekskul')->with('success','Hapus Ekskul Berhasil');
     }
 }

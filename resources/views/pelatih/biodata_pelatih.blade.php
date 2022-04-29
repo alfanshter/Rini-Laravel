@@ -8,6 +8,12 @@
 </div>
 @endif
 
+@if (session()->has('error'))
+<div class="alert alert-danger mt-2" role="alert">
+    {{session('error')}}  
+</div>
+@endif
+
 @error('password')
 <div class="alert alert-danger mt-2" role="alert">
     {{$message}}  
@@ -25,7 +31,7 @@
   </div>
   <div class="mb-3">
     <label for="recipient-name" class="col-form-label">Kode Pelatih:</label>
-    <input type="number" class="form-control" id="nim" name="nim" value="{{old('nim',$datapelatih->nim)}}" disabled>
+    <input type="text" class="form-control" id="nim" name="nim" value="{{old('nim',$datapelatih->nim)}}" disabled>
   </div>
 
   <div class="mb-3">
@@ -38,8 +44,13 @@
   </div>
 
   <div class="mb-3">
-    <label for="recipient-name" class="col-form-label">password:</label>
-    <input type="password" class="form-control" id="password" name="password" required>
+    <label for="recipient-name" class="col-form-label">password lama:</label>
+    <input type="password" class="form-control" id="password_lama" name="password_lama" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="recipient-name" class="col-form-label">password baru:</label>
+    <input type="password_sesudah" class="form-control" id="password" name="password" required>
   </div>
 
   <div class="modal-footer">

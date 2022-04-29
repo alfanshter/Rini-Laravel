@@ -15,6 +15,12 @@
                         </div>
                     @endif
 
+                    @if (session()->has('failed'))
+                    <div class="alert alert-danger mt-2" role="alert">
+                        {{session('failed')}}  
+                    </div>
+                @endif
+
                     @error('kode_pelatih')
                     <div class="alert alert-danger mt-2" role="alert">
                         {{$message}}  

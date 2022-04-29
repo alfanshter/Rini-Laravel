@@ -22,7 +22,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('username')->unique();
-            $table->string('alamat');
+            $table->string('alamat')->nullable();
             $table->string('nohp')->nullable();
             $table->string('jenis_kelamin')->nullable();
             $table->string('kelas')->nullable();

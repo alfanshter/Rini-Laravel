@@ -86,11 +86,7 @@
                                                 <div class="d-flex justify-content-sm-center mt-2">
                                                     
                                                     <a href="dataekskul/editekskul/{{$data->id}}" class="btn btn-warning">Edit</a>
-                                                    <form action="/datasiswa/hapussiswa/{{$data->id}}" method="post">
-                                                        @method('delete')
-                                                        @csrf
-                                                        <button class="btn btn-danger ml-2" onclick="return confirm('Apakah anda akan menghapus data ?')">Hapus</button>
-                                                    </form>
+                                                    <a href="/dataekskul/destroy/{{$data->id}}" class="btn btn-danger ml-2" onclick="return confirm('Apakah anda akan menghapus data ?')">Hapus</a>
 
                                                 </div>
                                                 </td>                                        

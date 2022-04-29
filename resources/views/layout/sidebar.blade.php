@@ -35,7 +35,32 @@
             <!-- Nav Item - Pages Collapse Menu -->
             {{-- ==================== ADMIN ===================== --}}
             @if (auth()->user()->role==0 )
-            <li class="nav-item {{Request::is('datasiswa') ? 'active' : ''}} ">
+
+            <li class="nav-item {{Request::is('/') ? 'active' : ''}} ">
+                <a class="nav-link" href="/">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <li class="nav-item {{Request::is('dataekskul') ? 'active' : ''}} {{Request::is('informasiekskul') ? 'active' : ''}}">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#user"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Data User</span>
+                </a>
+                <div id="user" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Menu User:</h6>
+                        <a class="collapse-item" href="/datasiswa">Data Siswa</a>
+                        <a class="collapse-item" href="/pelatih">Data Pelatih</a>
+                        <a class="collapse-item" href="/kepalasekolah">Data Kepaala Sekolah</a>
+                        <a class="collapse-item" href="/walikelas">Data Wali Kelas</a>
+                    </div>
+                </div>
+            </li>
+
+            {{-- <li class="nav-item {{Request::is('datasiswa') ? 'active' : ''}} ">
                 <a class="nav-link" href="/datasiswa">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Data Siswa</span></a>
@@ -46,7 +71,7 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Data Pelatih</span></a>
             </li>
-
+ --}}
             {{-- <li class="nav-item {{Request::is('kepalasekolah') ? 'active' : ''}} ">
                 <a class="nav-link" href="/kepalasekolah">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -112,16 +137,22 @@
                     <span>Absen Siswa</span></a>
             </li>     
 
-            <li class="nav-item {{Request::is('absenpelatih') ? 'active' : ''}}"  >
+            {{-- <li class="nav-item {{Request::is('absenpelatih') ? 'active' : ''}}"  >
                 <a class="nav-link" href="/absenpelatih">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Absen Pelatih</span></a>
-            </li>     
+            </li>      --}}
             @endif
             {{-- ==================== END ADMIN ===================== --}}
 
             {{-- ==================== SISWA ===================== --}}
             @if (auth()->user()->role == 1)
+            <li class="nav-item {{Request::is('/') ? 'active' : ''}} ">
+                <a class="nav-link" href="/">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
             <li class="nav-item {{Request::is('biodata') ? 'active' : ''}} ">
                 <a class="nav-link" href="/biodata">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -178,6 +209,12 @@
 
             {{-- ==================== PELATIH ===================== --}}
             @if (auth()->user()->role == 2)
+
+            <li class="nav-item {{Request::is('/') ? 'active' : ''}} ">
+                <a class="nav-link" href="/">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
             <li class="nav-item {{Request::is('biodata_pelatih') ? 'active' : ''}} ">
                 <a class="nav-link" href="/biodata_pelatih">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -227,11 +264,11 @@
                     <span>Absen</span></a>
             </li>     
 
-            <li class="nav-item {{Request::is('absenpelatih') ? 'active' : ''}}"  >
+            {{-- <li class="nav-item {{Request::is('absenpelatih') ? 'active' : ''}}"  >
                 <a class="nav-link" href="/absenpelatih">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Absen Pelatih</span></a>
-            </li>     
+            </li>      --}}
  
 
             @endif

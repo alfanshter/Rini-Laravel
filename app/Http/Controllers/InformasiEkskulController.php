@@ -49,7 +49,13 @@ class InformasiEkskulController extends Controller
             'kode_pelatih' => ['required']
         ]);
 
-
+        //cekekskul
+        $cek = InformasiEkskul::where('kode_ekskul',$request->kode_ekskul)
+                                ->where('kode_pelatih',$request->kode_pelatih)
+                                ->first();
+        if ($cek) {
+            return redirect('/informasiekskul')->with('failed','sudah ada pelatihnya');
+        }
         InformasiEkskul::create($validatedData);
 
         return redirect('/informasiekskul')->with('success','Tambah Data berhasil');

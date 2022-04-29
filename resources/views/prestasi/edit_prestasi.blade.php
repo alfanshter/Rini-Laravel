@@ -23,15 +23,16 @@
 <form action="/update_prestasi" method="POST">
   @csrf
   <input type="hidden" name="id" value="{{$data_prestasi->id}}" id="id">
+  <input type="hidden" name="kode_ekskul" value="{{$data_prestasi->kode_ekskul}}" id="kode_ekskul">
 
   <div class="mb-3">
     <label for="recipient-name" class="col-form-label">Nama Peserta:</label>
-    <input type="text" class="form-control" disabled value="{{old('nama_peserta',$data_prestasi->nama_peserta)}}">                                      
+    <input type="text" class="form-control" disabled value="{{old('nama_peserta',$data_prestasi->user->name)}}">                                      
   </div>
 
   <div class="mb-3">
     <label for="recipient-name" class="col-form-label">Nama Ekskul:</label>
-    <input type="text" class="form-control" disabled value="{{old('nama_ekskuls',$data_prestasi->nama_ekskuls)}}">                                      
+    <input type="text" class="form-control" disabled value="{{old('nama_ekskuls',$data_prestasi->ekskul->nama)}}">                                      
   </div>
 
   <div class="mb-3">
@@ -50,7 +51,7 @@
   </div>
 
   <div class="modal-footer">
-  <a href='/daftar_prestasi/{{$data_prestasi->nama_ekskuls}}' class="btn btn-secondary" >Kembali</a>
+  <a href='/daftar_prestasi/{{$data_prestasi->ekskul->kode}}' class="btn btn-secondary" >Kembali</a>
   <button type="submit" class="btn btn-primary">Edit</button>
 
 </div>

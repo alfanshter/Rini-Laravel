@@ -216,7 +216,7 @@ class AbsenController extends Controller
 
             Absen::create($validatedData);
         
-            return redirect("/data_absen/$request->nama_ekskul")->with('success','Nilai berhasil di input');
+            return redirect("/data_absen/$request->nama_ekskul")->with('success','absensi berhasil di input');
 
         }
         else if (auth()->user()->role ==2) {
@@ -247,7 +247,7 @@ class AbsenController extends Controller
     {
         
             Absen::destroy($id);
-            return redirect('/absen')->with('success', 'Absen berhasil di hapus ');            
+            return redirect(url()->previous())->with('success', 'Absen berhasil di hapus ');            
     }
 
     
@@ -266,7 +266,7 @@ class AbsenController extends Controller
                 'absen' => $request->absen
             ]);
     
-            return redirect("/absen")->with('success','Nilai berhasil di Edit');
+            return redirect("/data_absen/$request->nama_ekskul")->with('success','absensi berhasil di Edit');
 
     }
 

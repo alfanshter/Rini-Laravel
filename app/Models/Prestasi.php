@@ -9,4 +9,14 @@ class Prestasi extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'nim','nim');
+    }
+
+    public function ekskul()
+    {
+        return $this->belongsTo(DataEkskul::class,'kode_ekskul','kode');
+    }
 }
