@@ -46,7 +46,7 @@ class DataEkskulController extends Controller
 
         DataEkskul::create($validatedData);
 
-        return redirect('/dataekskul')->with('success','Pendaftaran berhasil');
+        return redirect('/dataekskul')->with('success','Input Data berhasil');
 
     }
 

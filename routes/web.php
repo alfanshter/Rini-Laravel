@@ -62,6 +62,7 @@ Route::delete('/datapelatih/hapuspelatih/{id}', [DataPelatihController::class,'d
 
 //Data Eksul
 Route::get('/dataekskul',[DataEkskulController::class,'index'])->middleware('auth');
+Route::post('/dataekskul',[DataEkskulController::class,'store'])->middleware('auth');
 Route::get('/dataekskul/destroy/{id}',[DataEkskulController::class,'destroy'])->middleware('auth');
 Route::get('/dataekskul/editekskul/{id}', [DataEkskulController::class,'edit'])->middleware('auth');
 Route::post('/dataekskul/updateekskul', [DataEkskulController::class,'update'])->middleware('auth');
