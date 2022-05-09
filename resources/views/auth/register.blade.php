@@ -48,7 +48,7 @@
 
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
-                                        <input type="number" class="form-control form-control-user @error('nim') is-invalid @enderror" required id="nim"  name="nim"
+                                        <input type="text" class="form-control form-control-user @error('nim') is-invalid @enderror" required id="nim"  name="nim"
                                             placeholder="Kode Admin" value="{{old('nim')}}">
                                             
                                     </div>

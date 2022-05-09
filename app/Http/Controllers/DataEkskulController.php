@@ -16,7 +16,7 @@ class DataEkskulController extends Controller
      */
     public function index()
     {
-        return view('ekskul.ekskul',[
+        return view('ekskul.ekskul', [
             'dataekskul' => DataEkskul::all()
         ]);
     }
@@ -38,16 +38,15 @@ class DataEkskulController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         $validatedData = $request->validate([
-            'kode' => ['required','min:3','max:255','unique:data_ekskuls'],
+            'kode' => ['required', 'min:3', 'max:255', 'unique:data_ekskuls'],
             'nama' => ['required']
         ]);
 
         DataEkskul::create($validatedData);
 
-        return redirect('/dataekskul')->with('success','Input Data berhasil');
-
+        return redirect('/dataekskul')->with('success', 'Input Data berhasil');
     }
 
     /**
@@ -69,8 +68,8 @@ class DataEkskulController extends Controller
      */
     public function edit($id)
     {
-        return view('ekskul.editekskul',[
-            'data_ekskul' => DataEkskul::where('id',$id)->first()
+        return view('ekskul.editekskul', [
+            'data_ekskul' => DataEkskul::where('id', $id)->first()
         ]);
     }
 
@@ -86,20 +85,19 @@ class DataEkskulController extends Controller
         $rule = [
             'kode' => 'required|max:255',
             'nama' => ['required']
-         ];
+        ];
         //Apakah Kode sama ? 
-        $getekskul = DataEkskul::where('id',$request->id)->first();
-        if ($request->kode !=$getekskul->kode) {
+        $getekskul = DataEkskul::where('id', $request->id)->first();
+        if ($request->kode != $getekskul->kode) {
             $rule['kode'] = 'required|unique:data_ekskuls';
         }
 
         $validation = $request->validate($rule);
 
-        DataEkskul::where('id',$request->id)
+        DataEkskul::where('id', $request->id)
             ->update($validation);
 
-        return redirect('/dataekskul')->with('success','Update Informasi Ekskul Berhasil');
-
+        return redirect('/dataekskul')->with('success', 'Update Ekskul Berhasil');
     }
 
     /**
@@ -110,7 +108,7 @@ class DataEkskulController extends Controller
      */
     public function destroy($id)
     {
-        $hapus = DataEkskul::where('id',$id)->delete();
-        return redirect('/dataekskul')->with('success','Hapus Ekskul Berhasil');
+        $hapus = DataEkskul::where('id', $id)->delete();
+        return redirect('/dataekskul')->with('success', 'Hapus Ekskul Berhasil');
     }
 }

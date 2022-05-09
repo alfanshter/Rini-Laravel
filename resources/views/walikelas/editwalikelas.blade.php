@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 @section('konten')
-<h2>Edit Wali Keas</h2>
+<h2>Edit Wali Kelas</h2>
 @error('username')
 <div class="alert alert-danger mt-2" role="alert">
     {{$message}}  
@@ -56,6 +56,11 @@
     <label for="recipient-name" class="col-form-label">Username:</label>
     <input type="text" class="form-control" id="username" name="username" value="{{old('username',$walikelas->username)}}">
   </div>
+
+   <div class="mb-3">
+        <label for="recipient-name" class="col-form-label">Password:</label>
+        <input type="text" class="form-control" id="password" name="password">
+    </div>
 
   <div class="modal-footer">
     <button type="submit" class="btn btn-primary">Update</button>

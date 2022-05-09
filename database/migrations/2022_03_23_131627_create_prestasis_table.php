@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('kode_ekskul');
             $table->foreign('kode_ekskul')->references('kode')->on('data_ekskuls')->onDelete('cascade')->onUpdate('cascade');
             $table->string('prestasi');
+            $table->string('foto');
             $table->string('nama_pelatih');
             $table->string('id_pelatih');
             $table->date('tanggal');

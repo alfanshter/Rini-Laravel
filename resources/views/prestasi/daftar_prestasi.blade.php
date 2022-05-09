@@ -20,7 +20,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form action="/prestasi" method="POST">
+                                <form action="/prestasi" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="id_pelatih" value="{{auth()->user()->nim}}" id="id_pelatih">
                                     <input type="hidden" name="kode_ekskul" value="{{$kode_ekskul}}" id="kode_ekskul">
@@ -52,6 +52,14 @@
                                         <input type="text" class="form-control" id="nama_lomba" required name="nama_lomba" value="{{old('nama_lomba')}}">
                                     </div>
 
+                                                                        <div class="mb-3">
+                                        <label for="recipient-name" class="col-form-label">Foto:</label>
+                                        <input type="file" class="form-control" id="foto" required name="foto" value="{{old('foto')}}">
+                                    </div>
+
+
+                                    
+
                                     <div class="modal-footer">
                                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                                     <button type="submit" class="btn btn-primary">Tambah</button>
@@ -80,7 +88,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form action="/prestasi" method="POST">
+                                <form action="/prestasi" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @if (auth()->user()->role ==2)
                                     <input type="hidden" name="id_pelatih" value="{{auth()->user()->nim}}" id="id_pelatih">
@@ -115,6 +123,12 @@
                                     <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Nama Lomba:</label>
                                         <input type="text" class="form-control" id="nama_lomba" required name="nama_lomba" value="{{old('nama_lomba')}}">
+                                    </div>
+
+                                    
+                                    <div class="mb-3">
+                                        <label for="recipient-name" class="col-form-label">Foto:</label>
+                                        <input type="file" class="form-control" id="foto" required name="foto" value="{{old('foto')}}">
                                     </div>
 
                                     <div class="modal-footer">
@@ -162,6 +176,7 @@
                                             <th>Prestasi</th>
                                             <th>Tanggal</th>
                                             <th>Nama Lomba</th>
+                                            <th>Foto</th>
                                             @if (auth()->user()->role ==2 || auth()->user()->role ==0)
                                             <th>Action</th>                                                
                                             @endif
@@ -176,13 +191,15 @@
                                             <td>{{$data->prestasi}}</td>
                                             <td>{{$data->tanggal}}</td>    
                                             <td>{{$data->nama_lomba}}</td>    
+                                            <td><img src="{{asset('storage/'. $data->foto)}}" width="150" height="150" alt="" srcset=""></td>    
                                             @if (auth()->user()->role ==2 || auth()->user()->role ==0)
                                             <td class="align-middle text-center">
                                                 <div class="d-flex justify-content-sm-center mt-2">                                                    
                                                         <a href="/prestasi/{{$data->id}}" class="btn btn-warning ml-2">Edit</a>
-                                                    <form action="/prestasi/hapusprestasi/{{$data->id}}" method="post">
-                                                        @method('delete')
+                                                    <form action="/prestasi/hapusprestasi" method="post">
                                                         @csrf
+                                                        <input type="hidden" name="id" value="{{$data->id}}">
+                                                        <input type="hidden" name="foto" value="{{$data->foto}}">
                                                         <button class="btn btn-danger ml-2" onclick="return confirm('Apakah anda menyetujui ?')">Hapus</button>
                                                     </form>
 

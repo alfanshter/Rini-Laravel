@@ -10,15 +10,15 @@ class DataPelatihController extends Controller
 {
     public function index()
     {
-        return view('pelatih.pelatih',[
-            'datapelatih' => User::where('role',2)->get()
+        return view('pelatih.pelatih', [
+            'datapelatih' => User::where('role', 2)->get()
         ]);
     }
 
     public function edit($id)
     {
-        return view('pelatih.editpelatih',[
-            'datapelatih' => User::where('id',$id)->first()
+        return view('pelatih.editpelatih', [
+            'datapelatih' => User::where('id', $id)->first()
         ]);
     }
 
@@ -32,13 +32,21 @@ class DataPelatihController extends Controller
             'username' => ['required'],
         ];
         //Apakah Nim sama ? 
-        $getuser = User::where('id',$request->id)->first();
-        if ($request->nim !=$getuser->nim) {
-            $rule['nim'] = 'required|unique:users';
+        $getuser = User::where('id', $request->id)->first();
+        if ($request->nim != $getuser->nim) {
+            //cek kode pelatih
+            $cek = User::where('nim', $request->nim)->first();
+            if ($cek != null) {
+                return redirect('/pelatih')->with('failed', 'Kode pelatih sama');
+            }
         }
 
-        if ($request->username !=$getuser->username) {
-            $rule['username'] = 'required|unique:users';
+        if ($request->username != $getuser->username) {
+            //cek kode pelatih
+            $cek = User::where('username', $request->username)->first();
+            if ($cek != null) {
+                return redirect('/pelatih')->with('failed', 'Username sama');
+            }
         }
 
         $validation = $request->validate($rule);
@@ -47,29 +55,28 @@ class DataPelatihController extends Controller
         if ($request->password) {
             $validation['password'] = Hash::make($request->password);
         }
-        
-        User::where('id',$request->id)
+
+        User::where('id', $request->id)
             ->update($validation);
 
-        return redirect('/pelatih')->with('success','Update Pelatih Berhasil');
-
+        return redirect('/pelatih')->with('success', 'Update Pelatih Berhasil');
     }
 
 
 
     public function tambahpelatih(Request $request)
     {
-        $cekuser = User::where('nim',$request->nim)->first();
-        if ($cekuser!=null) {
-            return redirect('/pelatih')->with('failed','Kode Pelatih sudah terdaftar');
+        $cekuser = User::where('nim', $request->nim)->first();
+        if ($cekuser != null) {
+            return redirect('/pelatih')->with('failed', 'Kode Pelatih sudah terdaftar');
         }
         $validatedData = $request->validate([
             'name' => 'required|max:255',
-            'username' => ['required','min:3','max:255','unique:users'],
+            'username' => ['required', 'min:3', 'max:255', 'unique:users'],
             'alamat' => ['required'],
             'nohp' => ['required'],
-            'nim' => ['required','unique:users'],
-            'password' => ['required','min:5'],
+            'nim' => ['required', 'unique:users'],
+            'password' => ['required', 'min:5'],
         ]);
 
         $validatedData['password'] = Hash::make($validatedData['password']);
@@ -77,48 +84,43 @@ class DataPelatihController extends Controller
 
         User::create($validatedData);
 
-        return redirect('/pelatih')->with('success','Pendaftaran berhasil');
-
-
+        return redirect('/pelatih')->with('success', 'Pendaftaran berhasil');
     }
 
     public function updatepassword(Request $request)
     {
 
         $validatedData = $request->validate([
-            'password' => ['required','min:5']
+            'password' => ['required', 'min:5']
         ]);
-        
+
         //cek password lama
-        $getuser = User::where('id',$request->id)->first();
+        $getuser = User::where('id', $request->id)->first();
         $password_lama = $request->password_lama;
-        if (!Hash::check($password_lama , $getuser->password )) {
-            return redirect('/biodata_pelatih')->with('error','Password lama salah');
+        if (!Hash::check($password_lama, $getuser->password)) {
+            return redirect('/biodata_pelatih')->with('error', 'Password lama salah');
         }
         $validatedData['password'] = Hash::make($validatedData['password']);
 
-        User::where('id',$request->id)
+        User::where('id', $request->id)
             ->update($validatedData);
 
 
-        return redirect('/biodata_pelatih')->with('success','Update Password Berhasil');
-
+        return redirect('/biodata_pelatih')->with('success', 'Update Password Berhasil');
     }
 
     public function biodata_pelatih()
     {
-        $datapelatih = User::where('id',auth()->user()->id)->first();
-        return view('pelatih.biodata_pelatih',[
+        $datapelatih = User::where('id', auth()->user()->id)->first();
+        return view('pelatih.biodata_pelatih', [
             'datapelatih' => $datapelatih
-        ]);   
+        ]);
     }
 
     public function destroy($id)
     {
 
         User::destroy($id);
-            return redirect('/pelatih')->with('success', 'Pelatih berhasil di hapus ');
+        return redirect('/pelatih')->with('success', 'Pelatih berhasil di hapus ');
     }
-
-
 }

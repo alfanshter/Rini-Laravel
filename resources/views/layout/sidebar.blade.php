@@ -54,7 +54,7 @@
                         <h6 class="collapse-header">Menu User:</h6>
                         <a class="collapse-item" href="/datasiswa">Data Siswa</a>
                         <a class="collapse-item" href="/pelatih">Data Pelatih</a>
-                        <a class="collapse-item" href="/kepalasekolah">Data Kepaala Sekolah</a>
+                        <a class="collapse-item" href="/kepalasekolah">Data Kepala Sekolah</a>
                         <a class="collapse-item" href="/walikelas">Data Wali Kelas</a>
                     </div>
                 </div>
@@ -100,8 +100,8 @@
                 </div>
             </li>
 
-            <li class="nav-item {{Request::is('hasil_seleksi') ? 'active' : ''}}">
-                <a class="nav-link" href="/hasil_seleksi">
+            <li class="nav-item {{Request::is('daftar_seleksi') ? 'active' : ''}}">
+                <a class="nav-link" href="/daftar_seleksi">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Hasil Seleksi</span></a>
             </li>
