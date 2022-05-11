@@ -34,10 +34,26 @@ class PrestasiController extends Controller
 
             return view('prestasi.prestasi', ['prestasi' => $ekskul]);
         } else if (auth()->user()->role == 2) {
-            $ekskul = InformasiEkskul::join('data_ekskuls', 'data_ekskuls.kode', '=', 'informasi_ekskuls.kode_ekskul')
-                ->where('informasi_ekskuls.kode_pelatih', auth()->user()->nim)
+            //nama ekskul
+            $ekskul = InformasiEkskul::where('kode_pelatih', auth()->user()->nim)->first();
+            //nama peserta
+            $nama_peserta = Ekskul::join('users', 'users.nim', '=', 'ekskuls.nim_siswa')
+                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
+                ->where('data_ekskuls.kode', $ekskul->kode_ekskul)
+                ->where('kode_pelatih', auth()->user()->nim)
+                ->where('is_status', 2)
+                ->get(['users.name', 'data_ekskuls.kode', 'users.nim']);
+
+
+            $data_prestasi = Prestasi::where('id_pelatih', auth()->user()->nim)
+                ->where('kode_ekskul', $ekskul->kode_ekskul)
                 ->get();
-            return view('prestasi.prestasi', ['prestasi' => $ekskul]);
+
+            return view('prestasi.daftar_prestasi', [
+                'dataprestasi' => $data_prestasi,
+                'nama_peserta' => $nama_peserta,
+                'kode_ekskul' => $ekskul->kode_ekskul
+            ]);
         }
     }
 
@@ -133,11 +149,23 @@ class PrestasiController extends Controller
 
     public function update(Request $request)
     {
-        $update = DB::table('prestasis')->where('id', $request->id)->update([
-            'nama_lomba' => $request->nama_lomba,
-            'prestasi' => $request->prestasi,
-            'tanggal' => $request->tanggal
+        $validatedData = $request->validate([
+            'nama_lomba' => 'required',
+            'foto' => 'image|file|max:1024',
+            'prestasi' => 'required',
+            'tanggal' => 'required'
         ]);
+
+
+
+        if ($request->file('foto')) {
+            if ($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+            $validatedData['foto'] = $request->file('foto')->store('foto-prestasi');
+        }
+
+        Prestasi::where('id', $request->id)->update($validatedData);
 
         return redirect("/daftar_prestasi/$request->kode_ekskul")->with('success', 'Update data berhasil');
     }

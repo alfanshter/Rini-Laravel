@@ -91,22 +91,30 @@ class DataPelatihController extends Controller
     {
 
         $validatedData = $request->validate([
-            'password' => ['required', 'min:5']
+            'nohp' => ['required'],
+            'alamat' => ['required']
         ]);
 
-        //cek password lama
-        $getuser = User::where('id', $request->id)->first();
-        $password_lama = $request->password_lama;
-        if (!Hash::check($password_lama, $getuser->password)) {
-            return redirect('/biodata_pelatih')->with('error', 'Password lama salah');
+        if ($request->password_lama && $request->password) {
+            //cek password lama
+            //Apakah Nim sama ? 
+            $getuser = User::where('id', $request->id)->first();
+            $password_lama = $request->password_lama;
+            if (!Hash::check($password_lama, $getuser->password)) {
+                return redirect('/biodata_pelatih')->with('error', 'Password lama salah');
+            }
+            $validatedData['password'] = Hash::make($request->password);
+
+            User::where('id', $request->id)
+                ->update($validatedData);
+
+
+            return redirect('/biodata_pelatih')->with('success', 'Update Biodata Berhasil');
+        } else {
+            User::where('id', $request->id)
+                ->update($validatedData);
+            return redirect('/biodata_pelatih')->with('success', 'Update Biodata Berhasil');
         }
-        $validatedData['password'] = Hash::make($validatedData['password']);
-
-        User::where('id', $request->id)
-            ->update($validatedData);
-
-
-        return redirect('/biodata_pelatih')->with('success', 'Update Password Berhasil');
     }
 
     public function biodata_pelatih()

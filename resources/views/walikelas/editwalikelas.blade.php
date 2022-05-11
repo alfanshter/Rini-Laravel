@@ -63,7 +63,8 @@
     </div>
 
   <div class="modal-footer">
-    <button type="submit" class="btn btn-primary">Update</button>
+    <a href="/walikelas" class="btn btn-dark">Cancel</a>
+    <button type="submit" class="btn btn-primary">Edit</button>
 
 </div>
 </form> 

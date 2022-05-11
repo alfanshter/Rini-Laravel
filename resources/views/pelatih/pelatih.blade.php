@@ -51,7 +51,7 @@
                     </div>                        
                     @enderror
                     
-                      <!-- Logout Modal-->
+                      <!-- Tambah Pelatih Modal-->
                     <div class="modal fade" id="tambahsiswa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -67,29 +67,29 @@
                                         @csrf
                                       <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Nama:</label>
-                                        <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}">
+                                        <input type="text" class="form-control" required id="name" name="name" value="{{old('name')}}">
                                       </div>
                                       <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Kode Pelatih:</label>
-                                        <input type="text" class="form-control" id="nim" name="nim" value="{{old('nim')}}">
+                                        <input type="text" class="form-control" required id="nim" name="nim" value="{{old('nim')}}">
                                       </div>
                                       <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Nomor HP:</label>
-                                        <input type="number" class="form-control" id="nohp" name="nohp" value="{{old('nim')}}">
+                                        <input type="number" class="form-control" required id="nohp" name="nohp" value="{{old('nim')}}">
                                       </div>
 
                                       <div class="mb-3">
                                         <label for="message-text" class="col-form-label">Alamat:</label>
-                                        <textarea class="form-control" id="alamat" name="alamat" value="{{old('alamat')}}"></textarea>
+                                        <textarea class="form-control" id="alamat" required name="alamat" value="{{old('alamat')}}"></textarea>
                                       </div>
                                       <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Username:</label>
-                                        <input type="text" class="form-control" id="username" name="username" value="{{old('username')}}">
+                                        <input type="text" class="form-control" required id="username" name="username" value="{{old('username')}}">
                                       </div>
 
                                       <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Password:</label>
-                                        <input type="text" class="form-control" id="password" name="password">
+                                        <input type="text" class="form-control" required id="password" name="password">
                                       </div>
 
                                       <div class="modal-footer">

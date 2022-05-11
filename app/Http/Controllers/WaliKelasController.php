@@ -17,6 +17,11 @@ class WaliKelasController extends Controller
 
     public function tambahwalikelas(Request $request)
     {
+        $cekuser = User::where('nim', $request->nim)->first();
+        if ($cekuser != null) {
+            return redirect('/walikelas')->with('failed', 'Kode Wali Kelas sudah terdaftar');
+        }
+
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'username' => ['required', 'min:3', 'max:255', 'unique:users'],

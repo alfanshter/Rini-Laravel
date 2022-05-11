@@ -56,11 +56,11 @@
                                         @csrf
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
-                                                id="username" name="username" aria-describedby="emailHelp"
+                                                id="username" name="username" aria-describedby="emailHelp" required
                                                 placeholder="Enter username ..." autofocus>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
+                                            <input type="password" class="form-control form-control-user" required
                                                 id="password" name="password" placeholder="Password">
                                         </div>
 

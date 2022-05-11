@@ -36,24 +36,25 @@
 
   <div class="mb-3">
     <label for="recipient-name" class="col-form-label">No HP:</label>
-    <input type="text" class="form-control" id="nohp" name="nohp" value="{{old('nohp',$datapelatih->nohp)}}" disabled>
+    <input type="text" class="form-control" id="nohp" name="nohp" value="{{old('nohp',$datapelatih->nohp)}}">
   </div>
   <div class="mb-3">
     <label for="message-text" class="col-form-label">Alamat:</label>
-    <textarea class="form-control" id="alamat" name="alamat" disabled >{{old('alamat',$datapelatih->alamat)}}</textarea>
+    <textarea class="form-control" id="alamat" name="alamat" >{{old('alamat',$datapelatih->alamat)}}</textarea>
   </div>
 
   <div class="mb-3">
     <label for="recipient-name" class="col-form-label">password lama:</label>
-    <input type="password" class="form-control" id="password_lama" name="password_lama" required>
+    <input type="password" class="form-control" id="password_lama" name="password_lama" >
   </div>
 
   <div class="mb-3">
     <label for="recipient-name" class="col-form-label">password baru:</label>
-    <input type="password_sesudah" class="form-control" id="password" name="password" required>
+    <input type="password" class="form-control" id="password" name="password" >
   </div>
 
   <div class="modal-footer">
+              <a href='/' class="btn btn-secondary" >Cancel</a>
     <button type="submit" class="btn btn-primary">Update</button>
 
 </div>

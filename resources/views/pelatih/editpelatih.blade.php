@@ -62,6 +62,7 @@
 
 
   <div class="modal-footer">
+    <a href="/pelatih" class="btn btn-dark">Cancel</a>
     <button type="submit" class="btn btn-primary">Edit</button>
 
 </div>

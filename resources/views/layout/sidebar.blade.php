@@ -1,12 +1,12 @@
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <center>
+            <img src="{{asset('logo/logosidebar.png')}}" width="100" height="100" alt="" srcset="">
+                
+            </center>        
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    {{-- ICON SEBELAH TEXT --}}
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
                 @if (auth()->user()->role ==0)
                 <div class="sidebar-brand-text mx-3">Admin</div>                    
                 @endif
@@ -228,7 +228,7 @@
             </li>
 
             <li class="nav-item {{Request::is('daftar_ekskul') ? 'active' : ''}} ">
-                <a class="nav-link" href="/daftar_ekskul">
+                <a class="nav-link" href="/daftar_peserta">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Peserta Ekskul</span></a>
             </li>

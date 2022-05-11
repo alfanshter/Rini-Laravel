@@ -32,12 +32,23 @@
 
   <div class="mb-3">
     <label for="recipient-name" class="col-form-label">Semester:</label>
-    <input type="text" class="form-control" disabled value="{{old('semester',$absen->semester)}}">                                      
+<select class="form-control" aria-label="Default select example" required name="semester" id="semester">
+     <option value="{{$absen->semester}}">
+                                                    {{$absen->semester}}
+                                                </option>                                              
+    <option value="GANJIL">
+                                                    GANJIL
+                                                </option>                                                
+                                                <option value="GENAP">
+                                                    GENAP
+                                                </option>                                                
+
+                                            </select>
   </div>
 
   <div class="mb-3">
     <label for="recipient-name" class="col-form-label">Tahun Ajaran:</label>
-    <input type="text" class="form-control" id="tahun_ajaran" disabled required name="tahun_ajaran" value="{{old('tahun_ajaran',$absen->tahun_ajaran)}}">                                      
+    <input type="text" class="form-control" id="tahun_ajaran"  required name="tahun_ajaran" value="{{old('tahun_ajaran',$absen->tahun_ajaran)}}">                                      
   </div>
 
   <div class="mb-3">

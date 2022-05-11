@@ -24,15 +24,15 @@
                                       @csrf
                                     <div class="mb-3">
                                       <label for="recipient-name" class="col-form-label">Nama Pengumuman:</label>
-                                      <input type="text" class="form-control" id="nama_pengumuman" name="nama_pengumuman" value="{{old('nama_pengumuman')}}">
+                                      <input type="text" class="form-control" id="nama_pengumuman" name="nama_pengumuman" required value="{{old('nama_pengumuman')}}">
                                     </div>
                                     <div class="mb-3">
                                       <label for="recipient-name" class="col-form-label">Keterangan:</label>
-                                      <input type="text" class="form-control" id="keterangan" name="keterangan" value="{{old('keterangan')}}">
+                                      <input type="text" class="form-control" id="keterangan" name="keterangan" required value="{{old('keterangan')}}">
                                     </div>
                                     <div class="mb-3">
                                       <label for="recipient-name" class="col-form-label">File PDF:</label>
-                                      <input type="file" class="form-control" id="file_pdf" name="file_pdf" value="{{old('file_pdf')}}">
+                                      <input type="file" class="form-control" id="file_pdf" name="file_pdf" required value="{{old('file_pdf')}}">
                                     </div>
                                     <div class="modal-footer">
                                       <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>

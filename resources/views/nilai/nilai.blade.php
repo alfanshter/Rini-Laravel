@@ -37,10 +37,10 @@
                                         <div class="mb-3">
                                             <label for="recipient-name" class="col-form-label">Semester:</label>
                                             <select class="form-control" aria-label="Default select example" name="semester" id="semester">
-                                                <option value="ganjil">
+                                                <option value="GANJIL">
                                                     GANJIL
                                                 </option>                                                
-                                                <option value="genap">
+                                                <option value="GENAP">
                                                     GENAP
                                                 </option>                                                
 
@@ -49,13 +49,13 @@
 
                                         <div class="mb-3">
                                             <label for="recipient-name" class="col-form-label">Tahun Ajaran:</label>
-                                            <input type="text" class="form-control" id="tahun_ajaran" name="tahun_ajaran" value="{{old('tahun_ajaran')}}">
+                                            <input type="text" class="form-control" id="tahun_ajaran" required name="tahun_ajaran" value="{{old('tahun_ajaran')}}">
                                             <p>Cara penulisan : 2022-2021</p>
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="recipient-name" class="col-form-label">Nilai</label>
-                                            <input type="number" class="form-control" id="nilai" name="nilai" value="{{old('nilai')}}">
+                                            <input type="number" class="form-control" id="nilai" required name="nilai" value="{{old('nilai')}}">
                                         </div>
                                         <div class="modal-footer">
                                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
@@ -103,10 +103,10 @@
                                             <div class="mb-3">
                                                 <label for="recipient-name" class="col-form-label">Semester:</label>
                                                 <select class="form-control" aria-label="Default select example" name="semester" id="semester">
-                                                    <option value="ganjil">
+                                                    <option value="GANJIL">
                                                         GANJIL
                                                     </option>                                                
-                                                    <option value="genap">
+                                                    <option value="GENAP">
                                                         GENAP
                                                     </option>                                                
 
@@ -115,13 +115,13 @@
 
                                             <div class="mb-3">
                                                 <label for="recipient-name" class="col-form-label">Tahun Ajaran:</label>
-                                                <input type="text" class="form-control" id="tahun_ajaran" name="tahun_ajaran" value="{{old('tahun_ajaran')}}">
+                                                <input type="text" class="form-control" required id="tahun_ajaran" name="tahun_ajaran"  value="{{old('tahun_ajaran')}}">
                                                 <p>Cara penulisan : 2022-2021</p>
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="recipient-name" class="col-form-label">Nilai</label>
-                                                <input type="number" class="form-control" id="nilai" name="nilai" value="{{old('nilai')}}">
+                                                <input type="number" required class="form-control" id="nilai" name="nilai" value="{{old('nilai')}}">
                                             </div>
                                             <div class="modal-footer">
                                             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
@@ -169,7 +169,7 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4 mt-4">
                         <div class="card-header py-3 d-flex">
-                            <h6 class="m-0 font-weight-bold text-primary p-2">Agenda</h6>
+                            <h6 class="m-0 font-weight-bold text-primary p-2">Nilai</h6>
                             @if (auth()->user()->role==0 || auth()->user()->role==2 || auth()->user()->role==3  ||  auth()->user()->role ==4)
                             <button type="button" class="btn btn-primary ml-auto"  data-toggle="modal" data-target="#cetakpdf">Cetak PDF</button>
                                 
@@ -192,10 +192,10 @@
                                                         <div class="mb-3">
                                                             <label for="recipient-name" class="col-form-label">Semester:</label>
                                                             <select class="form-control" aria-label="Default select example" name="semester" id="semester">
-                                                                <option value="ganjil">
+                                                                <option value="GANJIL">
                                                                     GANJIL
                                                                 </option>                                                
-                                                                <option value="genap">
+                                                                <option value="GENAP">
                                                                     GENAP
                                                                 </option>                                                
 

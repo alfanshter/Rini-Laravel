@@ -64,6 +64,7 @@
     </div>
 
   <div class="modal-footer">
+    <a href="/kepalasekolah" class="btn btn-dark">Cancel</a>
     <button type="submit" class="btn btn-primary">Update</button>
 
 </div>

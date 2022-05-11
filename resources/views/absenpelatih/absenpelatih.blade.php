@@ -51,10 +51,10 @@
                                         <div class="mb-3">
                                             <label for="recipient-name" class="col-form-label">Semester:</label>
                                             <select class="form-control" aria-label="Default select example" name="semester" id="semester">
-                                                <option value="ganjil">
+                                                <option value="GANJIL">
                                                     GANJIL
                                                 </option>                                                
-                                                <option value="genap">
+                                                <option value="GENAP">
                                                     GENAP
                                                 </option>                                                
 
@@ -141,10 +141,10 @@
                                                         <div class="mb-3">
                                                             <label for="recipient-name" class="col-form-label">Semester:</label>
                                                             <select class="form-control" aria-label="Default select example" name="semester" id="semester">
-                                                                <option value="ganjil">
+                                                                <option value="GANJIL">
                                                                     GANJIL
                                                                 </option>                                                
-                                                                <option value="genap">
+                                                                <option value="GENAP">
                                                                     GENAP
                                                                 </option>                                                
 

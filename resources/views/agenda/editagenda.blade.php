@@ -34,10 +34,10 @@
             <option value="{{$dataagenda->semester}}">
                 {{$dataagenda->semester}}
             </option>
-            <option value="ganjil">
+            <option value="GANJIL">
                 GANJIL
             </option>
-            <option value="genap">
+            <option value="GENAP">
                 GENAP
             </option>
 

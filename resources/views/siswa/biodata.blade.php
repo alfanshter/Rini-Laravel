@@ -8,6 +8,12 @@
 </div>
 @endif
 
+@if (session()->has('error'))
+<div class="alert alert-danger mt-2" role="alert">
+    {{session('error')}}  
+</div>
+@endif
+
 @error('password')
 <div class="alert alert-danger mt-2" role="alert">
     {{$message}}  
@@ -30,24 +36,25 @@
 
   <div class="mb-3">
     <label for="recipient-name" class="col-form-label">Kelas:</label>
-    <input type="text" class="form-control" id="nim" name="nim" value="{{old('kelas',$datasiswa->kelas)}}" disabled>
+    <input type="text" class="form-control" required id="kelas" name="kelas" value="{{old('kelas',$datasiswa->kelas)}}" >
   </div>
   <div class="mb-3">
     <label for="message-text" class="col-form-label">Alamat:</label>
-    <textarea class="form-control" id="alamat" name="alamat" disabled >{{old('alamat',$datasiswa->alamat)}}</textarea>
+    <textarea class="form-control" id="alamat" required name="alamat" >{{old('alamat',$datasiswa->alamat)}}</textarea>
   </div>
 
   <div class="mb-3">
     <label for="recipient-name" class="col-form-label">password lama:</label>
-    <input type="password" class="form-control" id="password_lama" name="password_lama" required>
+    <input type="password" class="form-control" id="password_lama" name="password_lama" >
   </div>
   
   <div class="mb-3">
     <label for="recipient-name" class="col-form-label">password baru:</label>
-    <input type="password" class="form-control" id="password" name="password" required>
+    <input type="password" class="form-control" id="password" name="password" >
   </div>
 
   <div class="modal-footer">
+        <a href='/' class="btn btn-secondary" >Cancel</a>
     <button type="submit" class="btn btn-primary">Update</button>
 
 </div>
