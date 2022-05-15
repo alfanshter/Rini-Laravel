@@ -33,17 +33,13 @@
                     </div>                        
                     @enderror
 
-                    @error('nim')
+                    @error('nomor_induk')
                     <div class="alert alert-danger mt-2" role="alert">
                         {{$message}}  
                     </div>                        
                     @enderror
 
-                    @error('alamat')
-                    <div class="alert alert-danger mt-2" role="alert">
-                        {{$message}}  
-                    </div>                        
-                    @enderror
+                 
 
                     @error('password')
                     <div class="alert alert-danger mt-2" role="alert">
@@ -71,17 +67,14 @@
                                       </div>
                                       <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Kode Pelatih:</label>
-                                        <input type="text" class="form-control" required id="nim" name="nim" value="{{old('nim')}}">
+                                        <input type="text" class="form-control" required id="nomor_induk" name="nomor_induk" value="{{old('nomor_induk')}}">
                                       </div>
                                       <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Nomor HP:</label>
-                                        <input type="number" class="form-control" required id="nohp" name="nohp" value="{{old('nim')}}">
+                                        <input type="number" class="form-control" required id="nohp" name="nohp" value="{{old('nomor_induk')}}">
                                       </div>
 
-                                      <div class="mb-3">
-                                        <label for="message-text" class="col-form-label">Alamat:</label>
-                                        <textarea class="form-control" id="alamat" required name="alamat" value="{{old('alamat')}}"></textarea>
-                                      </div>
+
                                       <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Username:</label>
                                         <input type="text" class="form-control" required id="username" name="username" value="{{old('username')}}">
@@ -116,7 +109,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
-                                            <th>Alamat</th>
+                                            
                                             <th>Username</th>
                                             <th>Kode Pelatih</th>
                                             <th>Nomor HP</th>
@@ -129,9 +122,9 @@
                                             <tr>
                                                 <td>{{$loop->iteration}}</td>                                        
                                                 <td>{{$data->name}}</td>                                        
-                                                <td>{{$data->alamat}}</td>                                        
+                                                                                        
                                                 <td>{{$data->username}}</td>                                        
-                                                <td>{{$data->nim}}</td>                                        
+                                                <td>{{$data->nomor_induk}}</td>                                        
                                                 <td>{{$data->nohp}}</td>                                        
                                                 <td>{{$data->created_at}}</td>
                                                 <td class="align-middle text-center">

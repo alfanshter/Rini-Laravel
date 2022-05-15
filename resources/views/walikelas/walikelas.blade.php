@@ -39,11 +39,7 @@
                     </div>                        
                     @enderror
 
-                    @error('alamat')
-                    <div class="alert alert-danger mt-2" role="alert">
-                        {{$message}}  
-                    </div>                        
-                    @enderror
+                 
 
                     @error('nohp')
                     <div class="alert alert-danger mt-2" role="alert">
@@ -84,10 +80,7 @@
                                         <input type="number" class="form-control" id="nohp" required name="nohp" value="{{old('nim')}}">
                                       </div>
 
-                                      <div class="mb-3">
-                                        <label for="message-text" class="col-form-label">Alamat:</label>
-                                        <textarea class="form-control" id="alamat" required name="alamat" value="{{old('alamat')}}"></textarea>
-                                      </div>
+
                                       <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Username:</label>
                                         <input type="text" class="form-control" id="username" required name="username" value="{{old('username')}}">
@@ -122,7 +115,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
-                                            <th>Alamat</th>
+                                            
                                             <th>Username</th>
                                             <th>Kode</th>
                                             <th>Nomor HP</th>
@@ -135,7 +128,7 @@
                                             <tr>
                                                 <td>{{$loop->iteration}}</td>                                        
                                                 <td>{{$data->name}}</td>                                        
-                                                <td>{{$data->alamat}}</td>                                        
+                                                                                        
                                                 <td>{{$data->username}}</td>                                        
                                                 <td>{{$data->nim}}</td>                                        
                                                 <td>{{$data->nohp}}</td>                                        

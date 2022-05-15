@@ -36,6 +36,19 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Pendaftaran Akun</h1>
                             </div>
+                            @error('nomor_induk')
+                            <div class="alert alert-danger mt-2" role="alert">
+                                {{$message}}
+                            </div>
+                            @enderror
+
+                            @if (session()->has('failed'))
+                            <div class="alert alert-danger mt-2" role="alert">
+                                {{session('failed')}}
+                            </div>
+                            @endif
+
+
                             <form class="user" action="/register" method="POST">
                                 @csrf
                                 <div class="form-group row">
@@ -48,8 +61,8 @@
 
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user @error('nim') is-invalid @enderror" required id="nim"  name="nim"
-                                            placeholder="Kode Admin" value="{{old('nim')}}">
+                                        <input type="text" class="form-control form-control-user " required id="nomor_induk"  name="nomor_induk"
+                                            placeholder="Kode Admin" value="{{old('nomor_induk')}}">
                                             
                                     </div>
                                 </div>

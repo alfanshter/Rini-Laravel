@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('nama_materi');
             $table->string('nama_ekskul');
             $table->string('id_pelatih');
-            $table->foreign('id_pelatih')->references('nim')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_pelatih')->references('nomor_induk')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

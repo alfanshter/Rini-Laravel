@@ -14,19 +14,26 @@
 </div>                        
 @enderror
 
-@error('nim')
+@error('nomor_induk')
 <div class="alert alert-danger mt-2" role="alert">
     {{$message}}  
 </div>                        
 @enderror
 
-@error('alamat')
-<div class="alert alert-danger mt-2" role="alert">
-    {{$message}}  
-</div>                        
-@enderror
 
 @error('nohp')
+<div class="alert alert-danger mt-2" role="alert">
+    {{$message}}  
+</div>                        
+@enderror
+
+@error('kode_pelatih')
+<div class="alert alert-danger mt-2" role="alert">
+    {{$message}}  
+</div>                        
+@enderror
+
+@error('kode_ekskul')
 <div class="alert alert-danger mt-2" role="alert">
     {{$message}}  
 </div>                        
@@ -41,7 +48,7 @@
   <select class="form-control" aria-label="Default select example" name="kode_ekskul" id="kode_ekskul">
     <option value="{{$data_ekskul->kode_ekskul}}">{{$data_ekskul->nama}}</option>                                                
     @foreach ($ekskul as $data)
-      <option value="{{$data->kode_ekskul}}">{{$data->nama}}</option>                                                
+      <option value="{{$data->kode}}">{{$data->nama}}</option>                                                
       @endforeach
   </select>
 </div>
@@ -70,9 +77,9 @@
 <div class="mb-3">
   <label for="recipient-name" class="col-form-label">Pelatih:</label>
   <select class="form-control" aria-label="Default select example" name="kode_pelatih" id="kode_pelatih">
-      <option value="{{$data_ekskul->nim}}">{{$data_ekskul->name}}</option>
+      <option value="{{$data_ekskul->nomor_induk}}">{{$data_ekskul->name}}</option>
       @foreach ($data_pelatih as $data)
-      <option value="{{$data->nim}}">{{$data->name}}</option>                                                                                                
+      <option value="{{$data->nomor_induk}}">{{$data->name}}</option>                                                                                                
       @endforeach
   </select>
 

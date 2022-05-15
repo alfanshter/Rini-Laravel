@@ -18,7 +18,7 @@ class KepalaSekolahController extends Controller
     public function tambahkepalasekolah(Request $request)
     {
 
-        $cekuser = User::where('nim', $request->nim)->first();
+        $cekuser = User::where('nomor_induk', $request->nomor_induk)->first();
         if ($cekuser != null) {
             return redirect('/kepalasekolah')->with('failed', 'Kode Kepala Sekolah sudah terdaftar');
         }
@@ -26,9 +26,8 @@ class KepalaSekolahController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'username' => ['required', 'min:3', 'max:255', 'unique:users'],
-            'alamat' => ['required'],
             'nohp' => ['required'],
-            'nim' => ['required', 'unique:users'],
+            'nomor_induk' => ['required', 'unique:users'],
             'password' => ['required', 'min:5']
         ]);
 
@@ -60,15 +59,15 @@ class KepalaSekolahController extends Controller
         $rule = [
             'name' => 'required|max:255',
             'nohp' => ['required'],
-            'alamat' => ['required'],
-            'nim' => ['required'],
+
+            'nomor_induk' => ['required'],
             'username' => ['required'],
         ];
-        //Apakah Nim sama ? 
+        //Apakah nomor_induk sama ? 
         $getuser = User::where('id', $request->id)->first();
-        if ($request->nim != $getuser->nim) {
+        if ($request->nomor_induk != $getuser->nomor_induk) {
             //cek kode Kepala sekolah
-            $cek = User::where('nim', $request->nim)->first();
+            $cek = User::where('nomor_induk', $request->nomor_induk)->first();
             if ($cek != null) {
                 return redirect('/kepalasekolah')->with('failed', 'Kode kepala sekolah sama');
             }

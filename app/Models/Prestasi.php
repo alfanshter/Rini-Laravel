@@ -12,11 +12,11 @@ class Prestasi extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class,'nim','nim');
+        return $this->belongsTo(User::class, 'nomor_induk', 'nomor_induk');
     }
 
     public function ekskul()
     {
-        return $this->belongsTo(DataEkskul::class,'kode_ekskul','kode');
+        return $this->belongsTo(DataEkskul::class, 'kode_ekskul', 'kode');
     }
 }

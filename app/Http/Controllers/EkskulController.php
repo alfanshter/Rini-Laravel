@@ -28,8 +28,8 @@ class EkskulController extends Controller
     {
         $pendaftaran_seleksi = Ekskul::join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
             ->join('informasi_ekskuls', 'informasi_ekskuls.id', '=', 'ekskuls.id_informasi')
-            ->join('users', 'users.nim', '=', 'ekskuls.nim_siswa')
-            ->where('ekskuls.kode_pelatih', auth()->user()->nim)
+            ->join('users', 'users.nomor_induk', '=', 'ekskuls.nomor_induk_siswa')
+            ->where('ekskuls.kode_pelatih', auth()->user()->nomor_induk)
             ->where('ekskuls.is_status', 1)
             ->get(['users.name', 'users.kelas', 'users.jenis_kelamin', 'informasi_ekskuls.*', 'data_ekskuls.nama as nama_ekskul', 'ekskuls.*']);
         return view('ekskul.pendaftaran_seleksi', [
@@ -40,12 +40,12 @@ class EkskulController extends Controller
     public function register($id)
     {
         $data = DataEkskul::join('informasi_ekskuls', 'informasi_ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
-            ->join('users', 'users.nim', '=', 'informasi_ekskuls.kode_pelatih')
+            ->join('users', 'users.nomor_induk', '=', 'informasi_ekskuls.kode_pelatih')
             ->where('informasi_ekskuls.id', $id)
-            ->first(['data_ekskuls.nama', 'informasi_ekskuls.*', 'users.name', 'users.nim']);
+            ->first(['data_ekskuls.nama', 'informasi_ekskuls.*', 'users.name', 'users.nomor_induk']);
 
         $is_daftar = 0;
-        $cekpendaftaran = Ekskul::where('nim_siswa', auth()->user()->nim)->where('id_informasi', $id)->first();
+        $cekpendaftaran = Ekskul::where('nomor_induk_siswa', auth()->user()->nomor_induk)->where('id_informasi', $id)->first();
         if ($cekpendaftaran != null) {
             $is_daftar = $cekpendaftaran->is_status;
         }
@@ -79,7 +79,7 @@ class EkskulController extends Controller
     {
 
         $ekskul = InformasiEkskul::join('data_ekskuls', 'data_ekskuls.kode', '=', 'informasi_ekskuls.kode_ekskul')
-            ->where('informasi_ekskuls.kode_pelatih', auth()->user()->nim)
+            ->where('informasi_ekskuls.kode_pelatih', auth()->user()->nomor_induk)
             ->get();
 
         return view('ekskul.daftar_ekskul', ['ekskul' => $ekskul]);
@@ -88,26 +88,26 @@ class EkskulController extends Controller
     public function daftar_peserta()
     {
         //nama ekskul
-        $nama_ekskul = InformasiEkskul::where('kode_pelatih', auth()->user()->nim)->first();
+        $nama_ekskul = InformasiEkskul::where('kode_pelatih', auth()->user()->nomor_induk)->first();
 
-        $getpeserta = Ekskul::join('users', 'users.nim', '=', 'ekskuls.nim_siswa')
+        $getpeserta = Ekskul::join('users', 'users.nomor_induk', '=', 'ekskuls.nomor_induk_siswa')
             ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
             ->where('kode_ekskul', $nama_ekskul->kode_ekskul)
-            ->where('kode_pelatih', auth()->user()->nim)
+            ->where('kode_pelatih', auth()->user()->nomor_induk)
             ->where('is_status', 2)
-            ->get(['users.name', 'users.kelas', 'users.nim', 'users.jenis_kelamin', 'data_ekskuls.nama', 'data_ekskuls.kode', 'ekskuls.id']);
+            ->get(['users.name', 'users.kelas', 'users.nomor_induk', 'users.jenis_kelamin', 'data_ekskuls.nama', 'data_ekskuls.kode', 'ekskuls.id']);
 
         return view('ekskul.daftar_peserta', ['peserta' => $getpeserta, 'kode_ekskul' => $nama_ekskul->kode_ekskul]);
     }
 
     public function peserta_cetakpdf(Request $request)
     {
-        $getpeserta = Ekskul::join('users', 'users.nim', '=', 'ekskuls.nim_siswa')
+        $getpeserta = Ekskul::join('users', 'users.nomor_induk', '=', 'ekskuls.nomor_induk_siswa')
             ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
             ->where('kode_ekskul', $request->kode)
-            ->where('kode_pelatih', auth()->user()->nim)
+            ->where('kode_pelatih', auth()->user()->nomor_induk)
             ->where('is_status', 2)
-            ->get(['users.name', 'users.kelas', 'users.nim', 'data_ekskuls.nama', 'data_ekskuls.kode', 'ekskuls.id']);
+            ->get(['users.name', 'users.kelas', 'users.nomor_induk', 'data_ekskuls.nama', 'data_ekskuls.kode', 'ekskuls.id']);
 
         $pdf = PDF::loadview('ekskul.peserta_cetakpdf', [
             'peserta' => $getpeserta
@@ -139,14 +139,14 @@ class EkskulController extends Controller
     public function hasil_seleksi($id)
     {
         if (auth()->user()->role == 1) {
-            $hasil_seleksi =  Ekskul::join('users', 'users.nim', '=', 'ekskuls.nim_siswa')
+            $hasil_seleksi =  Ekskul::join('users', 'users.nomor_induk', '=', 'ekskuls.nomor_induk_siswa')
                 ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
-                ->where('nim_siswa', auth()->user()->nim)
+                ->where('nomor_induk_siswa', auth()->user()->nomor_induk)
                 ->get(['users.*', 'ekskuls.*', 'data_ekskuls.nama']);
 
             return view('hasilseleksi.hasilseleksi', ['hasil_seleksi' => $hasil_seleksi]);
         } else if (auth()->user()->role == 0) {
-            $hasil_seleksi =  Ekskul::join('users', 'users.nim', '=', 'ekskuls.nim_siswa')
+            $hasil_seleksi =  Ekskul::join('users', 'users.nomor_induk', '=', 'ekskuls.nomor_induk_siswa')
                 ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
                 ->where('kode_ekskul', $id)
                 ->get(['users.*', 'ekskuls.*', 'data_ekskuls.nama']);
@@ -157,9 +157,9 @@ class EkskulController extends Controller
 
     public function hasil_seleksi_siswa()
     {
-        $hasil_seleksi =  Ekskul::join('users', 'users.nim', '=', 'ekskuls.nim_siswa')
+        $hasil_seleksi =  Ekskul::join('users', 'users.nomor_induk', '=', 'ekskuls.nomor_induk_siswa')
             ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
-            ->where('nim_siswa', auth()->user()->nim)
+            ->where('nomor_induk_siswa', auth()->user()->nomor_induk)
             ->get(['users.*', 'ekskuls.*', 'data_ekskuls.nama']);
 
         return view('hasilseleksi.hasilseleksi', ['hasil_seleksi' => $hasil_seleksi]);

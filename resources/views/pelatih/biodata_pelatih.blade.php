@@ -31,17 +31,14 @@
   </div>
   <div class="mb-3">
     <label for="recipient-name" class="col-form-label">Kode Pelatih:</label>
-    <input type="text" class="form-control" id="nim" name="nim" value="{{old('nim',$datapelatih->nim)}}" disabled>
+    <input type="text" class="form-control" id="nomor_induk" name="nomor_induk" value="{{old('nomor_induk',$datapelatih->nomor_induk)}}" disabled>
   </div>
 
   <div class="mb-3">
     <label for="recipient-name" class="col-form-label">No HP:</label>
     <input type="text" class="form-control" id="nohp" name="nohp" value="{{old('nohp',$datapelatih->nohp)}}">
   </div>
-  <div class="mb-3">
-    <label for="message-text" class="col-form-label">Alamat:</label>
-    <textarea class="form-control" id="alamat" name="alamat" >{{old('alamat',$datapelatih->alamat)}}</textarea>
-  </div>
+  
 
   <div class="mb-3">
     <label for="recipient-name" class="col-form-label">password lama:</label>

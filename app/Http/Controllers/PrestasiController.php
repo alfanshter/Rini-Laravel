@@ -28,24 +28,24 @@ class PrestasiController extends Controller
         } else if (auth()->user()->role == 1) {
             $ekskul = DB::table('ekskuls')
                 ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
-                ->where('nim_siswa', auth()->user()->nim)
+                ->where('nomor_induk_siswa', auth()->user()->nomor_induk)
                 ->where('is_status', 2)
                 ->get();
 
             return view('prestasi.prestasi', ['prestasi' => $ekskul]);
         } else if (auth()->user()->role == 2) {
             //nama ekskul
-            $ekskul = InformasiEkskul::where('kode_pelatih', auth()->user()->nim)->first();
+            $ekskul = InformasiEkskul::where('kode_pelatih', auth()->user()->nomor_induk)->first();
             //nama peserta
-            $nama_peserta = Ekskul::join('users', 'users.nim', '=', 'ekskuls.nim_siswa')
+            $nama_peserta = Ekskul::join('users', 'users.nomor_induk', '=', 'ekskuls.nomor_induk_siswa')
                 ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
                 ->where('data_ekskuls.kode', $ekskul->kode_ekskul)
-                ->where('kode_pelatih', auth()->user()->nim)
+                ->where('kode_pelatih', auth()->user()->nomor_induk)
                 ->where('is_status', 2)
-                ->get(['users.name', 'data_ekskuls.kode', 'users.nim']);
+                ->get(['users.name', 'data_ekskuls.kode', 'users.nomor_induk']);
 
 
-            $data_prestasi = Prestasi::where('id_pelatih', auth()->user()->nim)
+            $data_prestasi = Prestasi::where('id_pelatih', auth()->user()->nomor_induk)
                 ->where('kode_ekskul', $ekskul->kode_ekskul)
                 ->get();
 
@@ -61,15 +61,15 @@ class PrestasiController extends Controller
     {
         if (auth()->user()->role == 2) {
             //nama peserta
-            $nama_peserta = Ekskul::join('users', 'users.nim', '=', 'ekskuls.nim_siswa')
+            $nama_peserta = Ekskul::join('users', 'users.nomor_induk', '=', 'ekskuls.nomor_induk_siswa')
                 ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
                 ->where('data_ekskuls.kode', $nama)
-                ->where('kode_pelatih', auth()->user()->nim)
+                ->where('kode_pelatih', auth()->user()->nomor_induk)
                 ->where('is_status', 2)
-                ->get(['users.name', 'data_ekskuls.kode', 'users.nim']);
+                ->get(['users.name', 'data_ekskuls.kode', 'users.nomor_induk']);
 
 
-            $data_prestasi = Prestasi::where('id_pelatih', auth()->user()->nim)
+            $data_prestasi = Prestasi::where('id_pelatih', auth()->user()->nomor_induk)
                 ->where('kode_ekskul', $nama)
                 ->get();
 
@@ -86,9 +86,9 @@ class PrestasiController extends Controller
         } else if (auth()->user()->role == 0) {
             //idpelatih
             $namapelatih = DB::table('data_ekskuls')
-                ->select(['ekskuls.kode_pelatih as id_pelatih', 'users.nim as nama_pelatih'])
+                ->select(['ekskuls.kode_pelatih as id_pelatih', 'users.nomor_induk as nama_pelatih'])
                 ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
-                ->join('users', 'users.nim', '=', 'ekskuls.kode_pelatih')
+                ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
                 ->where('data_ekskuls.kode', $nama)
                 ->first();
 
@@ -96,12 +96,12 @@ class PrestasiController extends Controller
                 return redirect('/prestasi')->with('success', 'Belum ada peserta');
             } else {
                 //nama peserta
-                $nama_peserta = Ekskul::join('users', 'users.nim', '=', 'ekskuls.nim_siswa')
+                $nama_peserta = Ekskul::join('users', 'users.nomor_induk', '=', 'ekskuls.nomor_induk_siswa')
                     ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
                     ->where('data_ekskuls.kode', $nama)
                     ->where('data_ekskuls.kode', $nama)
                     ->where('is_status', 2)
-                    ->get(['users.name', 'data_ekskuls.kode', 'users.nim']);
+                    ->get(['users.name', 'data_ekskuls.kode', 'users.nomor_induk']);
 
                 $data_prestasi = Prestasi::where('kode_ekskul', $nama)
                     ->get();
@@ -121,7 +121,7 @@ class PrestasiController extends Controller
 
 
         $validatedData = $request->validate([
-            'nim' => 'required|max:255',
+            'nomor_induk' => 'required|max:255',
             'nama_lomba' => ['required'],
             'kode_ekskul' => ['required'],
             'prestasi' => ['required'],

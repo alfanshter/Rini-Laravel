@@ -27,7 +27,7 @@
                                             <label for="recipient-name" class="col-form-label">Nama Siswa:</label>
                                             <select class="form-control" aria-label="Default select example" name="id_siswa" id="id_siswa">
                                                 @foreach ($nama_siswa as $data)
-                                                <option value="{{$data->nim}}">
+                                                <option value="{{$data->nomor_induk}}">
                                                     {{$data->name}}
                                                 </option>                                                
                                                 @endforeach
@@ -93,7 +93,7 @@
                                                 <label for="recipient-name" class="col-form-label">Nama Siswa:</label>
                                                 <select class="form-control" aria-label="Default select example" name="id_siswa" id="id_siswa">
                                                     @foreach ($nama_siswa as $data)
-                                                    <option value="{{$data->nim}}">
+                                                    <option value="{{$data->nomor_induk}}">
                                                         {{$data->name}}
                                                     </option>                                                
                                                     @endforeach

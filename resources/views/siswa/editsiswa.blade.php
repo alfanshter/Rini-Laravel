@@ -2,7 +2,7 @@
 
 @section('konten')
 <h2>Edit Siswa</h2>
-@error('nim')
+@error('nomor_induk')
 <div class="alert alert-danger mt-2" role="alert">
     {{$message}}
 </div>
@@ -12,11 +12,7 @@
     {{$message}}
 </div>
 @enderror
-@error('alamat')
-<div class="alert alert-danger mt-2" role="alert">
-    {{$message}}
-</div>
-@enderror
+
 @error('kelas')
 <div class="alert alert-danger mt-2" role="alert">
     {{$message}}
@@ -36,16 +32,21 @@
     </div>
     <div class="mb-3">
         <label for="recipient-name" class="col-form-label">NISN:</label>
-        <input type="number" class="form-control" id="nim" name="nim" value="{{old('nim',$datasiswa->nim)}}">
-    </div>
-    <div class="mb-3">
-        <label for="message-text" class="col-form-label">Alamat:</label>
-        <textarea class="form-control" id="alamat" name="alamat">{{old('alamat',$datasiswa->alamat)}}</textarea>
+        <input type="number" class="form-control" id="nomor_induk" name="nomor_induk" value="{{old('nomor_induk',$datasiswa->nomor_induk)}}">
     </div>
     <div class="mb-3">
         <label for="recipient-name" class="col-form-label">Kelas:</label>
         <input type="text" class="form-control" id="kelas" name="kelas" value="{{old('kelas',$datasiswa->kelas)}}">
     </div>
+
+    <div class="mb-3">
+                                        <label for="message-text" class="col-form-label">Jenis Kelamin:</label>
+                                        <select class="form-control" aria-label="Default select example" name="jenis_kelamin" id="jenis_kelamin">
+                                            <option value="{{$datasiswa->jenis_kelamin}}">{{$datasiswa->jenis_kelamin}}</option>                                                
+                                            <option value="Perempuan">Perempuan</option>                                                
+                                            <option value="Laki - laki">Laki - laki</option>                                                
+                                        </select>
+                                      </div>
     <div class="mb-3">
         <label for="recipient-name" class="col-form-label">Username:</label>
         <input type="text" class="form-control" id="username" required name="username" value="{{old('username',$datasiswa->username)}}">

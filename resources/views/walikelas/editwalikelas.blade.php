@@ -20,11 +20,6 @@
 </div>                        
 @enderror
 
-@error('alamat')
-<div class="alert alert-danger mt-2" role="alert">
-    {{$message}}  
-</div>                        
-@enderror
 
 @error('nohp')
 <div class="alert alert-danger mt-2" role="alert">
@@ -43,10 +38,6 @@
   <div class="mb-3">
     <label for="recipient-name" class="col-form-label">Kode Wali Keas:</label>
     <input type="text" class="form-control" id="nim" name="nim" value="{{old('nim',$walikelas->nim)}}">
-  </div>
-  <div class="mb-3">
-    <label for="message-text" class="col-form-label">Alamat:</label>
-    <textarea class="form-control" id="alamat" name="alamat" >{{old('alamat',$walikelas->alamat)}}</textarea>
   </div>
   <div class="mb-3">
     <label for="recipient-name" class="col-form-label">No Hp:</label>

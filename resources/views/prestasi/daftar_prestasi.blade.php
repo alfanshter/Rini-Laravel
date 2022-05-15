@@ -22,16 +22,16 @@
                             <div class="modal-body">
                                 <form action="/prestasi" method="POST" enctype="multipart/form-data">
                                     @csrf
-                                    <input type="hidden" name="id_pelatih" value="{{auth()->user()->nim}}" id="id_pelatih">
+                                    <input type="hidden" name="id_pelatih" value="{{auth()->user()->nomor_induk}}" id="id_pelatih">
                                     <input type="hidden" name="kode_ekskul" value="{{$kode_ekskul}}" id="kode_ekskul">
                                     <input type="hidden" name="nama_pelatih" value="{{auth()->user()->name}}" id="nama_pelatih">
-                                    <input type="hidden" name="id_pelatih" value="{{auth()->user()->nim}}" id="id_pelatih">
+                                    <input type="hidden" name="id_pelatih" value="{{auth()->user()->nomor_induk}}" id="id_pelatih">
 
                                     <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Nama Peserta:</label>
-                                    <select class="form-control" aria-label="Default select example" name="nim" id="nama_peserta">
+                                    <select class="form-control" aria-label="Default select example" name="nomor_induk" id="nama_peserta">
                                         @foreach ($nama_peserta as $data)
-                                        <option value="{{$data->nim}}">{{$data->name}}</option>                                                
+                                        <option value="{{$data->nomor_induk}}">{{$data->name}}</option>                                                
                                         @endforeach
                                     </select>
                                     </div>
@@ -73,7 +73,12 @@
                     </div>
                     </div>
                     @endif
-
+                    @error('foto')
+                    <div class="alert alert-danger mt-2" role="alert">
+                        {{$message}}  
+                    </div>                        
+                    @enderror
+                    
                     @if (auth()->user()->role ==0)
                     <button class="btn btn-primary"  data-toggle="modal" data-target="#tambahmateri">Tambah Prestasi</button>                        
                     <!-- Tambah Prestasi-->
@@ -91,7 +96,7 @@
                                 <form action="/prestasi" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @if (auth()->user()->role ==2)
-                                    <input type="hidden" name="id_pelatih" value="{{auth()->user()->nim}}" id="id_pelatih">
+                                    <input type="hidden" name="id_pelatih" value="{{auth()->user()->nomor_induk}}" id="id_pelatih">
                                     <input type="hidden" name="kode_ekskul" value="{{$kode_ekskul}}" id="kode_ekskul">
                                     <input type="hidden" name="nama_pelatih" value="{{auth()->user()->name}}" id="nama_pelatih">
                                     @endif
@@ -102,9 +107,9 @@
                                     @endif
                                     <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Nama Peserta:</label>
-                                    <select class="form-control" aria-label="Default select example" name="nim" id="nim">
+                                    <select class="form-control" aria-label="Default select example" name="nomor_induk" id="nomor_induk">
                                         @foreach ($nama_peserta as $data)
-                                        <option value="{{$data->nim}}">{{$data->name}}</option>                                                
+                                        <option value="{{$data->nomor_induk}}">{{$data->name}}</option>                                                
                                         @endforeach
                                     </select>
                                     </div>

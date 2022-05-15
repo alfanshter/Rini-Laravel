@@ -28,9 +28,11 @@ class DashboardController extends Controller
                 'jumlahpengumuman' => $jumlahpengumuman
             ]);
         } else if (auth()->user()->role == 2 || auth()->user()->role == 3 || auth()->user()->role == 4) {
-            $jumlah_peserta_ekskul = Ekskul::where('kode_pelatih', auth()->user()->nim)
+
+            $jumlah_peserta_ekskul = Ekskul::where('kode_pelatih', auth()->user()->nomor_induk)
                 ->where('is_status', 2)->count();
-            $jumlah_pendaftar = Ekskul::where('kode_pelatih', auth()->user()->nim)
+
+            $jumlah_pendaftar = Ekskul::where('kode_pelatih', auth()->user()->nomor_induk)
                 ->where('is_status', 1)->count();
             return view('dashboard.index', [
                 'jumlahsiswa' => $jumlahsiswa,

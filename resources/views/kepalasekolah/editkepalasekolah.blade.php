@@ -15,17 +15,12 @@
 </div>                        
 @enderror
 
-@error('nim')
+@error('nomor_induk')
 <div class="alert alert-danger mt-2" role="alert">
     {{$message}}  
 </div>                        
 @enderror
 
-@error('alamat')
-<div class="alert alert-danger mt-2" role="alert">
-    {{$message}}  
-</div>                        
-@enderror
 
 @error('nohp')
 <div class="alert alert-danger mt-2" role="alert">
@@ -43,11 +38,7 @@
   </div>
   <div class="mb-3">
     <label for="recipient-name" class="col-form-label">Kode Kepala Sekolah:</label>
-    <input type="text" class="form-control" id="nim" name="nim" value="{{old('nim',$kepalasekolah->nim)}}">
-  </div>
-  <div class="mb-3">
-    <label for="message-text" class="col-form-label">Alamat:</label>
-    <textarea class="form-control" id="alamat" name="alamat" >{{old('alamat',$kepalasekolah->alamat)}}</textarea>
+    <input type="text" class="form-control" id="nomor_induk" name="nomor_induk" value="{{old('nomor_induk',$kepalasekolah->nomor_induk)}}">
   </div>
   <div class="mb-3">
     <label for="recipient-name" class="col-form-label">No Hp:</label>

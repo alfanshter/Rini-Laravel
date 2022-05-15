@@ -33,7 +33,7 @@
                     </div>                        
                     @enderror
 
-                    @error('nim')
+                    @error('nomor_induk')
                     <div class="alert alert-danger mt-2" role="alert">
                         {{$message}}  
                     </div>                        
@@ -45,11 +45,6 @@
                     </div>                        
                     @enderror
 
-                    @error('alamat')
-                    <div class="alert alert-danger mt-2" role="alert">
-                        {{$message}}  
-                    </div>                        
-                    @enderror
 
                     @error('password')
                     <div class="alert alert-danger mt-2" role="alert">
@@ -83,13 +78,9 @@
 
                                       <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">NISN:</label>
-                                        <input type="number" class="form-control" id="nim" required name="nim" value="{{old('nim')}}">
+                                        <input type="number" class="form-control" id="nomor_induk" required name="nomor_induk" value="{{old('nomor_induk')}}">
                                       </div>
-                                      <div class="mb-3">
-                                        <label for="message-text" class="col-form-label">Alamat:</label>
-                                        <textarea class="form-control" id="alamat" name="alamat" required value="{{old('alamat')}}"></textarea>
-                                      </div>
-
+                                  
                                       <div class="mb-3">
                                         <label for="message-text" class="col-form-label">Jenis Kelamin:</label>
                                         <select class="form-control" aria-label="Default select example" name="jenis_kelamin" id="jenis_kelamin">
@@ -132,7 +123,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
-                                            <th>Alamat</th>
+                                            {{----}}
                                             <th>Username</th>
                                             <th>Kelas</th>
                                             <th>NISN</th>
@@ -146,10 +137,10 @@
                                             <tr>
                                                 <td>{{$loop->iteration}}</td>                                        
                                                 <td>{{$data->name}}</td>                                        
-                                                <td>{{$data->alamat}}</td>                                        
+                                                {{--                                        --}}
                                                 <td>{{$data->username}}</td>                                        
                                                 <td>{{$data->kelas}}</td>                                        
-                                                <td>{{$data->nim}}</td>                                        
+                                                <td>{{$data->nomor_induk}}</td>                                        
                                                 <td>{{$data->jenis_kelamin}}</td>                                        
                                                 <td>{{$data->created_at}}</td>
                                                 <td class="align-middle text-center">

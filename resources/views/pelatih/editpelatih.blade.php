@@ -2,17 +2,12 @@
 
 @section('konten')
 <h2>Edit Pelatih</h2>
-@error('nim')
+@error('nomor_induk')
 <div class="alert alert-danger mt-2" role="alert">
     {{$message}}  
 </div>                        
 @enderror
 @error('name')
-<div class="alert alert-danger mt-2" role="alert">
-    {{$message}}  
-</div>                        
-@enderror
-@error('alamat')
 <div class="alert alert-danger mt-2" role="alert">
     {{$message}}  
 </div>                        
@@ -36,12 +31,9 @@
   </div>
   <div class="mb-3">
     <label for="recipient-name" class="col-form-label">Kode Pelatih:</label>
-    <input type="text" oninvalid="this.setCustomValidity('Kode pelatih wajib diisi')" class="form-control" id="nim" required name="nim" value="{{old('nim',$datapelatih->nim)}}">
+    <input type="text" oninvalid="this.setCustomValidity('Kode pelatih wajib diisi')" class="form-control" id="nomor_induk" required name="nomor_induk" value="{{old('nomor_induk',$datapelatih->nomor_induk)}}">
   </div>
-  <div class="mb-3">
-    <label for="message-text" class="col-form-label">Alamat:</label>
-    <textarea class="form-control" id="alamat" name="alamat" >{{old('alamat',$datapelatih->alamat)}}</textarea>
-  </div>
+  
 
   <div class="mb-3">
     <label for="recipient-name" class="col-form-label">No Hp:</label>

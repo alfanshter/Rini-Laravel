@@ -19,19 +19,18 @@ return new class extends Migration
             // is status = 2 diterima
             // is status = 3 ditolak
             $table->id();
-            $table->string('nim_siswa');
-            $table->foreign('nim_siswa')->references('nim')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('nomor_induk_siswa');
+            $table->foreign('nomor_induk_siswa')->references('nomor_induk')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('kode_ekskul');
             $table->foreign('kode_ekskul')->references('kode')->on('data_ekskuls')->onDelete('cascade')->onUpdate('cascade');
             $table->string('kode_pelatih');
-            $table->foreign('kode_pelatih')->references('nim')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('kode_pelatih')->references('nomor_induk')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('id_informasi');
             $table->foreign('id_informasi')->references('id')->on('informasi_ekskuls')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('is_status')->default(0);
             $table->string('alasan');
             $table->string('prestasi_pernah_diraih')->nullable();
             $table->timestamps();
-
         });
     }
 

@@ -22,14 +22,13 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('username')->unique();
-            $table->string('alamat')->nullable();
-            $table->string('nohp')->nullable();
-            $table->string('jenis_kelamin')->nullable();
-            $table->string('kelas')->nullable();
+            $table->string('nohp', 12)->nullable();
+            $table->string('jenis_kelamin', 15)->nullable();
+            $table->string('kelas', 10)->nullable();
             $table->integer('role');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('nim')->unique();
+            $table->string('nomor_induk')->unique();
             $table->rememberToken();
             $table->timestamps();
         });

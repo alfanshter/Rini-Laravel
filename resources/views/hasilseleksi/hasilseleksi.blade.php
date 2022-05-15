@@ -38,7 +38,7 @@
                                                 <td>{{$loop->iteration}}</td>                                        
                                                 <td>{{$data->name}}</td>                                        
                                                 <td>{{$data->kelas}}</td>                                        
-                                                <td>{{$data->nim}}</td>                                        
+                                                <td>{{$data->nomor_induk}}</td>                                        
                                                 <td>{{$data->nama}}</td> 
                                                 @if ($data->is_status ==2)
                                                 <td>Diterima</td>                                       
@@ -63,7 +63,7 @@
                                                 <td>{{$loop->iteration}}</td>                                        
                                                 <td>{{$data->name}}</td>                                        
                                                 <td>{{$data->kelas}}</td>                                        
-                                                <td>{{$data->nim}}</td>                                        
+                                                <td>{{$data->nomor_induk}}</td>                                        
                                                 <td>{{$data->nama}}</td> 
                                                 @if ($data->is_status ==2)
                                                 <td>Diterima</td>                                       

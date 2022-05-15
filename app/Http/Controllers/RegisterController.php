@@ -17,19 +17,21 @@ class RegisterController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:255',
-            'username' => ['required','min:3','max:255','unique:users'],
-            'nim' => ['required'],
-            'password' => ['required','min:5'],
+            'username' => ['required', 'min:3', 'max:255', 'unique:users'],
+            'nomor_induk' => ['required'],
+            'password' => ['required', 'min:5'],
         ]);
+
+        //cek nik
+        $cekuser = User::where('nomor_induk', $request->nomor_induk)->first();
+        if ($cekuser != null) {
+            return redirect('/register')->with('failed', 'Kode Admin sudah terdaftar');
+        }
 
         $validatedData['password'] = Hash::make($validatedData['password']);
         $validatedData['role'] = 0;
         User::create($validatedData);
 
-        return redirect('/login')->with('success','Pendaftaran berhasil');
-
-
+        return redirect('/login')->with('success', 'Pendaftaran berhasil');
     }
-
-  
 }

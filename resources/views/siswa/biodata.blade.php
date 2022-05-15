@@ -31,17 +31,14 @@
   </div>
   <div class="mb-3">
     <label for="recipient-name" class="col-form-label">NISN:</label>
-    <input type="number" class="form-control" id="nim" name="nim" value="{{old('nim',$datasiswa->nim)}}" disabled>
+    <input type="number" class="form-control" id="nomor_induk" name="nomor_induk" value="{{old('nomor_induk',$datasiswa->nomor_induk)}}" disabled>
   </div>
 
   <div class="mb-3">
     <label for="recipient-name" class="col-form-label">Kelas:</label>
     <input type="text" class="form-control" required id="kelas" name="kelas" value="{{old('kelas',$datasiswa->kelas)}}" >
   </div>
-  <div class="mb-3">
-    <label for="message-text" class="col-form-label">Alamat:</label>
-    <textarea class="form-control" id="alamat" required name="alamat" >{{old('alamat',$datasiswa->alamat)}}</textarea>
-  </div>
+  
 
   <div class="mb-3">
     <label for="recipient-name" class="col-form-label">password lama:</label>

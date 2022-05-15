@@ -52,7 +52,7 @@
                                             <td class="align-middle text-center">{{$data->name}}</td>
                                             <td class="align-middle text-center">{{$data->kelas}}</td>
                                             <td class="align-middle text-center">{{$data->jenis_kelamin}}</td>
-                                            <td class="align-middle text-center">{{$data->nim}}</td>
+                                            <td class="align-middle text-center">{{$data->nomor_induk}}</td>
                                             <td class="align-middle text-center">{{$data->nama}}</td>
                                             <td class="align-middle text-center">
                                                 <div class="d-flex justify-content-sm-center mt-2">

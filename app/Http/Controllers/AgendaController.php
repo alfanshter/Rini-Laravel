@@ -20,11 +20,14 @@ class AgendaController extends Controller
     {
 
         if (auth()->user()->role == 1) {
-            $data_agenda = Ekskul::join('agendas', 'agendas.id_pelatih', '=', 'ekskuls.kode_pelatih')
-                ->join('users', 'users.nim', '=', 'agendas.id_pelatih')
-                ->where('agendas.nama_ekskul', $nama)
-                ->where('nim_siswa', auth()->user()->nim)
-                ->where('is_status', 2)
+            $uid = auth()->user()->nomor_induk;
+            $data_agenda = Agenda::where('nama_ekskul', $nama)
+                ->whereHas('ekskul', function ($query) use ($uid) {
+                    $query->where('nomor_induk_siswa', $uid);
+                    $query->where('is_status', 2);
+                })
+                ->with('users')
+                ->with('data_ekskul')
                 ->get();
             return view('agenda.agenda', [
                 'dataagenda' => $data_agenda
@@ -35,9 +38,9 @@ class AgendaController extends Controller
             $tahun_ajaran = Agenda::groupBy('tahun_ajaran')->distinct()->get();
             //idpelatih
             $namapelatih = DB::table('data_ekskuls')
-                ->select(['ekskuls.kode_pelatih as id_pelatih', 'users.nim as nama_pelatih'])
+                ->select(['ekskuls.kode_pelatih as id_pelatih', 'users.nomor_induk as nama_pelatih'])
                 ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
-                ->join('users', 'users.nim', '=', 'ekskuls.kode_pelatih')
+                ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
                 ->where('data_ekskuls.kode', $nama)
                 ->first();
             if ($namapelatih == null) {
@@ -45,7 +48,7 @@ class AgendaController extends Controller
             } else {
 
                 $data_agenda = Agenda::join('data_ekskuls', 'data_ekskuls.kode', '=', 'agendas.nama_ekskul')
-                    ->join('users', 'users.nim', '=', 'agendas.id_pelatih')
+                    ->join('users', 'users.nomor_induk', '=', 'agendas.id_pelatih')
                     ->where('agendas.nama_ekskul', $nama)
                     ->get(['agendas.*', 'users.name']);
 
@@ -61,9 +64,9 @@ class AgendaController extends Controller
             $tahun_ajaran = Agenda::groupBy('tahun_ajaran')->distinct()->get();
             //idpelatih
             $namapelatih = DB::table('data_ekskuls')
-                ->select(['ekskuls.kode_pelatih as id_pelatih', 'users.nim as nama_pelatih'])
+                ->select(['ekskuls.kode_pelatih as id_pelatih', 'users.nomor_induk as nama_pelatih'])
                 ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
-                ->join('users', 'users.nim', '=', 'ekskuls.kode_pelatih')
+                ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
                 ->where('data_ekskuls.kode', $nama)
                 ->first();
 
@@ -72,7 +75,7 @@ class AgendaController extends Controller
             } else {
 
                 $data_agenda = Agenda::join('data_ekskuls', 'data_ekskuls.kode', '=', 'agendas.nama_ekskul')
-                    ->join('users', 'users.nim', '=', 'agendas.id_pelatih')
+                    ->join('users', 'users.nomor_induk', '=', 'agendas.id_pelatih')
                     ->where('agendas.nama_ekskul', $nama)
                     ->get(['agendas.*', 'users.name']);
 
@@ -163,10 +166,10 @@ class AgendaController extends Controller
             $tahun_ajaran = Agenda::groupBy('tahun_ajaran')->distinct()->get();
 
             //nama ekskul
-            $nama_ekskul = InformasiEkskul::where('kode_pelatih', auth()->user()->nim)->first();
+            $nama_ekskul = InformasiEkskul::where('kode_pelatih', auth()->user()->nomor_induk)->first();
             $data_agenda = Agenda::join('data_ekskuls', 'data_ekskuls.kode', '=', 'agendas.nama_ekskul')
-                ->join('users', 'users.nim', '=', 'agendas.id_pelatih')
-                ->where('agendas.id_pelatih', auth()->user()->nim)
+                ->join('users', 'users.nomor_induk', '=', 'agendas.id_pelatih')
+                ->where('agendas.id_pelatih', auth()->user()->nomor_induk)
                 ->get(['agendas.*', 'users.name', 'data_ekskuls.nama as ekskul']);
             return view('agenda.agenda', [
                 'dataagenda' => $data_agenda,
@@ -177,7 +180,7 @@ class AgendaController extends Controller
         } else if (auth()->user()->role == 1) {
             $ekskul = DB::table('ekskuls')
                 ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
-                ->where('nim_siswa', auth()->user()->nim)
+                ->where('nomor_induk_siswa', auth()->user()->nomor_induk)
                 ->where('is_status', 2)
                 ->get();
 
@@ -194,27 +197,27 @@ class AgendaController extends Controller
         $nama = $request->input('nama_ekskul');
         //idpelatih
         $namapelatih = DB::table('data_ekskuls')
-            ->select(['ekskuls.kode_pelatih as id_pelatih', 'users.name as nama_pelatih'])
+            ->select(['ekskuls.kode_pelatih as id_pelatih', 'users.name as nama_pelatih', 'data_ekskuls.*'])
             ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
-            ->join('users', 'users.nim', '=', 'ekskuls.kode_pelatih')
+            ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
             ->where('data_ekskuls.kode', $nama)
             ->first();
         if (auth()->user()->role == 2) {
-            $data_agenda = Agenda::join('users', 'users.nim', '=', 'agendas.id_pelatih')
-                ->where('id_pelatih', auth()->user()->nim)
+            $data_agenda = Agenda::join('users', 'users.nomor_induk', '=', 'agendas.id_pelatih')
+                ->where('id_pelatih', auth()->user()->nomor_induk)
                 ->where('nama_ekskul', $nama)
                 ->where('tahun_ajaran', $request->input('tahun_ajaran'))
                 ->where('semester', $request->input('semester'))
                 ->get(['users.name', 'agendas.*']);
             $pdf = PDF::loadview('agenda.agenda_cetakpdf', [
                 'agenda' => $data_agenda,
-                'nama_ekskul' => $nama,
+                'nama_ekskul' => $namapelatih->nama,
                 'tahun_ajaran' => $request->input('tahun_ajaran'),
                 'nama_pelatih' => $namapelatih
             ]);
             return $pdf->stream();
         } else if (auth()->user()->role == 0 || auth()->user()->role == 3) {
-            $data_agenda = Agenda::join('users', 'users.nim', '=', 'agendas.id_pelatih')
+            $data_agenda = Agenda::join('users', 'users.nomor_induk', '=', 'agendas.id_pelatih')
                 ->where('nama_ekskul', $nama)
                 ->where('tahun_ajaran', $request->input('tahun_ajaran'))
                 ->where('semester', $request->input('semester'))
@@ -222,7 +225,7 @@ class AgendaController extends Controller
 
             $pdf = PDF::loadview('agenda.agenda_cetakpdf', [
                 'agenda' => $data_agenda,
-                'nama_ekskul' => $nama,
+                'nama_ekskul' => $namapelatih->nama,
                 'tahun_ajaran' => $request->input('tahun_ajaran'),
                 'nama_pelatih' => $namapelatih
 

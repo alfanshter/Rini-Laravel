@@ -62,7 +62,7 @@ td.center {
 
     <center>
         <div>
-                <p style=" font-weight: bold;text-transform:uppercase">DAFTAR HADIR PESERTA KEGIATAN EKTRAKULIKULER {{$nama_ekskul}}</p>
+                <p style=" font-weight: bold;text-transform:uppercase">DAFTAR HADIR PESERTA KEGIATAN EKTRAKULIKULER {{$nama_ekskuls}}</p>
                 <p style=" font-weight: bold;text-transform:uppercase">SMA NEGERI 16 JAKARTA</p>
                 <p style=" font-weight: bold;text-transform:uppercase">tahun pelajaran {{$tahun_ajaran}}</p>
         </div>

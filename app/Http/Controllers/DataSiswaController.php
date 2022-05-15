@@ -17,7 +17,7 @@ class DataSiswaController extends Controller
 
     public function tambahsiswa(Request $request)
     {
-        $cekuser = User::where('nim', $request->nim)->first();
+        $cekuser = User::where('nomor_induk', $request->nomor_induk)->first();
         if ($cekuser != null) {
             return redirect('/datasiswa')->with('failed', 'NISN sudah terdaftar');
         }
@@ -25,9 +25,8 @@ class DataSiswaController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'username' => ['required', 'min:3', 'max:255', 'unique:users'],
-            'alamat' => ['required'],
             'kelas' => ['required'],
-            'nim' => ['required', 'unique:users'],
+            'nomor_induk' => ['required', 'unique:users'],
             'password' => ['required', 'min:5'],
             'jenis_kelamin' => ['required']
         ]);
@@ -59,15 +58,15 @@ class DataSiswaController extends Controller
     {
         $rule = [
             'name' => 'required|max:255',
-            'alamat' => ['required'],
             'kelas' => ['required'],
-            'nim' => ['required'],
+            'nomor_induk' => ['required'],
             'username' => ['required'],
+            'jenis_kelamin' => ['required']
         ];
-        //Apakah Nim sama ? 
+        //Apakah nomor_induk sama ? 
         $getuser = User::where('id', $request->id)->first();
-        if ($request->nim != $getuser->nim) {
-            $rule['nim'] = 'required|unique:users';
+        if ($request->nomor_induk != $getuser->nomor_induk) {
+            $rule['nomor_induk'] = 'required|unique:users';
         }
 
         if ($request->username != $getuser->username) {
@@ -92,13 +91,12 @@ class DataSiswaController extends Controller
 
 
         $validatedData = $request->validate([
-            'kelas' => ['required'],
-            'alamat' => ['required']
+            'kelas' => ['required']
         ]);
 
         if ($request->password_lama && $request->password) {
             //cek password lama
-            //Apakah Nim sama ? 
+            //Apakah nomor_induk sama ? 
             $getuser = User::where('id', $request->id)->first();
             $password_lama = $request->password_lama;
             if (!Hash::check($password_lama, $getuser->password)) {
