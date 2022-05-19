@@ -37,7 +37,7 @@ class AbsenPelatihController extends Controller
         if (auth()->user()->role == 0) {
             //idpelatih
             $namapelatih = DB::table('data_ekskuls')
-                ->select(['ekskuls.kode_pelatih as id_pelatih', 'users.name as nama_pelatih', 'users.id as user_id'])
+                ->select(['ekskuls.kode_pelatih as kode_pelatih', 'users.name as nama_pelatih', 'users.id as user_id'])
                 ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
                 ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
                 ->where('data_ekskuls.nama', $nama_ekskul)
@@ -91,7 +91,7 @@ class AbsenPelatihController extends Controller
                 ->where('nama', $request->nama_ekskul)
                 ->first();
 
-            $validatedData['id_ekskul'] = $getekskul->kode;
+            $validatedData['kode_ekskul'] = $getekskul->kode;
             $validatedData['bulan'] = $bulan;
 
 
@@ -116,7 +116,7 @@ class AbsenPelatihController extends Controller
         //idpelatih
         //idpelatih
         $namapelatih = DB::table('data_ekskuls')
-            ->select(['ekskuls.kode_pelatih as id_pelatih', 'users.name as nama_pelatih', 'users.id as user_id'])
+            ->select(['ekskuls.kode_pelatih as kode_pelatih', 'users.name as nama_pelatih', 'users.id as user_id'])
             ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
             ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
             ->where('data_ekskuls.nama', $nama_ekskul)
@@ -139,8 +139,8 @@ class AbsenPelatihController extends Controller
 
 
         $update = DB::table('absen_pelatihs')->where('id', $request->id)->update([
-                'absen' => $request->absen
-            ]);
+            'absen' => $request->absen
+        ]);
 
         return redirect("/absenpelatih")->with('success', 'Absen berhasil di Edit');
     }

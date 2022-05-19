@@ -28,7 +28,7 @@ return new class extends Migration
             $table->integer('role');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('nomor_induk')->unique();
+            $table->string('nomor_induk', 20)->unique();
             $table->rememberToken();
             $table->timestamps();
         });

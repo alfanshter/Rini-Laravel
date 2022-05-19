@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('kode_ekskul')->unique();
             $table->foreign('kode_ekskul')->references('kode')->on('data_ekskuls')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('jadwal');
+            $table->string('jadwal', 11);
             $table->time('jam');
             $table->string('tempat_ekskul');
             $table->string('kode_pelatih')->unique();

@@ -28,7 +28,6 @@ class PrestasiController extends Controller
         } else if (auth()->user()->role == 1) {
             $ekskul = DB::table('ekskuls')
                 ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
-                ->where('nomor_induk_siswa', auth()->user()->nomor_induk)
                 ->where('is_status', 2)
                 ->get();
 
@@ -45,7 +44,7 @@ class PrestasiController extends Controller
                 ->get(['users.name', 'data_ekskuls.kode', 'users.nomor_induk']);
 
 
-            $data_prestasi = Prestasi::where('id_pelatih', auth()->user()->nomor_induk)
+            $data_prestasi = Prestasi::where('kode_pelatih', auth()->user()->nomor_induk)
                 ->where('kode_ekskul', $ekskul->kode_ekskul)
                 ->get();
 
@@ -69,7 +68,7 @@ class PrestasiController extends Controller
                 ->get(['users.name', 'data_ekskuls.kode', 'users.nomor_induk']);
 
 
-            $data_prestasi = Prestasi::where('id_pelatih', auth()->user()->nomor_induk)
+            $data_prestasi = Prestasi::where('kode_pelatih', auth()->user()->nomor_induk)
                 ->where('kode_ekskul', $nama)
                 ->get();
 
@@ -86,7 +85,7 @@ class PrestasiController extends Controller
         } else if (auth()->user()->role == 0) {
             //idpelatih
             $namapelatih = DB::table('data_ekskuls')
-                ->select(['ekskuls.kode_pelatih as id_pelatih', 'users.nomor_induk as nama_pelatih'])
+                ->select(['ekskuls.kode_pelatih as kode_pelatih', 'users.nomor_induk as nama_pelatih'])
                 ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
                 ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
                 ->where('data_ekskuls.kode', $nama)
@@ -126,7 +125,7 @@ class PrestasiController extends Controller
             'kode_ekskul' => ['required'],
             'prestasi' => ['required'],
             'nama_pelatih' => ['required'],
-            'id_pelatih' => ['required'],
+            'kode_pelatih' => ['required'],
             'tanggal' => ['required'],
             'foto' => 'image|file|max:1024'
         ]);

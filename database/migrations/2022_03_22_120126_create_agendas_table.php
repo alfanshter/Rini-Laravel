@@ -16,13 +16,13 @@ return new class extends Migration
         Schema::create('agendas', function (Blueprint $table) {
             $table->id();
             $table->date('tanggal');
-            $table->string('hari');
-            $table->string('tahun_ajaran');
-            $table->string('semester');
+            $table->string('hari', 10);
+            $table->string('tahun_ajaran', 25);
+            $table->string('semester', 7);
             $table->string('nama_materi');
             $table->string('nama_ekskul');
-            $table->string('id_pelatih');
-            $table->foreign('id_pelatih')->references('nomor_induk')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('kode_pelatih');
+            $table->foreign('kode_pelatih')->references('nomor_induk')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

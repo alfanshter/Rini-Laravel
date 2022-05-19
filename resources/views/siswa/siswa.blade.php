@@ -80,6 +80,12 @@
                                         <label for="recipient-name" class="col-form-label">NISN:</label>
                                         <input type="number" class="form-control" id="nomor_induk" required name="nomor_induk" value="{{old('nomor_induk')}}">
                                       </div>
+
+                                      <div class="mb-3">
+                                        <label for="recipient-name" class="col-form-label">No Hp:</label>
+                                        <input type="number" class="form-control" id="nohp" required name="nohp" value="{{old('nohp')}}">
+                                      </div>
+
                                   
                                       <div class="mb-3">
                                         <label for="message-text" class="col-form-label">Jenis Kelamin:</label>
@@ -96,7 +102,7 @@
 
                                       <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Password:</label>
-                                        <input type="text" class="form-control" id="password" required name="password">
+                                        <input type="password" class="form-control" id="password" required name="password">
                                       </div>
 
                                       <div class="modal-footer">
@@ -127,6 +133,7 @@
                                             <th>Username</th>
                                             <th>Kelas</th>
                                             <th>NISN</th>
+                                            <th>No Hp</th>
                                             <th>Jenis Kelamin</th>
                                             <th>Tanggal Daftar</th>
                                             <th>Action</th>
@@ -141,6 +148,7 @@
                                                 <td>{{$data->username}}</td>                                        
                                                 <td>{{$data->kelas}}</td>                                        
                                                 <td>{{$data->nomor_induk}}</td>                                        
+                                                <td>{{$data->nohp}}</td>                                        
                                                 <td>{{$data->jenis_kelamin}}</td>                                        
                                                 <td>{{$data->created_at}}</td>
                                                 <td class="align-middle text-center">

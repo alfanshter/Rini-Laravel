@@ -119,7 +119,7 @@ class EkskulController extends Controller
     {
         $delete = Ekskul::where('id', $request->id)->delete();
 
-        return redirect('/daftar_peserta/' . $request->kode)->with('success', 'Peserta dihapus');
+        return redirect('/daftar_peserta')->with('success', 'Peserta dihapus');
     }
 
     /**

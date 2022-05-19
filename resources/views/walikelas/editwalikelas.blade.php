@@ -14,11 +14,18 @@
 </div>                        
 @enderror
 
-@error('nim')
+@error('nomor_induk')
 <div class="alert alert-danger mt-2" role="alert">
     {{$message}}  
 </div>                        
 @enderror
+
+
+@if (session()->has('success'))
+<div class="alert alert-success mt-2" role="alert">
+    {{session('success')}}  
+</div>
+@endif
 
 
 @error('nohp')
@@ -27,25 +34,44 @@
 </div>                        
 @enderror
 
-
-<form action="/walikelas/updatewalikelas" method="POST">
-    @csrf
+@if (auth()->user()->role == 4)
+    <form action="/walikelas/updatepassword" method="POST">
+ @else
+    <form action="/walikelas/updatewalikelas" method="POST">
+  @endif
+      @csrf
     <input type="hidden" name="id" id="id" value="{{$walikelas->id}}">
   <div class="mb-3">
     <label for="recipient-name" class="col-form-label">Nama:</label>
-    <input type="text" class="form-control" id="name" name="name" value="{{old('name',$walikelas->name)}}">
+    @if (auth()->user()->role == 4)
+        <input  disabled type="text" class="form-control" id="name" name="name" value="{{old('name',$walikelas->name)}}" >    
+    @else 
+        <input type="text" class="form-control" id="name" name="name" value="{{old('name',$walikelas->name)}}">    
+    @endif
   </div>
   <div class="mb-3">
     <label for="recipient-name" class="col-form-label">Kode Wali Keas:</label>
-    <input type="text" class="form-control" id="nim" name="nim" value="{{old('nim',$walikelas->nim)}}">
+    @if (auth()->user()->role == 4)
+        <input type="text" disabled class="form-control" id="nomor_induk" name="nomor_induk" value="{{old('nomor_induk',$walikelas->nomor_induk)}}">
+    @else 
+        <input type="text" class="form-control" id="nomor_induk" name="nomor_induk" value="{{old('nomor_induk',$walikelas->nomor_induk)}}">
+    @endif
   </div>
   <div class="mb-3">
     <label for="recipient-name" class="col-form-label">No Hp:</label>
-    <input type="number" class="form-control" id="nohp" name="nohp" value="{{old('nohp',$walikelas->nohp)}}">
+    @if (auth()->user()->role == 4)
+        <input type="number" class="form-control" id="nohp" name="nohp" disabled value="{{old('nohp',$walikelas->nohp)}}">
+    @else 
+        <input type="number" class="form-control" id="nohp" name="nohp" value="{{old('nohp',$walikelas->nohp)}}">
+    @endif
   </div>
   <div class="mb-3">
     <label for="recipient-name" class="col-form-label">Username:</label>
-    <input type="text" class="form-control" id="username" name="username" value="{{old('username',$walikelas->username)}}">
+     @if (auth()->user()->role == 4)
+        <input type="text" disabled class="form-control" id="username" name="username" value="{{old('username',$walikelas->username)}}">
+    @else 
+        <input type="text" class="form-control" id="username" name="username" value="{{old('username',$walikelas->username)}}">
+    @endif
   </div>
 
    <div class="mb-3">

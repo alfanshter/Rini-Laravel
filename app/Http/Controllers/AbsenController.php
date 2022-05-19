@@ -36,8 +36,8 @@ class AbsenController extends Controller
             $absen = DB::table('absens')
                 ->select(['absens.*', 'users.kelas', 'users.name'])
                 ->join('users', 'users.id', '=', 'absens.user_id')
-                ->where('id_pelatih', auth()->user()->nomor_induk)
-                ->where('id_ekskul', $ekskul->kode_ekskul)
+                ->where('kode_pelatih', auth()->user()->nomor_induk)
+                ->where('kode_ekskul', $ekskul->kode_ekskul)
                 ->get();
 
 
@@ -74,7 +74,7 @@ class AbsenController extends Controller
         if (auth()->user()->role == 0) {
             //idpelatih
             $namapelatih = DB::table('data_ekskuls')
-                ->select(['ekskuls.kode_pelatih as id_pelatih', 'users.name as nama_pelatih'])
+                ->select(['ekskuls.kode_pelatih as kode_pelatih', 'users.name as nama_pelatih'])
                 ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
                 ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
                 ->where('data_ekskuls.kode', $nama_ekskul)
@@ -96,7 +96,7 @@ class AbsenController extends Controller
             $absen = DB::table('absens')
                 ->select(['absens.*', 'users.kelas', 'users.name'])
                 ->join('users', 'users.id', '=', 'absens.user_id')
-                ->where('id_pelatih', $namapelatih->id_pelatih)
+                ->where('kode_pelatih', $namapelatih->kode_pelatih)
                 ->where('nama_ekskul', $nama_ekskul)
                 ->get();
 
@@ -122,7 +122,7 @@ class AbsenController extends Controller
             $absen = DB::table('absens')
                 ->select(['absens.*', 'users.kelas', 'users.name'])
                 ->join('users', 'users.id', '=', 'absens.user_id')
-                ->where('id_pelatih', auth()->user()->nomor_induk)
+                ->where('kode_pelatih', auth()->user()->nomor_induk)
                 ->where('nama_ekskul', $nama_ekskul)
                 ->get();
 
@@ -155,7 +155,7 @@ class AbsenController extends Controller
             //idpelatih
             //idpelatih
             $namapelatih = DB::table('data_ekskuls')
-                ->select(['ekskuls.kode_pelatih as id_pelatih', 'users.name as nama_pelatih'])
+                ->select(['ekskuls.kode_pelatih as kode_pelatih', 'users.name as nama_pelatih'])
                 ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
                 ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
                 ->where('data_ekskuls.kode', $nama_ekskul)
@@ -179,7 +179,7 @@ class AbsenController extends Controller
             $absen = DB::table('absens')
                 ->select(['absens.*', 'users.kelas', 'users.name'])
                 ->join('users', 'users.id', '=', 'absens.user_id')
-                ->where('id_pelatih', $namapelatih->id_pelatih)
+                ->where('kode_pelatih', $namapelatih->kode_pelatih)
                 ->where('nama_ekskul', $nama_ekskul)
                 ->get();
 
@@ -224,7 +224,7 @@ class AbsenController extends Controller
 
             //Nama Pelatih
             $namapelatih = DB::table('data_ekskuls')
-                ->select(['ekskuls.kode_pelatih as id_pelatih', 'users.name as nama_pelatih', 'ekskuls.kode_ekskul'])
+                ->select(['ekskuls.kode_pelatih as kode_pelatih', 'users.name as nama_pelatih', 'ekskuls.kode_ekskul'])
                 ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
                 ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
                 ->where('data_ekskuls.kode', $request->nama_ekskul)
@@ -232,8 +232,8 @@ class AbsenController extends Controller
 
 
             $validatedData['nama_pelatih'] = $namapelatih->nama_pelatih;
-            $validatedData['id_pelatih'] = $namapelatih->id_pelatih;
-            $validatedData['id_ekskul'] = $namapelatih->kode_ekskul;
+            $validatedData['kode_pelatih'] = $namapelatih->kode_pelatih;
+            $validatedData['kode_ekskul'] = $namapelatih->kode_ekskul;
             $validatedData['nama_siswa'] = $siswa->name;
             $validatedData['bulan'] = $bulan;
 
@@ -245,7 +245,7 @@ class AbsenController extends Controller
             //getid ekskul
             //Nama Pelatih
             $namapelatih = DB::table('data_ekskuls')
-                ->select(['ekskuls.kode_pelatih as id_pelatih', 'users.name as nama_pelatih', 'ekskuls.kode_ekskul'])
+                ->select(['ekskuls.kode_pelatih as kode_pelatih', 'users.name as nama_pelatih', 'ekskuls.kode_ekskul'])
                 ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
                 ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
                 ->where('data_ekskuls.kode', $request->nama_ekskul)
@@ -259,8 +259,8 @@ class AbsenController extends Controller
 
 
             $validatedData['nama_pelatih'] = auth()->user()->name;
-            $validatedData['id_pelatih'] = auth()->user()->nomor_induk;
-            $validatedData['id_ekskul'] = $namapelatih->kode_ekskul;
+            $validatedData['kode_pelatih'] = auth()->user()->nomor_induk;
+            $validatedData['kode_ekskul'] = $namapelatih->kode_ekskul;
             $validatedData['nama_siswa'] = $siswa->name;
             $validatedData['bulan'] = $bulan;
 
@@ -311,20 +311,20 @@ class AbsenController extends Controller
 
 
         //Nama Pelatih
-        $namapelatih = DataEkskul::select(['ekskuls.kode_pelatih as id_pelatih', 'users.name as nama_pelatih', 'ekskuls.kode_ekskul', 'data_ekskuls.*'])
+        $namapelatih = DataEkskul::select(['ekskuls.kode_pelatih as kode_pelatih', 'users.name as nama_pelatih', 'ekskuls.kode_ekskul', 'data_ekskuls.*'])
             ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
             ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
             ->where('data_ekskuls.kode', $request->nama_ekskul)
             ->first();
 
-        $id_ekskul = $namapelatih->kode_ekskul;
+        $kode_ekskul = $namapelatih->kode_ekskul;
 
 
-        //$users = User::where('role', '1')->with(['absensi' => function ($query) use ($id_ekskul) {
-        //    $query->where('id_ekskul', $id_ekskul);
+        //$users = User::where('role', '1')->with(['absensi' => function ($query) use ($kode_ekskul) {
+        //    $query->where('kode_ekskul', $kode_ekskul);
         //}])->get();
-        $users = User::where('role', '1')->whereHas('absensi', function ($query) use ($id_ekskul) {
-            $query->where('id_ekskul', $id_ekskul);
+        $users = User::where('role', '1')->whereHas('absensi', function ($query) use ($kode_ekskul) {
+            $query->where('kode_ekskul', $kode_ekskul);
         })->get();
 
 

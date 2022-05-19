@@ -103,7 +103,7 @@
             <li class="nav-item {{Request::is('daftar_seleksi') ? 'active' : ''}}">
                 <a class="nav-link" href="/daftar_seleksi">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Hasil Seleksi</span></a>
+                    <span>Daftar Peserta</span></a>
             </li>
 
             <li class="nav-item {{Request::is('daftar_agenda') ? 'active' : ''}} ">
@@ -295,6 +295,12 @@
                     <span>Agenda</span></a>
             </li>
 
+            <li class="nav-item {{Request::is('editkepalasekolah') ? 'active' : ''}}"  >
+                <a class="nav-link" href="/kepalasekolah/editkepalasekolah/{{auth()->user()->id}}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Ganti Password</span></a>
+            </li>
+
 
                 
             @endif
@@ -308,6 +314,13 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Nilai</span></a>
             </li>
+
+            <li class="nav-item {{Request::is('editwalikelas') ? 'active' : ''}}"  >
+                <a class="nav-link" href="/walikelas/editwalikelas/{{auth()->user()->id}}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Ganti Password</span></a>
+            </li>
+
                 
             @endif
 

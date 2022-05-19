@@ -39,14 +39,19 @@
         <input type="text" class="form-control" id="kelas" name="kelas" value="{{old('kelas',$datasiswa->kelas)}}">
     </div>
 
+        <div class="mb-3">
+        <label for="recipient-name" class="col-form-label">No HP:</label>
+        <input type="text" class="form-control" id="nohp" name="nohp" value="{{old('nohp',$datasiswa->nohp)}}">
+    </div>
+
     <div class="mb-3">
-                                        <label for="message-text" class="col-form-label">Jenis Kelamin:</label>
-                                        <select class="form-control" aria-label="Default select example" name="jenis_kelamin" id="jenis_kelamin">
-                                            <option value="{{$datasiswa->jenis_kelamin}}">{{$datasiswa->jenis_kelamin}}</option>                                                
-                                            <option value="Perempuan">Perempuan</option>                                                
-                                            <option value="Laki - laki">Laki - laki</option>                                                
-                                        </select>
-                                      </div>
+        <label for="message-text" class="col-form-label">Jenis Kelamin:</label>
+        <select class="form-control" aria-label="Default select example" name="jenis_kelamin" id="jenis_kelamin">
+            <option value="{{$datasiswa->jenis_kelamin}}">{{$datasiswa->jenis_kelamin}}</option>
+            <option value="Perempuan">Perempuan</option>
+            <option value="Laki - laki">Laki - laki</option>
+        </select>
+    </div>
     <div class="mb-3">
         <label for="recipient-name" class="col-form-label">Username:</label>
         <input type="text" class="form-control" id="username" required name="username" value="{{old('username',$datasiswa->username)}}">
@@ -61,7 +66,7 @@
 
 
     <div class="modal-footer">
-         <a href="/datasiswa" class="btn btn-dark">Cancel</a>
+        <a href="/datasiswa" class="btn btn-dark">Cancel</a>
         <button type="submit" class="btn btn-primary">Update</button>
     </div>
 </form>

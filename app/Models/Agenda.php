@@ -12,12 +12,12 @@ class Agenda extends Model
 
     public function ekskul()
     {
-        return $this->belongsTo(Ekskul::class, 'id_pelatih', 'kode_pelatih');
+        return $this->belongsTo(Ekskul::class, 'kode_pelatih', 'kode_pelatih');
     }
 
     public function users()
     {
-        return $this->belongsTo(Users::class, 'id_pelatih', 'nomor_induk');
+        return $this->belongsTo(Users::class, 'kode_pelatih', 'nomor_induk');
     }
 
     public function data_ekskul()

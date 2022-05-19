@@ -29,8 +29,8 @@ class NilaiController extends Controller
                 ->get(['users.name', 'users.nomor_induk']);
 
             $nilai = DB::table('nilais')
-                ->where('id_pelatih', auth()->user()->nomor_induk)
-                ->where('id_ekskul', $nama_ekskul->kode_ekskul)
+                ->where('kode_pelatih', auth()->user()->nomor_induk)
+                ->where('kode_ekskul', $nama_ekskul->kode_ekskul)
                 ->get();
 
             return view(
@@ -87,8 +87,8 @@ class NilaiController extends Controller
                 ->first();
 
             $validatedData['nama_pelatih'] = auth()->user()->name;
-            $validatedData['id_pelatih'] = auth()->user()->nomor_induk;
-            $validatedData['id_ekskul'] = $request->nama_ekskul;
+            $validatedData['kode_pelatih'] = auth()->user()->nomor_induk;
+            $validatedData['kode_ekskul'] = $request->nama_ekskul;
             $validatedData['nama_siswa'] = $siswa->name;
 
             Nilai::create($validatedData);
@@ -111,7 +111,7 @@ class NilaiController extends Controller
 
             //Nama Pelatih
             $namapelatih = DB::table('data_ekskuls')
-                ->select(['ekskuls.kode_pelatih as id_pelatih', 'users.name as nama_pelatih', 'ekskuls.kode_ekskul'])
+                ->select(['ekskuls.kode_pelatih as kode_pelatih', 'users.name as nama_pelatih', 'ekskuls.kode_ekskul'])
                 ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
                 ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
                 ->where('data_ekskuls.kode', $request->nama_ekskul)
@@ -119,8 +119,8 @@ class NilaiController extends Controller
 
 
             $validatedData['nama_pelatih'] = $namapelatih->nama_pelatih;
-            $validatedData['id_pelatih'] = $namapelatih->id_pelatih;
-            $validatedData['id_ekskul'] = $namapelatih->kode_ekskul;
+            $validatedData['kode_pelatih'] = $namapelatih->kode_pelatih;
+            $validatedData['kode_ekskul'] = $namapelatih->kode_ekskul;
             $validatedData['nama_siswa'] = $siswa->name;
 
             Nilai::create($validatedData);
@@ -146,7 +146,7 @@ class NilaiController extends Controller
 
 
             $nilai = DB::table('nilais')
-                ->where('id_pelatih', $namapelatih->kode_pelatih)
+                ->where('kode_pelatih', $namapelatih->kode_pelatih)
                 ->where('nama_ekskul', $nama_ekskul)
                 ->get();
 
@@ -169,7 +169,7 @@ class NilaiController extends Controller
                 ->get(['users.name', 'users.nomor_induk']);
 
             $nilai = DB::table('nilais')
-                ->where('id_pelatih', auth()->user()->nomor_induk)
+                ->where('kode_pelatih', auth()->user()->nomor_induk)
                 ->where('nama_ekskul', $nama_ekskul)
                 ->get();
 
@@ -194,7 +194,7 @@ class NilaiController extends Controller
         } else if (auth()->user()->role == 3 || auth()->user()->role == 4) {
             //idpelatih
             $namapelatih = DB::table('data_ekskuls')
-                ->select(['ekskuls.kode_pelatih as id_pelatih', 'users.name as nama_pelatih'])
+                ->select(['ekskuls.kode_pelatih as kode_pelatih', 'users.name as nama_pelatih'])
                 ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
                 ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
                 ->where('data_ekskuls.kode', $nama_ekskul)
@@ -213,7 +213,7 @@ class NilaiController extends Controller
 
 
             $nilai = DB::table('nilais')
-                ->where('id_pelatih', $namapelatih->id_pelatih)
+                ->where('kode_pelatih', $namapelatih->kode_pelatih)
                 ->where('nama_ekskul', $nama_ekskul)
                 ->get();
 
@@ -261,7 +261,7 @@ class NilaiController extends Controller
         //idpelatih
 
         $namapelatih = DB::table('data_ekskuls')
-            ->select(['ekskuls.kode_pelatih as id_pelatih', 'users.name as nama_pelatih', 'data_ekskuls.*'])
+            ->select(['ekskuls.kode_pelatih as kode_pelatih', 'users.name as nama_pelatih', 'data_ekskuls.*'])
             ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
             ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
             ->where('data_ekskuls.kode', $nama_ekskul)

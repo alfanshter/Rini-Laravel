@@ -33,7 +33,7 @@
                     </div>                        
                     @enderror
 
-                    @error('nim')
+                    @error('nomor_induk')
                     <div class="alert alert-danger mt-2" role="alert">
                         {{$message}}  
                     </div>                        
@@ -73,11 +73,11 @@
                                       </div>
                                       <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Kode Wali Kelas:</label>
-                                        <input type="text" class="form-control" id="nim" required name="nim" value="{{old('nim')}}">
+                                        <input type="text" class="form-control" id="nomor_induk" required name="nomor_induk" value="{{old('nomor_induk')}}">
                                       </div>
                                       <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Nomor HP:</label>
-                                        <input type="number" class="form-control" id="nohp" required name="nohp" value="{{old('nim')}}">
+                                        <input type="number" class="form-control" id="nohp" required name="nohp" value="{{old('nomor_induk')}}">
                                       </div>
 
 
@@ -88,7 +88,7 @@
 
                                       <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Password:</label>
-                                        <input type="text" class="form-control" id="password" required name="password">
+                                        <input type="password" class="form-control" id="password" required name="password">
                                       </div>
 
                                       <div class="modal-footer">
@@ -130,7 +130,7 @@
                                                 <td>{{$data->name}}</td>                                        
                                                                                         
                                                 <td>{{$data->username}}</td>                                        
-                                                <td>{{$data->nim}}</td>                                        
+                                                <td>{{$data->nomor_induk}}</td>                                        
                                                 <td>{{$data->nohp}}</td>                                        
                                                 <td>{{$data->created_at}}</td>
                                                 <td class="align-middle text-center">

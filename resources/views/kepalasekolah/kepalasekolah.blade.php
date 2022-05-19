@@ -89,7 +89,7 @@
 
                                       <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Password:</label>
-                                        <input type="text" class="form-control" id="password" required name="password">
+                                        <input type="password" class="form-control" id="password" required name="password">
                                       </div>
 
                                       <div class="modal-footer">

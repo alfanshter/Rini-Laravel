@@ -22,10 +22,10 @@
                             <div class="modal-body">
                                 <form action="/prestasi" method="POST" enctype="multipart/form-data">
                                     @csrf
-                                    <input type="hidden" name="id_pelatih" value="{{auth()->user()->nomor_induk}}" id="id_pelatih">
+                                    <input type="hidden" name="kode_pelatih" value="{{auth()->user()->nomor_induk}}" id="kode_pelatih">
                                     <input type="hidden" name="kode_ekskul" value="{{$kode_ekskul}}" id="kode_ekskul">
                                     <input type="hidden" name="nama_pelatih" value="{{auth()->user()->name}}" id="nama_pelatih">
-                                    <input type="hidden" name="id_pelatih" value="{{auth()->user()->nomor_induk}}" id="id_pelatih">
+                                    <input type="hidden" name="kode_pelatih" value="{{auth()->user()->nomor_induk}}" id="kode_pelatih">
 
                                     <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Nama Peserta:</label>
@@ -96,12 +96,12 @@
                                 <form action="/prestasi" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @if (auth()->user()->role ==2)
-                                    <input type="hidden" name="id_pelatih" value="{{auth()->user()->nomor_induk}}" id="id_pelatih">
+                                    <input type="hidden" name="kode_pelatih" value="{{auth()->user()->nomor_induk}}" id="kode_pelatih">
                                     <input type="hidden" name="kode_ekskul" value="{{$kode_ekskul}}" id="kode_ekskul">
                                     <input type="hidden" name="nama_pelatih" value="{{auth()->user()->name}}" id="nama_pelatih">
                                     @endif
                                     @if (auth()->user()->role ==0)
-                                    <input type="hidden" name="id_pelatih" value="{{$pelatih->id_pelatih}}" id="id_pelatih">
+                                    <input type="hidden" name="kode_pelatih" value="{{$pelatih->kode_pelatih}}" id="kode_pelatih">
                                     <input type="hidden" name="kode_ekskul" value="{{$kode_ekskul}}" id="kode_ekskul">
                                     <input type="hidden" name="nama_pelatih" value="{{$pelatih->nama_pelatih}}" id="nama_pelatih">                                        
                                     @endif

@@ -22,12 +22,13 @@ return new class extends Migration
         Schema::create('absen_pelatihs', function (Blueprint $table) {
             $table->id();
             $table->integer('absen')->default(0);
-            $table->string('user_id');
-            $table->string('id_ekskul');
+            $table->foreignId('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('kode_ekskul');
+            $table->foreign('kode_ekskul')->references('kode')->on('data_ekskuls')->onDelete('cascade')->onUpdate('cascade');
             $table->string('nama_ekskul');
-            $table->string('tahun_ajaran');
-            $table->string('bulan');
-            $table->string('semester');
+            $table->string('tahun_ajaran', 25);
+            $table->string('semester', 7);
             $table->date('tanggal');
             $table->timestamps();
         });

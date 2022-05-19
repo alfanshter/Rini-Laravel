@@ -73,6 +73,7 @@ Route::get('/kepalasekolah', [KepalaSekolahController::class, 'index'])->middlew
 Route::post('/kepalasekolah', [KepalaSekolahController::class, 'tambahkepalasekolah']);
 Route::get('/kepalasekolah/editkepalasekolah/{id}', [KepalaSekolahController::class, 'edit'])->middleware('auth');
 Route::post('/kepalasekolah/updatekepalasekolah', [KepalaSekolahController::class, 'update'])->middleware('auth');
+Route::post('/kepalasekolah/updatepassword', [KepalaSekolahController::class, 'updatepassword'])->middleware('auth');
 Route::delete('/kepalasekolah/hapuskepalasekolah/{id}', [KepalaSekolahController::class, 'destroy'])->middleware('auth');
 
 //Wali kelas
@@ -81,6 +82,7 @@ Route::post('/walikelas', [WaliKelasController::class, 'tambahwalikelas']);
 Route::get('/walikelas/editwalikelas/{id}', [WaliKelasController::class, 'edit'])->middleware('auth');
 Route::post('/walikelas/updatewalikelas', [WaliKelasController::class, 'update'])->middleware('auth');
 Route::delete('/walikelas/hapuswalikelas/{id}', [WaliKelasController::class, 'destroy'])->middleware('auth');
+Route::post('/walikelas/updatepassword', [KepalaSekolahController::class, 'updatepassword'])->middleware('auth');
 
 //Informasi Ekskul
 Route::get('/informasiekskul', [InformasiEkskulController::class, 'index'])->middleware('auth');

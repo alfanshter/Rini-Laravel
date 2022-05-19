@@ -20,7 +20,7 @@
             <div class="modal-body">
                 <form action="/post_agenda" method="POST">
                     @csrf
-                    <input type="hidden" name="id_pelatih" value="{{$pelatih->id_pelatih}}" id="id_pelatih">
+                    <input type="hidden" name="kode_pelatih" value="{{$pelatih->kode_pelatih}}" id="kode_pelatih">
                     <input type="hidden" name="nama_ekskul" value="{{$nama_ekskul}}" id="nama_ekskul">
                     <div class="mb-3">
                         <label for="recipient-name" class="col-form-label">Nama Materi:</label>
@@ -77,7 +77,7 @@
             <div class="modal-body">
                 <form action="/post_agenda" method="POST">
                     @csrf
-                    <input type="hidden" name="id_pelatih" value="{{auth()->user()->nomor_induk}}" id="id_pelatih">
+                    <input type="hidden" name="kode_pelatih" value="{{auth()->user()->nomor_induk}}" id="kode_pelatih">
                     <input type="hidden" name="nama_ekskul" value="{{$nama_ekskul}}" id="nama_ekskul">
                     <div class="mb-3">
                         <label for="recipient-name" class="col-form-label">Nama Materi:</label>

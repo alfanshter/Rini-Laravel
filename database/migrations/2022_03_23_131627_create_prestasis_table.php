@@ -23,7 +23,8 @@ return new class extends Migration
             $table->string('prestasi');
             $table->string('foto');
             $table->string('nama_pelatih');
-            $table->string('id_pelatih');
+            $table->string('kode_pelatih');
+            $table->foreign('kode_pelatih')->references('nomor_induk')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->date('tanggal');
             $table->timestamps();
         });

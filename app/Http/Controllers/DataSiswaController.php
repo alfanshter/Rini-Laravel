@@ -28,7 +28,8 @@ class DataSiswaController extends Controller
             'kelas' => ['required'],
             'nomor_induk' => ['required', 'unique:users'],
             'password' => ['required', 'min:5'],
-            'jenis_kelamin' => ['required']
+            'jenis_kelamin' => ['required'],
+            'nohp' => ['required']
         ]);
 
         $validatedData['password'] = Hash::make($validatedData['password']);
@@ -61,7 +62,8 @@ class DataSiswaController extends Controller
             'kelas' => ['required'],
             'nomor_induk' => ['required'],
             'username' => ['required'],
-            'jenis_kelamin' => ['required']
+            'jenis_kelamin' => ['required'],
+            'nohp' => ['required']
         ];
         //Apakah nomor_induk sama ? 
         $getuser = User::where('id', $request->id)->first();

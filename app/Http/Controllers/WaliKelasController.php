@@ -103,8 +103,7 @@ class WaliKelasController extends Controller
 
         User::where('id', $request->id)
             ->update($validatedData);
-
-        return redirect('/biodata')->with('success', 'Update Password Berhasil');
+        return redirect(redirect()->getUrlGenerator()->previous())->with('success', 'Update Password Berhasil');
     }
     public function destroy($id)
     {
