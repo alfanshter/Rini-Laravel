@@ -39,7 +39,7 @@ class AgendaController extends Controller
             //idpelatih
             $namapelatih = DB::table('data_ekskuls')
                 ->select(['ekskuls.kode_pelatih as kode_pelatih', 'users.nomor_induk as nama_pelatih'])
-                ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
+                ->join('ekskuls', 'ekskuls.id_data_ekskul', '=', 'data_ekskuls.kode')
                 ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
                 ->where('data_ekskuls.kode', $nama)
                 ->first();
@@ -65,7 +65,7 @@ class AgendaController extends Controller
             //idpelatih
             $namapelatih = DB::table('data_ekskuls')
                 ->select(['ekskuls.kode_pelatih as kode_pelatih', 'users.nomor_induk as nama_pelatih'])
-                ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
+                ->join('ekskuls', 'ekskuls.id_data_ekskul', '=', 'data_ekskuls.kode')
                 ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
                 ->where('data_ekskuls.kode', $nama)
                 ->first();
@@ -157,7 +157,7 @@ class AgendaController extends Controller
     {
 
         if (auth()->user()->role == 0) {
-            $ekskul = InformasiEkskul::join('data_ekskuls', 'data_ekskuls.kode', '=', 'informasi_ekskuls.kode_ekskul')
+            $ekskul = InformasiEkskul::join('data_ekskuls', 'data_ekskuls.kode', '=', 'informasi_ekskuls.id_data_ekskul')
                 ->get();
             return view('agenda.daftar_agenda', ['agenda' => $ekskul]);
         } else if (auth()->user()->role == 2) {
@@ -173,20 +173,20 @@ class AgendaController extends Controller
                 ->get(['agendas.*', 'users.name', 'data_ekskuls.nama as ekskul']);
             return view('agenda.agenda', [
                 'dataagenda' => $data_agenda,
-                'nama_ekskul' => $nama_ekskul->kode_ekskul,
+                'nama_ekskul' => $nama_ekskul->id_data_ekskul,
                 'pelatih' => auth()->user()->name,
                 'tahun_ajaran' => $tahun_ajaran
             ]);
         } else if (auth()->user()->role == 1) {
             $ekskul = DB::table('ekskuls')
-                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
+                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.id_data_ekskul')
                 ->where('nomor_induk_siswa', auth()->user()->nomor_induk)
                 ->where('is_status', 2)
                 ->get();
 
             return view('agenda.daftar_agenda', ['agenda' => $ekskul]);
         } else if (auth()->user()->role == 3) {
-            $ekskul = InformasiEkskul::join('data_ekskuls', 'data_ekskuls.kode', '=', 'informasi_ekskuls.kode_ekskul')
+            $ekskul = InformasiEkskul::join('data_ekskuls', 'data_ekskuls.kode', '=', 'informasi_ekskuls.id_data_ekskul')
                 ->get();
             return view('agenda.daftar_agenda', ['agenda' => $ekskul]);
         }
@@ -198,7 +198,7 @@ class AgendaController extends Controller
         //idpelatih
         $namapelatih = DB::table('data_ekskuls')
             ->select(['ekskuls.kode_pelatih as kode_pelatih', 'users.name as nama_pelatih', 'data_ekskuls.*'])
-            ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
+            ->join('ekskuls', 'ekskuls.id_data_ekskul', '=', 'data_ekskuls.kode')
             ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
             ->where('data_ekskuls.kode', $nama)
             ->first();

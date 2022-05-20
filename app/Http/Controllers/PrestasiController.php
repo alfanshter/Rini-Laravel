@@ -22,12 +22,12 @@ class PrestasiController extends Controller
     public function index()
     {
         if (auth()->user()->role == 0) {
-            $ekskul = InformasiEkskul::join('data_ekskuls', 'data_ekskuls.kode', '=', 'informasi_ekskuls.kode_ekskul')
+            $ekskul = InformasiEkskul::join('data_ekskuls', 'data_ekskuls.kode', '=', 'informasi_ekskuls.id_data_ekskul')
                 ->get();
             return view('prestasi.prestasi', ['prestasi' => $ekskul]);
         } else if (auth()->user()->role == 1) {
             $ekskul = DB::table('ekskuls')
-                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
+                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.id_data_ekskul')
                 ->where('is_status', 2)
                 ->get();
 
@@ -37,21 +37,21 @@ class PrestasiController extends Controller
             $ekskul = InformasiEkskul::where('kode_pelatih', auth()->user()->nomor_induk)->first();
             //nama peserta
             $nama_peserta = Ekskul::join('users', 'users.nomor_induk', '=', 'ekskuls.nomor_induk_siswa')
-                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
-                ->where('data_ekskuls.kode', $ekskul->kode_ekskul)
+                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.id_data_ekskul')
+                ->where('data_ekskuls.kode', $ekskul->id_data_ekskul)
                 ->where('kode_pelatih', auth()->user()->nomor_induk)
                 ->where('is_status', 2)
                 ->get(['users.name', 'data_ekskuls.kode', 'users.nomor_induk']);
 
 
             $data_prestasi = Prestasi::where('kode_pelatih', auth()->user()->nomor_induk)
-                ->where('kode_ekskul', $ekskul->kode_ekskul)
+                ->where('id_data_ekskul', $ekskul->id_data_ekskul)
                 ->get();
 
             return view('prestasi.daftar_prestasi', [
                 'dataprestasi' => $data_prestasi,
                 'nama_peserta' => $nama_peserta,
-                'kode_ekskul' => $ekskul->kode_ekskul
+                'id_data_ekskul' => $ekskul->id_data_ekskul
             ]);
         }
     }
@@ -61,7 +61,7 @@ class PrestasiController extends Controller
         if (auth()->user()->role == 2) {
             //nama peserta
             $nama_peserta = Ekskul::join('users', 'users.nomor_induk', '=', 'ekskuls.nomor_induk_siswa')
-                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
+                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.id_data_ekskul')
                 ->where('data_ekskuls.kode', $nama)
                 ->where('kode_pelatih', auth()->user()->nomor_induk)
                 ->where('is_status', 2)
@@ -69,16 +69,16 @@ class PrestasiController extends Controller
 
 
             $data_prestasi = Prestasi::where('kode_pelatih', auth()->user()->nomor_induk)
-                ->where('kode_ekskul', $nama)
+                ->where('id_data_ekskul', $nama)
                 ->get();
 
             return view('prestasi.daftar_prestasi', [
                 'dataprestasi' => $data_prestasi,
                 'nama_peserta' => $nama_peserta,
-                'kode_ekskul' => $nama
+                'id_data_ekskul' => $nama
             ]);
         } else if (auth()->user()->role == 1) {
-            $data_prestasi = Prestasi::where('kode_ekskul', $nama)->get();
+            $data_prestasi = Prestasi::where('id_data_ekskul', $nama)->get();
             return view('prestasi.daftar_prestasi', [
                 'dataprestasi' => $data_prestasi
             ]);
@@ -86,7 +86,7 @@ class PrestasiController extends Controller
             //idpelatih
             $namapelatih = DB::table('data_ekskuls')
                 ->select(['ekskuls.kode_pelatih as kode_pelatih', 'users.nomor_induk as nama_pelatih'])
-                ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
+                ->join('ekskuls', 'ekskuls.id_data_ekskul', '=', 'data_ekskuls.kode')
                 ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
                 ->where('data_ekskuls.kode', $nama)
                 ->first();
@@ -96,18 +96,18 @@ class PrestasiController extends Controller
             } else {
                 //nama peserta
                 $nama_peserta = Ekskul::join('users', 'users.nomor_induk', '=', 'ekskuls.nomor_induk_siswa')
-                    ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
+                    ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.id_data_ekskul')
                     ->where('data_ekskuls.kode', $nama)
                     ->where('data_ekskuls.kode', $nama)
                     ->where('is_status', 2)
                     ->get(['users.name', 'data_ekskuls.kode', 'users.nomor_induk']);
 
-                $data_prestasi = Prestasi::where('kode_ekskul', $nama)
+                $data_prestasi = Prestasi::where('id_data_ekskul', $nama)
                     ->get();
 
                 return view('prestasi.daftar_prestasi', [
                     'dataprestasi' => $data_prestasi,
-                    'kode_ekskul' => $nama,
+                    'id_data_ekskul' => $nama,
                     'nama_peserta' => $nama_peserta,
                     'pelatih' => $namapelatih
                 ]);
@@ -122,7 +122,7 @@ class PrestasiController extends Controller
         $validatedData = $request->validate([
             'nomor_induk' => 'required|max:255',
             'nama_lomba' => ['required'],
-            'kode_ekskul' => ['required'],
+            'id_data_ekskul' => ['required'],
             'prestasi' => ['required'],
             'nama_pelatih' => ['required'],
             'kode_pelatih' => ['required'],
@@ -136,7 +136,7 @@ class PrestasiController extends Controller
 
         Prestasi::create($validatedData);
 
-        return redirect("/daftar_prestasi/$request->kode_ekskul")->with('success', 'Prestasi berhasil di input');
+        return redirect("/daftar_prestasi/$request->id_data_ekskul")->with('success', 'Prestasi berhasil di input');
     }
 
     public function edit($id)
@@ -166,7 +166,7 @@ class PrestasiController extends Controller
 
         Prestasi::where('id', $request->id)->update($validatedData);
 
-        return redirect("/daftar_prestasi/$request->kode_ekskul")->with('success', 'Update data berhasil');
+        return redirect("/daftar_prestasi/$request->id_data_ekskul")->with('success', 'Update data berhasil');
     }
 
     public function destroy(Request $request)

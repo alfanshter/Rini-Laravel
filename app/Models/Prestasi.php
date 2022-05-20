@@ -17,6 +17,6 @@ class Prestasi extends Model
 
     public function ekskul()
     {
-        return $this->belongsTo(DataEkskul::class, 'kode_ekskul', 'kode');
+        return $this->belongsTo(DataEkskul::class, 'id_data_ekskul', 'kode');
     }
 }

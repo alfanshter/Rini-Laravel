@@ -23,7 +23,7 @@
 <form action="/update_prestasi" method="POST" enctype="multipart/form-data">
     @csrf
     <input type="hidden" name="id" value="{{$data_prestasi->id}}" id="id">
-    <input type="hidden" name="kode_ekskul" value="{{$data_prestasi->kode_ekskul}}" id="kode_ekskul">
+    <input type="hidden" name="id_data_ekskul" value="{{$data_prestasi->id_data_ekskul}}" id="id_data_ekskul">
      <input type="hidden" name="oldImage" value="{{$data_prestasi->foto}}">
     <div class="mb-3">
         <label for="recipient-name" class="col-form-label">Nama Peserta:</label>

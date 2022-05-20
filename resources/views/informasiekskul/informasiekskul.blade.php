@@ -45,7 +45,7 @@
 </div>
 @enderror
 
-@error('kode_ekskul')
+@error('id_data_ekskul')
 <div class="alert alert-danger mt-2" role="alert">
     {{$message}}
 </div>
@@ -66,7 +66,7 @@
                     @csrf
                     <div class="mb-3">
                         <label for="recipient-name" class="col-form-label">Nama:</label>
-                        <select class="form-control" aria-label="Default select example" name="kode_ekskul" id="kode_ekskul">
+                        <select class="form-control" aria-label="Default select example" name="id_data_ekskul" id="id_data_ekskul">
                             @foreach ($data_ekskul as $data)
                             <option value="{{$data->kode}}">{{$data->nama}}</option>
                             @endforeach

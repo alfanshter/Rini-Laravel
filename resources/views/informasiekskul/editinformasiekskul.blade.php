@@ -33,7 +33,7 @@
 </div>                        
 @enderror
 
-@error('kode_ekskul')
+@error('id_data_ekskul')
 <div class="alert alert-danger mt-2" role="alert">
     {{$message}}  
 </div>                        
@@ -45,8 +45,8 @@
   <input type="hidden" name="id" id="id" value="{{$data_ekskul->id}}">
 <div class="mb-3">
   <label for="recipient-name" class="col-form-label">Nama:</label>
-  <select class="form-control" aria-label="Default select example" name="kode_ekskul" id="kode_ekskul">
-    <option value="{{$data_ekskul->kode_ekskul}}">{{$data_ekskul->nama}}</option>                                                
+  <select class="form-control" aria-label="Default select example" name="id_data_ekskul" id="id_data_ekskul">
+    <option value="{{$data_ekskul->id_data_ekskul}}">{{$data_ekskul->nama}}</option>                                                
     @foreach ($ekskul as $data)
       <option value="{{$data->kode}}">{{$data->nama}}</option>                                                
       @endforeach

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('nomor_induk');
             $table->foreign('nomor_induk')->references('nomor_induk')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('nama_lomba');
-            $table->string('kode_ekskul');
-            $table->foreign('kode_ekskul')->references('kode')->on('data_ekskuls')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('id_data_ekskul');
+            $table->foreign('id_data_ekskul')->references('kode')->on('data_ekskuls')->onDelete('cascade')->onUpdate('cascade');
             $table->string('prestasi');
             $table->string('foto');
             $table->string('nama_pelatih');

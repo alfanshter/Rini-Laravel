@@ -18,13 +18,13 @@ class AbsenPelatihController extends Controller
     public function index()
     {
         if (auth()->user()->role == 0) {
-            $ekskul = InformasiEkskul::join('data_ekskuls', 'data_ekskuls.kode', '=', 'informasi_ekskuls.kode_ekskul')
+            $ekskul = InformasiEkskul::join('data_ekskuls', 'data_ekskuls.kode', '=', 'informasi_ekskuls.id_data_ekskul')
                 ->get();
             return view('absenpelatih.daftarabsenpelatih', ['ekskul' => $ekskul]);
         }
 
         if (auth()->user()->role == 2) {
-            $ekskul = InformasiEkskul::join('data_ekskuls', 'data_ekskuls.kode', '=', 'informasi_ekskuls.kode_ekskul')
+            $ekskul = InformasiEkskul::join('data_ekskuls', 'data_ekskuls.kode', '=', 'informasi_ekskuls.id_data_ekskul')
                 ->where('informasi_ekskuls.kode_pelatih', auth()->user()->nomor_induk)
                 ->get();
 
@@ -38,7 +38,7 @@ class AbsenPelatihController extends Controller
             //idpelatih
             $namapelatih = DB::table('data_ekskuls')
                 ->select(['ekskuls.kode_pelatih as kode_pelatih', 'users.name as nama_pelatih', 'users.id as user_id'])
-                ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
+                ->join('ekskuls', 'ekskuls.id_data_ekskul', '=', 'data_ekskuls.kode')
                 ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
                 ->where('data_ekskuls.nama', $nama_ekskul)
                 ->first();
@@ -91,7 +91,7 @@ class AbsenPelatihController extends Controller
                 ->where('nama', $request->nama_ekskul)
                 ->first();
 
-            $validatedData['kode_ekskul'] = $getekskul->kode;
+            $validatedData['id_data_ekskul'] = $getekskul->kode;
             $validatedData['bulan'] = $bulan;
 
 
@@ -117,7 +117,7 @@ class AbsenPelatihController extends Controller
         //idpelatih
         $namapelatih = DB::table('data_ekskuls')
             ->select(['ekskuls.kode_pelatih as kode_pelatih', 'users.name as nama_pelatih', 'users.id as user_id'])
-            ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
+            ->join('ekskuls', 'ekskuls.id_data_ekskul', '=', 'data_ekskuls.kode')
             ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
             ->where('data_ekskuls.nama', $nama_ekskul)
             ->first();

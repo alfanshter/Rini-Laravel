@@ -24,8 +24,8 @@ return new class extends Migration
             $table->integer('absen')->default(0);
             $table->foreignId('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('kode_ekskul');
-            $table->foreign('kode_ekskul')->references('kode')->on('data_ekskuls')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('id_data_ekskul');
+            $table->foreign('id_data_ekskul')->references('kode')->on('data_ekskuls')->onDelete('cascade')->onUpdate('cascade');
             $table->string('nama_ekskul');
             $table->string('tahun_ajaran', 25);
             $table->string('semester', 7);

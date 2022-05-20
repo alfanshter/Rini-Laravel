@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('informasi_ekskuls', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_ekskul')->unique();
-            $table->foreign('kode_ekskul')->references('kode')->on('data_ekskuls')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('id_data_ekskul')->unique();
+            $table->foreign('id_data_ekskul')->references('kode')->on('data_ekskuls')->onDelete('cascade')->onUpdate('cascade');
             $table->string('jadwal', 11);
             $table->time('jam');
             $table->string('tempat_ekskul');

@@ -23,7 +23,7 @@
                                 <form action="/prestasi" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="kode_pelatih" value="{{auth()->user()->nomor_induk}}" id="kode_pelatih">
-                                    <input type="hidden" name="kode_ekskul" value="{{$kode_ekskul}}" id="kode_ekskul">
+                                    <input type="hidden" name="id_data_ekskul" value="{{$id_data_ekskul}}" id="id_data_ekskul">
                                     <input type="hidden" name="nama_pelatih" value="{{auth()->user()->name}}" id="nama_pelatih">
                                     <input type="hidden" name="kode_pelatih" value="{{auth()->user()->nomor_induk}}" id="kode_pelatih">
 
@@ -97,12 +97,12 @@
                                     @csrf
                                     @if (auth()->user()->role ==2)
                                     <input type="hidden" name="kode_pelatih" value="{{auth()->user()->nomor_induk}}" id="kode_pelatih">
-                                    <input type="hidden" name="kode_ekskul" value="{{$kode_ekskul}}" id="kode_ekskul">
+                                    <input type="hidden" name="id_data_ekskul" value="{{$id_data_ekskul}}" id="id_data_ekskul">
                                     <input type="hidden" name="nama_pelatih" value="{{auth()->user()->name}}" id="nama_pelatih">
                                     @endif
                                     @if (auth()->user()->role ==0)
                                     <input type="hidden" name="kode_pelatih" value="{{$pelatih->kode_pelatih}}" id="kode_pelatih">
-                                    <input type="hidden" name="kode_ekskul" value="{{$kode_ekskul}}" id="kode_ekskul">
+                                    <input type="hidden" name="id_data_ekskul" value="{{$id_data_ekskul}}" id="id_data_ekskul">
                                     <input type="hidden" name="nama_pelatih" value="{{$pelatih->nama_pelatih}}" id="nama_pelatih">                                        
                                     @endif
                                     <div class="mb-3">

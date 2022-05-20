@@ -27,7 +27,7 @@
                             <h6 class="m-0 font-weight-bold text-primary p-2">Data Ekskul</h6>
                             <form action="/cetakpdf_peserta" class=" ml-auto p-2" method="post">
                             @csrf
-                            <input type="hidden" name="kode" id="kode" value="{{$kode_ekskul}}">
+                            <input type="hidden" name="kode" id="kode" value="{{$id_data_ekskul}}">
                             <button type="submit"  class="btn btn-primary">Cetak Pdf</button>
                             </form>
                         </div>

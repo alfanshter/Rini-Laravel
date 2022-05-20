@@ -11,7 +11,7 @@
 <form action="/ekskul/pendaftaran" method="POST">
   @csrf
   <input type="hidden" class="form-control" id="nomor_induk_siswa" name="nomor_induk_siswa" value="{{auth()->user()->nomor_induk}}">                   
-  <input type="hidden" class="form-control" id="kode_ekskul" name="kode_ekskul" value="{{$data_ekskul->kode_ekskul}}">                   
+  <input type="hidden" class="form-control" id="id_data_ekskul" name="id_data_ekskul" value="{{$data_ekskul->id_data_ekskul}}">                   
   <input type="hidden" class="form-control" id="kode_pelatih" name="kode_pelatih" value="{{$data_ekskul->kode_pelatih}}">                   
   <input type="hidden" class="form-control" id="id_informasi" name="id_informasi" value="{{$data_ekskul->id}}">                   
   <input type="hidden" class="form-control" id="is_status" name="is_status" value="1">                   

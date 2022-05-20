@@ -40,7 +40,7 @@
                                             <td class="align-middle text-center">{{$data->nama}}</td>
                                             <td class="align-middle text-center">
                                                 <div class="d-flex justify-content-sm-center mt-2">
-                                                        <a  href="/hasil_seleksi/{{$data->kode_ekskul}}" class="btn btn-primary ml-2" >Lihat seleksi</a>
+                                                        <a  href="/hasil_seleksi/{{$data->id_data_ekskul}}" class="btn btn-primary ml-2" >Lihat seleksi</a>
                                                 </div>
                                                 </td>                                        
 

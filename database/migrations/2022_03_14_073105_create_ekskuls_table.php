@@ -21,8 +21,8 @@ return new class extends Migration
             $table->id();
             $table->string('nomor_induk_siswa');
             $table->foreign('nomor_induk_siswa')->references('nomor_induk')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('kode_ekskul');
-            $table->foreign('kode_ekskul')->references('kode')->on('data_ekskuls')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('id_data_ekskul');
+            $table->foreign('id_data_ekskul')->references('kode')->on('data_ekskuls')->onDelete('cascade')->onUpdate('cascade');
             $table->string('kode_pelatih');
             $table->foreign('kode_pelatih')->references('nomor_induk')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('id_informasi');

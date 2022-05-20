@@ -18,7 +18,7 @@ class AbsenController extends Controller
     public function index()
     {
         if (auth()->user()->role == 0) {
-            $ekskul = InformasiEkskul::join('data_ekskuls', 'data_ekskuls.kode', '=', 'informasi_ekskuls.kode_ekskul')
+            $ekskul = InformasiEkskul::join('data_ekskuls', 'data_ekskuls.kode', '=', 'informasi_ekskuls.id_data_ekskul')
                 ->get();
             return view('absen.daftarabsen', ['ekskul' => $ekskul]);
         } else if (auth()->user()->role == 2) {
@@ -27,8 +27,8 @@ class AbsenController extends Controller
             $ekskul = InformasiEkskul::where('kode_pelatih', auth()->user()->nomor_induk)->first();
             //nama siswa
             $nama_siswa = Ekskul::join('users', 'users.nomor_induk', '=', 'ekskuls.nomor_induk_siswa')
-                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
-                ->where('data_ekskuls.kode', $ekskul->kode_ekskul)
+                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.id_data_ekskul')
+                ->where('data_ekskuls.kode', $ekskul->id_data_ekskul)
                 ->where('kode_pelatih', auth()->user()->nomor_induk)
                 ->where('is_status', 2)
                 ->get(['users.name', 'users.nomor_induk', 'users.id']);
@@ -37,7 +37,7 @@ class AbsenController extends Controller
                 ->select(['absens.*', 'users.kelas', 'users.name'])
                 ->join('users', 'users.id', '=', 'absens.user_id')
                 ->where('kode_pelatih', auth()->user()->nomor_induk)
-                ->where('kode_ekskul', $ekskul->kode_ekskul)
+                ->where('id_data_ekskul', $ekskul->id_data_ekskul)
                 ->get();
 
 
@@ -46,24 +46,24 @@ class AbsenController extends Controller
                 [
                     'absen' => $absen,
                     'nama_siswa' => $nama_siswa,
-                    'nama_ekskul' => $ekskul->kode_ekskul
+                    'nama_ekskul' => $ekskul->id_data_ekskul
                 ]
             );
-            //$ekskul = InformasiEkskul::join('data_ekskuls', 'data_ekskuls.kode', '=', 'informasi_ekskuls.kode_ekskul')
+            //$ekskul = InformasiEkskul::join('data_ekskuls', 'data_ekskuls.kode', '=', 'informasi_ekskuls.id_data_ekskul')
             //    ->where('informasi_ekskuls.kode_pelatih', auth()->user()->nomor_induk)
             //    ->get();
 
             //return view('absen.daftarabsen', ['ekskul' => $ekskul]);
         } else if (auth()->user()->role == 1) {
             $ekskul = DB::table('ekskuls')
-                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
+                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.id_data_ekskul')
                 ->where('nomor_induk_siswa', auth()->user()->nomor_induk)
                 ->where('is_status', 2)
                 ->get();
 
             return view('absen.daftarabsen', ['ekskul' => $ekskul]);
         } else if (auth()->user()->role == 3) {
-            $ekskul = InformasiEkskul::join('data_ekskuls', 'data_ekskuls.kode', '=', 'informasi_ekskuls.kode_ekskul')
+            $ekskul = InformasiEkskul::join('data_ekskuls', 'data_ekskuls.kode', '=', 'informasi_ekskuls.id_data_ekskul')
                 ->get();
             return view('absen.daftarabsen', ['ekskul' => $ekskul]);
         }
@@ -75,7 +75,7 @@ class AbsenController extends Controller
             //idpelatih
             $namapelatih = DB::table('data_ekskuls')
                 ->select(['ekskuls.kode_pelatih as kode_pelatih', 'users.name as nama_pelatih'])
-                ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
+                ->join('ekskuls', 'ekskuls.id_data_ekskul', '=', 'data_ekskuls.kode')
                 ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
                 ->where('data_ekskuls.kode', $nama_ekskul)
                 ->first();
@@ -85,7 +85,7 @@ class AbsenController extends Controller
 
             //nama siswa
             $nama_siswa = Ekskul::join('users', 'users.nomor_induk', '=', 'ekskuls.nomor_induk_siswa')
-                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
+                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.id_data_ekskul')
                 ->where('data_ekskuls.kode', $nama_ekskul)
                 ->where('is_status', 2)
                 ->get(['users.name', 'users.kelas', 'users.nomor_induk', 'users.id']);
@@ -113,7 +113,7 @@ class AbsenController extends Controller
         } else if (auth()->user()->role == 2) {
             //nama siswa
             $nama_siswa = Ekskul::join('users', 'users.nomor_induk', '=', 'ekskuls.nomor_induk_siswa')
-                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
+                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.id_data_ekskul')
                 ->where('data_ekskuls.nama', $nama_ekskul)
                 ->where('kode_pelatih', auth()->user()->nomor_induk)
                 ->where('is_status', 2)
@@ -156,7 +156,7 @@ class AbsenController extends Controller
             //idpelatih
             $namapelatih = DB::table('data_ekskuls')
                 ->select(['ekskuls.kode_pelatih as kode_pelatih', 'users.name as nama_pelatih'])
-                ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
+                ->join('ekskuls', 'ekskuls.id_data_ekskul', '=', 'data_ekskuls.kode')
                 ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
                 ->where('data_ekskuls.kode', $nama_ekskul)
                 ->first();
@@ -170,7 +170,7 @@ class AbsenController extends Controller
 
             //nama siswa
             $nama_siswa = Ekskul::join('users', 'users.nomor_induk', '=', 'ekskuls.nomor_induk_siswa')
-                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
+                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.id_data_ekskul')
                 ->where('data_ekskuls.nama', $nama_ekskul)
                 ->where('data_ekskuls.nama', $nama_ekskul)
                 ->where('is_status', 2)
@@ -224,8 +224,8 @@ class AbsenController extends Controller
 
             //Nama Pelatih
             $namapelatih = DB::table('data_ekskuls')
-                ->select(['ekskuls.kode_pelatih as kode_pelatih', 'users.name as nama_pelatih', 'ekskuls.kode_ekskul'])
-                ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
+                ->select(['ekskuls.kode_pelatih as kode_pelatih', 'users.name as nama_pelatih', 'ekskuls.id_data_ekskul'])
+                ->join('ekskuls', 'ekskuls.id_data_ekskul', '=', 'data_ekskuls.kode')
                 ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
                 ->where('data_ekskuls.kode', $request->nama_ekskul)
                 ->first();
@@ -233,7 +233,7 @@ class AbsenController extends Controller
 
             $validatedData['nama_pelatih'] = $namapelatih->nama_pelatih;
             $validatedData['kode_pelatih'] = $namapelatih->kode_pelatih;
-            $validatedData['kode_ekskul'] = $namapelatih->kode_ekskul;
+            $validatedData['id_data_ekskul'] = $namapelatih->id_data_ekskul;
             $validatedData['nama_siswa'] = $siswa->name;
             $validatedData['bulan'] = $bulan;
 
@@ -245,8 +245,8 @@ class AbsenController extends Controller
             //getid ekskul
             //Nama Pelatih
             $namapelatih = DB::table('data_ekskuls')
-                ->select(['ekskuls.kode_pelatih as kode_pelatih', 'users.name as nama_pelatih', 'ekskuls.kode_ekskul'])
-                ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
+                ->select(['ekskuls.kode_pelatih as kode_pelatih', 'users.name as nama_pelatih', 'ekskuls.id_data_ekskul'])
+                ->join('ekskuls', 'ekskuls.id_data_ekskul', '=', 'data_ekskuls.kode')
                 ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
                 ->where('data_ekskuls.kode', $request->nama_ekskul)
                 ->first();
@@ -260,7 +260,7 @@ class AbsenController extends Controller
 
             $validatedData['nama_pelatih'] = auth()->user()->name;
             $validatedData['kode_pelatih'] = auth()->user()->nomor_induk;
-            $validatedData['kode_ekskul'] = $namapelatih->kode_ekskul;
+            $validatedData['id_data_ekskul'] = $namapelatih->id_data_ekskul;
             $validatedData['nama_siswa'] = $siswa->name;
             $validatedData['bulan'] = $bulan;
 
@@ -311,20 +311,20 @@ class AbsenController extends Controller
 
 
         //Nama Pelatih
-        $namapelatih = DataEkskul::select(['ekskuls.kode_pelatih as kode_pelatih', 'users.name as nama_pelatih', 'ekskuls.kode_ekskul', 'data_ekskuls.*'])
-            ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
+        $namapelatih = DataEkskul::select(['ekskuls.kode_pelatih as kode_pelatih', 'users.name as nama_pelatih', 'ekskuls.id_data_ekskul', 'data_ekskuls.*'])
+            ->join('ekskuls', 'ekskuls.id_data_ekskul', '=', 'data_ekskuls.kode')
             ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
             ->where('data_ekskuls.kode', $request->nama_ekskul)
             ->first();
 
-        $kode_ekskul = $namapelatih->kode_ekskul;
+        $id_data_ekskul = $namapelatih->id_data_ekskul;
 
 
-        //$users = User::where('role', '1')->with(['absensi' => function ($query) use ($kode_ekskul) {
-        //    $query->where('kode_ekskul', $kode_ekskul);
+        //$users = User::where('role', '1')->with(['absensi' => function ($query) use ($id_data_ekskul) {
+        //    $query->where('id_data_ekskul', $id_data_ekskul);
         //}])->get();
-        $users = User::where('role', '1')->whereHas('absensi', function ($query) use ($kode_ekskul) {
-            $query->where('kode_ekskul', $kode_ekskul);
+        $users = User::where('role', '1')->whereHas('absensi', function ($query) use ($id_data_ekskul) {
+            $query->where('id_data_ekskul', $id_data_ekskul);
         })->get();
 
 

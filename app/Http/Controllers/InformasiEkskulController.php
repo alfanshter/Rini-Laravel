@@ -14,7 +14,7 @@ class InformasiEkskulController extends Controller
     {
         if (auth()->user()->role == 1) {
             $get_data_ekskul = DataEkskul::all();
-            $data = DataEkskul::join('informasi_ekskuls', 'informasi_ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
+            $data = DataEkskul::join('informasi_ekskuls', 'informasi_ekskuls.id_data_ekskul', '=', 'data_ekskuls.kode')
                 ->join('users', 'users.nomor_induk', '=', 'informasi_ekskuls.kode_pelatih')
                 ->get(['data_ekskuls.nama', 'informasi_ekskuls.*', 'users.name']);
 
@@ -25,7 +25,7 @@ class InformasiEkskulController extends Controller
             ]);
         } else if (auth()->user()->role == 0) {
             $get_data_ekskul = DataEkskul::all();
-            $data = DataEkskul::join('informasi_ekskuls', 'informasi_ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
+            $data = DataEkskul::join('informasi_ekskuls', 'informasi_ekskuls.id_data_ekskul', '=', 'data_ekskuls.kode')
                 ->join('users', 'users.nomor_induk', '=', 'informasi_ekskuls.kode_pelatih')
                 ->get(['data_ekskuls.nama', 'informasi_ekskuls.*', 'users.name']);
             return view('informasiekskul.informasiekskul', [
@@ -39,7 +39,7 @@ class InformasiEkskulController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'kode_ekskul' => 'required|unique:informasi_ekskuls',
+            'id_data_ekskul' => 'required|unique:informasi_ekskuls',
             'jadwal' => ['required'],
             'jam' => ['required'],
             'tempat_ekskul' => ['required'],
@@ -47,7 +47,7 @@ class InformasiEkskulController extends Controller
         ]);
 
         //cekekskul
-        $cek = InformasiEkskul::where('kode_ekskul', $request->kode_ekskul)
+        $cek = InformasiEkskul::where('id_data_ekskul', $request->id_data_ekskul)
             ->where('kode_pelatih', $request->kode_pelatih)
             ->first();
         if ($cek) {
@@ -61,7 +61,7 @@ class InformasiEkskulController extends Controller
     public function edit($id)
     {
 
-        $data = DataEkskul::join('informasi_ekskuls', 'informasi_ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
+        $data = DataEkskul::join('informasi_ekskuls', 'informasi_ekskuls.id_data_ekskul', '=', 'data_ekskuls.kode')
             ->join('users', 'users.nomor_induk', '=', 'informasi_ekskuls.kode_pelatih')
             ->where('informasi_ekskuls.id', $id)
             ->first(['data_ekskuls.nama', 'informasi_ekskuls.*', 'users.name', 'users.nomor_induk']);
@@ -76,7 +76,7 @@ class InformasiEkskulController extends Controller
     public function update(Request $request)
     {
         $rule = [
-            'kode_ekskul' => 'required|max:255',
+            'id_data_ekskul' => 'required|max:255',
             'jadwal' => ['required'],
             'jam' => ['required'],
             'tempat_ekskul' => ['required'],
@@ -91,9 +91,9 @@ class InformasiEkskulController extends Controller
 
             $rule['kode_pelatih'] = 'required|unique:informasi_ekskuls';
         }
-        if ($ekskul->kode_ekskul != $request->kode_ekskul) {
+        if ($ekskul->id_data_ekskul != $request->id_data_ekskul) {
 
-            $rule['kode_ekskul'] = 'required|unique:informasi_ekskuls';
+            $rule['id_data_ekskul'] = 'required|unique:informasi_ekskuls';
         }
 
         $validation = $request->validate($rule);

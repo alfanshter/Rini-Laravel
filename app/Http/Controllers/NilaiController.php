@@ -22,15 +22,15 @@ class NilaiController extends Controller
             $nama_ekskul = InformasiEkskul::where('kode_pelatih', auth()->user()->nomor_induk)->first();
             //nama siswa
             $nama_siswa = Ekskul::join('users', 'users.nomor_induk', '=', 'ekskuls.nomor_induk_siswa')
-                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
-                ->where('data_ekskuls.kode', $nama_ekskul->kode_ekskul)
+                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.id_data_ekskul')
+                ->where('data_ekskuls.kode', $nama_ekskul->id_data_ekskul)
                 ->where('kode_pelatih', auth()->user()->nomor_induk)
                 ->where('is_status', 2)
                 ->get(['users.name', 'users.nomor_induk']);
 
             $nilai = DB::table('nilais')
                 ->where('kode_pelatih', auth()->user()->nomor_induk)
-                ->where('kode_ekskul', $nama_ekskul->kode_ekskul)
+                ->where('id_data_ekskul', $nama_ekskul->id_data_ekskul)
                 ->get();
 
             return view(
@@ -38,24 +38,24 @@ class NilaiController extends Controller
                 [
                     'nilai' => $nilai,
                     'nama_siswa' => $nama_siswa,
-                    'nama_ekskul' => $nama_ekskul->kode_ekskul
+                    'nama_ekskul' => $nama_ekskul->id_data_ekskul
                 ]
             );
-            //$ekskul = InformasiEkskul::join('data_ekskuls', 'data_ekskuls.kode', '=', 'informasi_ekskuls.kode_ekskul')
+            //$ekskul = InformasiEkskul::join('data_ekskuls', 'data_ekskuls.kode', '=', 'informasi_ekskuls.id_data_ekskul')
             //    ->where('informasi_ekskuls.kode_pelatih', auth()->user()->nomor_induk)
             //    ->get();
             //return view('nilai.daftarnilai', ['ekskul' => $ekskul]);
         } else if (auth()->user()->role == 0) {
-            $ekskul = InformasiEkskul::join('data_ekskuls', 'data_ekskuls.kode', '=', 'informasi_ekskuls.kode_ekskul')
+            $ekskul = InformasiEkskul::join('data_ekskuls', 'data_ekskuls.kode', '=', 'informasi_ekskuls.id_data_ekskul')
                 ->get();
             return view('nilai.daftarnilai', ['ekskul' => $ekskul]);
         } else if (auth()->user()->role == 3 || auth()->user()->role == 4) {
-            $ekskul = InformasiEkskul::join('data_ekskuls', 'data_ekskuls.kode', '=', 'informasi_ekskuls.kode_ekskul')
+            $ekskul = InformasiEkskul::join('data_ekskuls', 'data_ekskuls.kode', '=', 'informasi_ekskuls.id_data_ekskul')
                 ->get();
             return view('nilai.daftarnilai', ['ekskul' => $ekskul]);
         } else if (auth()->user()->role == 1) {
             $ekskul = DB::table('ekskuls')
-                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
+                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.id_data_ekskul')
                 ->where('nomor_induk_siswa', auth()->user()->nomor_induk)
                 ->where('is_status', 2)
                 ->get();
@@ -88,7 +88,7 @@ class NilaiController extends Controller
 
             $validatedData['nama_pelatih'] = auth()->user()->name;
             $validatedData['kode_pelatih'] = auth()->user()->nomor_induk;
-            $validatedData['kode_ekskul'] = $request->nama_ekskul;
+            $validatedData['id_data_ekskul'] = $request->nama_ekskul;
             $validatedData['nama_siswa'] = $siswa->name;
 
             Nilai::create($validatedData);
@@ -111,8 +111,8 @@ class NilaiController extends Controller
 
             //Nama Pelatih
             $namapelatih = DB::table('data_ekskuls')
-                ->select(['ekskuls.kode_pelatih as kode_pelatih', 'users.name as nama_pelatih', 'ekskuls.kode_ekskul'])
-                ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
+                ->select(['ekskuls.kode_pelatih as kode_pelatih', 'users.name as nama_pelatih', 'ekskuls.id_data_ekskul'])
+                ->join('ekskuls', 'ekskuls.id_data_ekskul', '=', 'data_ekskuls.kode')
                 ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
                 ->where('data_ekskuls.kode', $request->nama_ekskul)
                 ->first();
@@ -120,7 +120,7 @@ class NilaiController extends Controller
 
             $validatedData['nama_pelatih'] = $namapelatih->nama_pelatih;
             $validatedData['kode_pelatih'] = $namapelatih->kode_pelatih;
-            $validatedData['kode_ekskul'] = $namapelatih->kode_ekskul;
+            $validatedData['id_data_ekskul'] = $namapelatih->id_data_ekskul;
             $validatedData['nama_siswa'] = $siswa->name;
 
             Nilai::create($validatedData);
@@ -133,13 +133,13 @@ class NilaiController extends Controller
     {
         if (auth()->user()->role == 0) {
             //idpelatih
-            $namapelatih = InformasiEkskul::where('kode_ekskul', $nama_ekskul)->first();
+            $namapelatih = InformasiEkskul::where('id_data_ekskul', $nama_ekskul)->first();
             if ($namapelatih == null) {
                 return redirect('/nilai')->with('success', 'Belum ada peserta');
             }
             //nama siswa
             $nama_siswa = Ekskul::join('users', 'users.nomor_induk', '=', 'ekskuls.nomor_induk_siswa')
-                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
+                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.id_data_ekskul')
                 ->where('data_ekskuls.kode', $nama_ekskul)
                 ->where('is_status', 2)
                 ->get(['users.name', 'users.nomor_induk']);
@@ -162,7 +162,7 @@ class NilaiController extends Controller
         } else if (auth()->user()->role == 2) {
             //nama siswa
             $nama_siswa = Ekskul::join('users', 'users.nomor_induk', '=', 'ekskuls.nomor_induk_siswa')
-                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
+                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.id_data_ekskul')
                 ->where('data_ekskuls.nama', $nama_ekskul)
                 ->where('kode_pelatih', auth()->user()->nomor_induk)
                 ->where('is_status', 2)
@@ -195,7 +195,7 @@ class NilaiController extends Controller
             //idpelatih
             $namapelatih = DB::table('data_ekskuls')
                 ->select(['ekskuls.kode_pelatih as kode_pelatih', 'users.name as nama_pelatih'])
-                ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
+                ->join('ekskuls', 'ekskuls.id_data_ekskul', '=', 'data_ekskuls.kode')
                 ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
                 ->where('data_ekskuls.kode', $nama_ekskul)
                 ->first();
@@ -204,7 +204,7 @@ class NilaiController extends Controller
             }
             //nama siswa
             $nama_siswa = Ekskul::join('users', 'users.nomor_induk', '=', 'ekskuls.nomor_induk_siswa')
-                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.kode_ekskul')
+                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.id_data_ekskul')
                 ->where('data_ekskuls.nama', $nama_ekskul)
                 ->where('data_ekskuls.nama', $nama_ekskul)
                 ->where('is_status', 2)
@@ -262,7 +262,7 @@ class NilaiController extends Controller
 
         $namapelatih = DB::table('data_ekskuls')
             ->select(['ekskuls.kode_pelatih as kode_pelatih', 'users.name as nama_pelatih', 'data_ekskuls.*'])
-            ->join('ekskuls', 'ekskuls.kode_ekskul', '=', 'data_ekskuls.kode')
+            ->join('ekskuls', 'ekskuls.id_data_ekskul', '=', 'data_ekskuls.kode')
             ->join('users', 'users.nomor_induk', '=', 'ekskuls.kode_pelatih')
             ->where('data_ekskuls.kode', $nama_ekskul)
             ->first();
