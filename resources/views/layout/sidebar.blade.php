@@ -276,6 +276,13 @@
 
             {{-- ==================== KEPALA SEKOLAH ===================== --}}
             @if (auth()->user()->role ==3)
+
+              <li class="nav-item {{Request::is('/') ? 'active' : ''}}"  >
+                <a class="nav-link" href="/">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>     
+
             <li class="nav-item {{Request::is('absen') ? 'active' : ''}}"  >
                 <a class="nav-link" href="/absen">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -298,7 +305,7 @@
             <li class="nav-item {{Request::is('editkepalasekolah') ? 'active' : ''}}"  >
                 <a class="nav-link" href="/kepalasekolah/editkepalasekolah/{{auth()->user()->id}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Ganti Password</span></a>
+                    <span>Biodata</span></a>
             </li>
 
 
@@ -309,6 +316,12 @@
 
             {{-- ==================== WALI KELAS ===================== --}}
             @if ( (auth()->user()->role ==4))
+              <li class="nav-item {{Request::is('/') ? 'active' : ''}}"  >
+                <a class="nav-link" href="/">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>    
+           
             <li class="nav-item {{Request::is('nilai') ? 'active' : ''}}"  >
                 <a class="nav-link" href="/nilai">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -318,7 +331,7 @@
             <li class="nav-item {{Request::is('editwalikelas') ? 'active' : ''}}"  >
                 <a class="nav-link" href="/walikelas/editwalikelas/{{auth()->user()->id}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Ganti Password</span></a>
+                    <span>Biodata</span></a>
             </li>
 
                 

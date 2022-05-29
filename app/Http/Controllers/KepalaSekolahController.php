@@ -77,17 +77,45 @@ class KepalaSekolahController extends Controller
         if ($request->username != $getuser->username) {
             $cek = User::where('username', $request->username)->first();
             if ($cek != null) {
+                if (auth()->user()->role == 3) {
+                    $id = auth()->user()->id;
+                    return redirect("/kepalasekolah/editkepalasekolah/$id")->with('failed', 'Username Sama');
+                }
                 return redirect('/kepalasekolah')->with('failed', 'Username sama');
             }
         }
 
         $validation = $request->validate($rule);
-        if ($request->password) {
+        if ($request->password_lama && $request->password) {
+            //cek password lama
+            //Apakah nomor_induk sama ? 
+            $getuser = User::where('id', $request->id)->first();
+            $password_lama = $request->password_lama;
+            if (!Hash::check($password_lama, $getuser->password)) {
+                if (auth()->user()->role == 3) {
+                    $id = auth()->user()->id;
+                    return redirect("/kepalasekolah/editkepalasekolah/$id")->with('failed', 'Password lama salah');
+                }
+                return redirect('/kepalasekolah')->with('failed', 'Password lama salah');
+            }
             $validation['password'] = Hash::make($request->password);
+            User::where('id', $request->id)
+                ->update($validation);
+
+
+            if (auth()->user()->role == 3) {
+                $id = auth()->user()->id;
+                return redirect("/kepalasekolah/editkepalasekolah/$id")->with('success', 'Update Kepala Sekolah Berhasil');
+            }
+            return redirect('/kepalasekolah')->with('success', 'Update Kepala Sekolah Berhasil');
         }
         User::where('id', $request->id)
             ->update($validation);
 
+        if (auth()->user()->role == 3) {
+            $id = auth()->user()->id;
+            return redirect("/kepalasekolah/editkepalasekolah/$id")->with('success', 'Update Kepala Sekolah Berhasil');
+        }
         return redirect('/kepalasekolah')->with('success', 'Update Kepala Sekolah Berhasil');
     }
 

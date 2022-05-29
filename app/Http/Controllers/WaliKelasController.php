@@ -76,19 +76,47 @@ class WaliKelasController extends Controller
         if ($request->username != $getuser->username) {
             $cek = User::where('username', $request->username)->first();
             if ($cek != null) {
+                if (auth()->user()->role == 4) {
+                    $id = auth()->user()->id;
+                    return redirect("/walikelas/editwalikelas/$id")->with('failed', 'Username sama');
+                }
                 return redirect('/walikelas')->with('failed', 'Username sama');
             }
         }
 
         $validation = $request->validate($rule);
 
-        if ($request->password) {
+        if ($request->password_lama && $request->password) {
+            //cek password lama
+            //Apakah nomor_induk sama ? 
+            $getuser = User::where('id', $request->id)->first();
+            $password_lama = $request->password_lama;
+            if (!Hash::check($password_lama, $getuser->password)) {
+                if (auth()->user()->role == 4) {
+                    $id = auth()->user()->id;
+                    return redirect("/walikelas/editwalikelas/$id")->with('failed', 'Password lama salah');
+                }
+                return redirect('/walikelas')->with('failed', 'Password lama salah');
+            }
             $validation['password'] = Hash::make($request->password);
+            User::where('id', $request->id)
+                ->update($validation);
+
+
+            if (auth()->user()->role == 4) {
+                $id = auth()->user()->id;
+                return redirect("/walikelas/editwalikelas/$id")->with('success', 'Update Wali Kelas Berhasil');
+            }
+            return redirect('/walikelas')->with('success', 'Update Wali Kelas Berhasil');
         }
 
         User::where('id', $request->id)
             ->update($validation);
 
+        if (auth()->user()->role == 4) {
+            $id = auth()->user()->id;
+            return redirect("/walikelas/editwalikelas/$id")->with('success', 'Update Wali Kelas Berhasil');
+        }
         return redirect('/walikelas')->with('success', 'Update Wali Kelas Berhasil');
     }
 

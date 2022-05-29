@@ -5,7 +5,7 @@
 
     
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Daftar Seleksi</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Daftar Peserta</h1>
                     @if (session()->has('success'))
                         <div class="alert alert-success mt-2" role="alert">
                             {{session('success')}}  
@@ -21,7 +21,7 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4 mt-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Seleksi</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Peserta</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

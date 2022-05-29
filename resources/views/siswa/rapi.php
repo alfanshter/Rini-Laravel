@@ -36,7 +36,21 @@
     </div>
     <div class="mb-3">
         <label for="recipient-name" class="col-form-label">Kelas:</label>
-        <input type="text" class="form-control" id="kelas" name="kelas" value="{{old('kelas',$datasiswa->kelas)}}">
+        <select class="form-control" aria-label="Default select example" name="kelas" id="kelas">
+            <option value="{{$datasiswa->kelas}}">{{$datasiswa->kelas}}</option>
+            <option value="12 IPA 1">12 IPA 1</option>
+            <option value="12 IPA 2">12 IPA 2</option>
+            <option value="12 IPA 3">12 IPA 3</option>
+            <option value="12 IPA 4">12 IPA 4</option>
+            <option value="12 IPS 1">12 IPS 1</option>
+            <option value="12 IPS 2">12 IPS 2</option>
+            <option value="12 IPS 3">12 IPS 3</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="recipient-name" class="col-form-label">No HP:</label>
+        <input type="text" class="form-control" id="nohp" name="nohp" value="{{old('nohp',$datasiswa->nohp)}}">
     </div>
 
     <div class="mb-3">
