@@ -56,15 +56,15 @@
     @if (auth()->user()->role == 4)
         <input  disabled type="text" class="form-control" id="name" name="name" value="{{old('name',$walikelas->name)}}" >    
     @else 
-        <input  disabled type="text" class="form-control" id="name" name="name" value="{{old('name',$walikelas->name)}}">    
+        <input   type="text" class="form-control" id="name" name="name" value="{{old('name',$walikelas->name)}}">    
     @endif
   </div>
   <div class="mb-3">
-    <label for="recipient-name" class="col-form-label">Kode Wali Keas:</label>
+    <label for="recipient-name" class="col-form-label">Kode Wali Kelas:</label>
     @if (auth()->user()->role == 4)
         <input disabled type="text" class="form-control" id="nomor_induk" name="nomor_induk" value="{{old('nomor_induk',$walikelas->nomor_induk)}}">
     @else 
-        <input disabled type="text" class="form-control" id="nomor_induk" name="nomor_induk" value="{{old('nomor_induk',$walikelas->nomor_induk)}}">
+        <input  type="text" class="form-control" id="nomor_induk" name="nomor_induk" value="{{old('nomor_induk',$walikelas->nomor_induk)}}">
     @endif
   </div>
   <div class="mb-3">
@@ -85,11 +85,9 @@
   </div>
 
     <div class="mb-3">
-        <label for="recipient-name" class="col-form-label">Password Lama :</label>
          @if (auth()->user()->role == 4)
+         <label for="recipient-name" class="col-form-label">Password Lama :</label>
             <input type="password"  class="form-control" id="password_lama" name="password_lama">
-        @else 
-            <input type="password" class="form-control" id="password_lama" name="password_lama">
         @endif
     </div>
 

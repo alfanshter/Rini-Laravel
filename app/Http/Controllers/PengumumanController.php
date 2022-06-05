@@ -27,7 +27,7 @@ class PengumumanController extends Controller
             $validatedData['file_pdf'] = $request->file('file_pdf')->store('pengumuman-pdf');
         }
 
-        $post =  DB::table('pengumumen')->insert($validatedData);
+        $post =  DB::table('pengumuman')->insert($validatedData);
         return redirect('/pengumuman')->with('success', 'Pengumuman berhasil di input');
     }
 

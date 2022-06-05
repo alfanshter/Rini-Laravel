@@ -96,7 +96,7 @@ Route::get('/ekskul/pendaftaran/{id}', [EkskulController::class, 'register'])->m
 Route::get('/pendaftaran_seleksi', [EkskulController::class, 'pendaftaran_seleksi'])->middleware('auth');
 Route::get('/hasil_seleksi/{id}', [EkskulController::class, 'hasil_seleksi'])->middleware('auth');
 Route::get('/hasil_seleksi', [EkskulController::class, 'hasil_seleksi_siswa'])->middleware('auth');
-Route::get('/daftar_seleksi', [EkskulController::class, 'daftar_seleksi'])->middleware('auth');
+Route::get('/peserta', [EkskulController::class, 'peserta'])->middleware('auth');
 Route::get('/daftar_ekskul', [EkskulController::class, 'daftar_ekskul'])->middleware('auth');
 Route::get('/daftar_peserta', [EkskulController::class, 'daftar_peserta'])->middleware('auth');
 Route::post('/ekskul/pendaftaran', [EkskulController::class, 'store'])->middleware('auth');

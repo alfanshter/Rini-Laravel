@@ -76,7 +76,7 @@
 
     <div class="modal-footer">
         <a href="/datasiswa" class="btn btn-dark">Cancel</a>
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-primary">Edit</button>
     </div>
 </form>
 @endsection

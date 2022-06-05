@@ -86,6 +86,7 @@ class KepalaSekolahController extends Controller
         }
 
         $validation = $request->validate($rule);
+       
         if ($request->password_lama && $request->password) {
             //cek password lama
             //Apakah nomor_induk sama ? 
@@ -98,6 +99,18 @@ class KepalaSekolahController extends Controller
                 }
                 return redirect('/kepalasekolah')->with('failed', 'Password lama salah');
             }
+            $validation['password'] = Hash::make($request->password);
+            User::where('id', $request->id)
+                ->update($validation);
+
+
+            if (auth()->user()->role == 3) {
+                $id = auth()->user()->id;
+                return redirect("/kepalasekolah/editkepalasekolah/$id")->with('success', 'Update Kepala Sekolah Berhasil');
+            }
+            return redirect('/kepalasekolah')->with('success', 'Update Kepala Sekolah Berhasil');
+        }
+        else if ($request->password) {
             $validation['password'] = Hash::make($request->password);
             User::where('id', $request->id)
                 ->update($validation);

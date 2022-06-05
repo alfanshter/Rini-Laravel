@@ -39,10 +39,16 @@ class EkskulController extends Controller
 
     public function register($id)
     {
-        $data = DataEkskul::join('informasi_ekskuls', 'informasi_ekskuls.id_data_ekskul', '=', 'data_ekskuls.kode')
-            ->join('users', 'users.nomor_induk', '=', 'informasi_ekskuls.kode_pelatih')
-            ->where('informasi_ekskuls.id', $id)
-            ->first(['data_ekskuls.nama', 'informasi_ekskuls.*', 'users.name', 'users.nomor_induk']);
+        // $data = DataEkskul::join('informasi_ekskuls', 'informasi_ekskuls.id_data_ekskul', '=', 'data_ekskuls.kode')
+        //     ->join('users', 'users.nomor_induk', '=', 'informasi_ekskuls.kode_pelatih')
+        //     ->where('informasi_ekskuls.id', $id)
+        //     ->first(['data_ekskuls.nama', 'informasi_ekskuls.*', 'users.name', 'users.nomor_induk']);
+        $data = DataEkskul::whereHas('ekskul_to_informasiekskul', function ($query) use ($id) {
+            $query->where('id', $id);
+        })
+            ->with('ekskul_to_informasiekskul')
+            ->first();
+
 
         $is_daftar = 0;
         $cekpendaftaran = Ekskul::where('nomor_induk_siswa', auth()->user()->nomor_induk)->where('id_informasi', $id)->first();
@@ -137,12 +143,12 @@ class EkskulController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function daftar_seleksi()
+    public function peserta()
     {
         if (auth()->user()->role == 0) {
             $ekskul = InformasiEkskul::join('data_ekskuls', 'data_ekskuls.kode', '=', 'informasi_ekskuls.id_data_ekskul')
                 ->get();
-            return view('hasilseleksi.daftar_seleksi', ['seleksi' => $ekskul]);
+            return view('hasilseleksi.peserta', ['seleksi' => $ekskul]);
         }
     }
     public function hasil_seleksi($id)

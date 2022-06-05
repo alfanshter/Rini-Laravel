@@ -84,8 +84,8 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Keterangan</th>
                                             <th>Nama</th>
+                                            <th>Keterangan</th>
                                             <th>Pdf</th>
                                             @if (auth()->user()->role ==0)
                                             <th>Action</th>                                                
@@ -97,8 +97,8 @@
                                         @foreach ($pengumuman as $data)
                                         <tr>
                                             <td>{{$loop->iteration}}</td>
-                                            <td>{{$data->keterangan}}</td>
                                             <td>{{$data->nama_pengumuman}}</td>
+                                            <td>{{$data->keterangan}}</td>
                                             <td><a href="{{asset('storage/'.$data->file_pdf)}}" download="{{$data->file_pdf}}">
                                                 <p>Download Pdf</p>
                                               </a>

@@ -22,7 +22,7 @@
         <div>
                 <p style=" font-weight: bold;">DAFTAR PESERTA</p>
                 <p style=" font-weight: bold;text-transform:uppercase">EKSTRAKURIKULER {{$peserta[0]->nama}}</p>
-                <p style=" font-weight: bold;text-transform:uppercase">tahun pelajaran 2021/2022</p>
+             
         </div>
         <br>
     

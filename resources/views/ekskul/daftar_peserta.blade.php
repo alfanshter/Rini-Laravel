@@ -39,7 +39,7 @@
                                             <th class="align-middle text-center">No</th>
                                             <th class="align-middle text-center">Nama</th>
                                             <th class="align-middle text-center">Kelas</th>
-                                            <th class="align-middle text-center">J/K</th>
+                                            <th class="align-middle text-center">Jenis Kelamin</th>
                                             <th class="align-middle text-center">NISN</th>
                                             <th class="align-middle text-center">Nama Ekskul</th>
                                             <th class="align-middle text-center">Action</th>

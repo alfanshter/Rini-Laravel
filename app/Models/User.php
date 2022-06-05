@@ -49,6 +49,7 @@ class User extends Authenticatable
     public function absen(){
         return $this->belongsTo('App\Models\AbsenPelatih');
     }
+    
 
     public function absensi()
     {
@@ -59,5 +60,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(AbsenPelatih::class);
     }
+
+  
  
 }

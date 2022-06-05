@@ -20,7 +20,7 @@
                 <div class="sidebar-brand-text mx-3">Kepala Sekolah</div>                    
                 @endif
                 @if (auth()->user()->role ==4)
-                <div class="sidebar-brand-text mx-3">Wali Kelass</div>                    
+                <div class="sidebar-brand-text mx-3">Wali Kelas</div>                    
                 @endif
 
 
@@ -38,14 +38,16 @@
 
             <li class="nav-item {{Request::is('/') ? 'active' : ''}} ">
                 <a class="nav-link" href="/">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                        <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+                      </svg>
                     <span>Dashboard</span></a>
             </li>
 
             <li class="nav-item {{Request::is('dataekskul') ? 'active' : ''}} {{Request::is('informasiekskul') ? 'active' : ''}}">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#user"
                     aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
+                    <i class="fa fa-address-book"></i>
                     <span>Data User</span>
                 </a>
                 <div id="user" class="collapse" aria-labelledby="headingUtilities"
@@ -87,7 +89,7 @@
             <li class="nav-item {{Request::is('dataekskul') ? 'active' : ''}} {{Request::is('informasiekskul') ? 'active' : ''}}">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
+                    <i class="fas fa-basketball-ball"></i>
                     <span>Ekskul</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
@@ -100,40 +102,40 @@
                 </div>
             </li>
 
-            <li class="nav-item {{Request::is('daftar_seleksi') ? 'active' : ''}}">
-                <a class="nav-link" href="/daftar_seleksi">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+            <li class="nav-item {{Request::is('peserta') ? 'active' : ''}}">
+                <a class="nav-link" href="/peserta">
+                    <i class="fa fa-address-book"></i>
                     <span>Daftar Peserta</span></a>
             </li>
 
             <li class="nav-item {{Request::is('daftar_agenda') ? 'active' : ''}} ">
                 <a class="nav-link" href="/daftar_agenda">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-calendar-check"></i>
                     <span>Agenda</span></a>
             </li>
 
 
             <li class="nav-item {{Request::is('prestasi') ? 'active' : ''}}"  >
                 <a class="nav-link" href="/prestasi">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-trophy"></i>
                     <span>Prestasi</span></a>
             </li>
 
             <li class="nav-item {{Request::is('nilai') ? 'active' : ''}}"  >
                 <a class="nav-link" href="/nilai">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-graduation-cap"></i>
                     <span>Nilai</span></a>
             </li>
 
             <li class="nav-item {{Request::is('pengumuman') ? 'active' : ''}}">
                 <a class="nav-link" href="/pengumuman">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-bullhorn"></i>
                     <span>Pengumuman</span></a>
             </li>
 
             <li class="nav-item {{Request::is('absen') ? 'active' : ''}}"  >
                 <a class="nav-link" href="/absen">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-clipboard-list"></i>
                     <span>Absen Siswa</span></a>
             </li>     
 
@@ -149,56 +151,58 @@
             @if (auth()->user()->role == 1)
             <li class="nav-item {{Request::is('/') ? 'active' : ''}} ">
                 <a class="nav-link" href="/">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                        <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+                      </svg>
                     <span>Dashboard</span></a>
             </li>
 
             <li class="nav-item {{Request::is('biodata') ? 'active' : ''}} ">
                 <a class="nav-link" href="/biodata">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fa-solid fa-user"></i>
                     <span>Biodata Siswa</span></a>
             </li>
 
             <li class="nav-item {{Request::is('informasiekskul') ? 'active' : ''}} ">
                 <a class="nav-link" href="/informasiekskul">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-basketball-ball"></i>
                     <span>Informasi Ekskul</span></a>
             </li>
 
             <li class="nav-item {{Request::is('hasil_seleksi') ? 'active' : ''}} ">
                 <a class="nav-link" href="/hasil_seleksi">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-tasks"></i>
                     <span>Hasil Seleksi</span></a>
             </li>
 
             <li class="nav-item {{Request::is('daftar_agenda') ? 'active' : ''}} ">
                 <a class="nav-link" href="/daftar_agenda">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-calendar-check"></i>
                     <span>Agenda</span></a>
             </li>
 
             <li class="nav-item {{Request::is('prestasi') ? 'active' : ''}}"  >
                 <a class="nav-link" href="/prestasi">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-trophy"></i>
                     <span>Prestasi</span></a>
             </li>
 
             
             <li class="nav-item {{Request::is('pengumuman') ? 'active' : ''}}"  >
                 <a class="nav-link" href="/pengumuman">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-bullhorn"></i>
                     <span>Pengumuman</span></a>
             </li>
 
             <li class="nav-item {{Request::is('nilai') ? 'active' : ''}}"  >
                 <a class="nav-link" href="/nilai">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-graduation-cap"></i>
                     <span>Nilai</span></a>
             </li>
 
             <li class="nav-item {{Request::is('absen') ? 'active' : ''}}"  >
                 <a class="nav-link" href="/absen">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-clipboard-list"></i>
                     <span>Absen</span></a>
             </li>     
 
@@ -212,7 +216,9 @@
 
             <li class="nav-item {{Request::is('/') ? 'active' : ''}} ">
                 <a class="nav-link" href="/">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                        <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+                      </svg>
                     <span>Dashboard</span></a>
             </li>
             <li class="nav-item {{Request::is('biodata_pelatih') ? 'active' : ''}} ">
@@ -223,44 +229,44 @@
 
             <li class="nav-item {{Request::is('pendaftaran_seleksi') ? 'active' : ''}} ">
                 <a class="nav-link" href="/pendaftaran_seleksi">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                     <i class="fas fa-tasks"></i>
                     <span>Pendaftaran Seleksi</span></a>
             </li>
 
             <li class="nav-item {{Request::is('daftar_ekskul') ? 'active' : ''}} ">
                 <a class="nav-link" href="/daftar_peserta">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fa fa-address-book"></i>
                     <span>Peserta Ekskul</span></a>
             </li>
 
             <li class="nav-item {{Request::is('daftar_agenda') ? 'active' : ''}} ">
                 <a class="nav-link" href="/daftar_agenda">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-calendar-check"></i>
                     <span>Agenda</span></a>
             </li>
 
             
             <li class="nav-item {{Request::is('prestasi') ? 'active' : ''}}"  >
                 <a class="nav-link" href="/prestasi">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-trophy"></i>
                     <span>Prestasi</span></a>
             </li>
 
             <li class="nav-item {{Request::is('pengumuman') ? 'active' : ''}}"  >
                 <a class="nav-link" href="/pengumuman">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-bullhorn"></i>
                     <span>Pengumuman</span></a>
             </li>
 
             <li class="nav-item {{Request::is('nilai') ? 'active' : ''}}"  >
                 <a class="nav-link" href="/nilai">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-graduation-cap"></i>
                     <span>Nilai</span></a>
             </li>
            
             <li class="nav-item {{Request::is('absen') ? 'active' : ''}}"  >
                 <a class="nav-link" href="/absen">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-clipboard-list"></i>
                     <span>Absen</span></a>
             </li>     
 
@@ -279,34 +285,37 @@
 
               <li class="nav-item {{Request::is('/') ? 'active' : ''}}"  >
                 <a class="nav-link" href="/">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                        <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+                      </svg>
                     <span>Dashboard</span></a>
             </li>     
-
-            <li class="nav-item {{Request::is('absen') ? 'active' : ''}}"  >
-                <a class="nav-link" href="/absen">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Absen</span></a>
-            </li>     
-
-            <li class="nav-item {{Request::is('nilai') ? 'active' : ''}}"  >
-                <a class="nav-link" href="/nilai">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Nilai</span></a>
-            </li>
-
-            
-            <li class="nav-item {{Request::is('daftar_agenda') ? 'active' : ''}} ">
-                <a class="nav-link" href="/daftar_agenda">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Agenda</span></a>
-            </li>
 
             <li class="nav-item {{Request::is('editkepalasekolah') ? 'active' : ''}}"  >
                 <a class="nav-link" href="/kepalasekolah/editkepalasekolah/{{auth()->user()->id}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Biodata</span></a>
             </li>
+
+            <li class="nav-item {{Request::is('absen') ? 'active' : ''}}"  >
+                <a class="nav-link" href="/absen">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>Absen</span></a>
+            </li>     
+
+            <li class="nav-item {{Request::is('nilai') ? 'active' : ''}}"  >
+                <a class="nav-link" href="/nilai">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Nilai</span></a>
+            </li>
+
+            
+            <li class="nav-item {{Request::is('daftar_agenda') ? 'active' : ''}} ">
+                <a class="nav-link" href="/daftar_agenda">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Agenda</span></a>
+            </li>
+
 
 
                 
@@ -318,21 +327,24 @@
             @if ( (auth()->user()->role ==4))
               <li class="nav-item {{Request::is('/') ? 'active' : ''}}"  >
                 <a class="nav-link" href="/">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                        <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+                      </svg>
                     <span>Dashboard</span></a>
             </li>    
-           
-            <li class="nav-item {{Request::is('nilai') ? 'active' : ''}}"  >
-                <a class="nav-link" href="/nilai">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Nilai</span></a>
-            </li>
 
             <li class="nav-item {{Request::is('editwalikelas') ? 'active' : ''}}"  >
                 <a class="nav-link" href="/walikelas/editwalikelas/{{auth()->user()->id}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Biodata</span></a>
             </li>
+
+            <li class="nav-item {{Request::is('nilai') ? 'active' : ''}}"  >
+                <a class="nav-link" href="/nilai">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Nilai</span></a>
+            </li>
+
 
                 
             @endif

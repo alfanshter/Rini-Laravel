@@ -167,7 +167,7 @@
                         @if (auth()->user()->role ==1)
                         <td class="align-middle text-center">
                             <div class="d-flex justify-content-sm-center mt-2">
-                                <a href="ekskul/pendaftaran/{{$data->id}}" class="btn btn-primary">Register</a>
+                                <a href="ekskul/pendaftaran/{{$data->id}}" class="btn btn-primary">Daftar Ekskul</a>
                             </div>
                         </td>
                         @endif

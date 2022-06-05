@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Login</title>
+    <title>SIM EKSKUL SMAN 16 JAKARTA</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -50,7 +50,8 @@
                                     </div>
                                     @endif
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">SIM EKSKUL</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">SMA NEGERI 16 JAKARTA</h1>
                                     </div>
                                     <form class="user" action="/login" method="POST">
                                         @csrf

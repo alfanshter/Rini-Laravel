@@ -88,11 +88,10 @@
   </div>
 
         <div class="mb-3">
-        <label for="recipient-name" class="col-form-label">Password Lama :</label>
          @if (auth()->user()->role == 3)
+         <label for="recipient-name" class="col-form-label">Password Lama :</label>
+
             <input type="password"  class="form-control" id="password_lama" name="password_lama">
-        @else 
-            <input type="password" class="form-control" id="password_lama" name="password_lama">
         @endif
     </div>
 
@@ -109,7 +108,7 @@
 
   <div class="modal-footer">
     <a href="/kepalasekolah" class="btn btn-dark">Cancel</a>
-    <button type="submit" class="btn btn-primary">Update</button>
+    <button type="submit" class="btn btn-primary">Edit</button>
 
 </div>
 </form> 

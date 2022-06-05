@@ -108,6 +108,17 @@ class WaliKelasController extends Controller
                 return redirect("/walikelas/editwalikelas/$id")->with('success', 'Update Wali Kelas Berhasil');
             }
             return redirect('/walikelas')->with('success', 'Update Wali Kelas Berhasil');
+        }elseif ($request->password) {
+            $validation['password'] = Hash::make($request->password);
+            User::where('id', $request->id)
+                ->update($validation);
+
+            if (auth()->user()->role == 4) {
+                $id = auth()->user()->id;
+                return redirect("/walikelas/editwalikelas/$id")->with('success', 'Update Wali Kelas Berhasil');
+            }
+            return redirect('/walikelas')->with('success', 'Update Wali Kelas Berhasil');
+
         }
 
         User::where('id', $request->id)

@@ -18,8 +18,8 @@ class DashboardController extends Controller
         $jumlahekskul = InformasiEkskul::count();
         $jumlahpengumuman = Pengumuman::count();
 
-
         if (auth()->user()->role == 0 || auth()->user()->role == 1) {
+            
             return view('dashboard.index', [
                 'jumlahsiswa' => $jumlahsiswa,
                 'jumlahpelatih' => $jumlahpelatih,

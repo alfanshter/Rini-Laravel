@@ -24,4 +24,9 @@ class Agenda extends Model
     {
         return $this->belongsTo(DataEkskul::class, 'nama_ekskul', 'kode');
     }
+
+    public function agenda_to_ekskul()
+    {
+        return $this->belongsTo(DataEkskul::class, 'id_data_ekskul', 'kode');
+    }
 }

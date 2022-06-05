@@ -19,7 +19,7 @@ return new class extends Migration
             // is status = 2 diterima
             // is status = 3 ditolak
             $table->id();
-            $table->string('nomor_induk_siswa');
+            $table->string('nomor_induk_siswa',20);
             $table->foreign('nomor_induk_siswa')->references('nomor_induk')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('id_data_ekskul');
             $table->foreign('id_data_ekskul')->references('kode')->on('data_ekskuls')->onDelete('cascade')->onUpdate('cascade');

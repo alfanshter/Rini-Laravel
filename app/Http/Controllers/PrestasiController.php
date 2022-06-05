@@ -26,10 +26,13 @@ class PrestasiController extends Controller
                 ->get();
             return view('prestasi.prestasi', ['prestasi' => $ekskul]);
         } else if (auth()->user()->role == 1) {
-            $ekskul = DB::table('ekskuls')
-                ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.id_data_ekskul')
-                ->where('is_status', 2)
-                ->get();
+            // $ekskul = DB::table('ekskuls')
+            //     ->join('data_ekskuls', 'data_ekskuls.kode', '=', 'ekskuls.id_data_ekskul')
+            //     ->where('is_status', 2)
+            //     ->get();
+
+            $ekskul = InformasiEkskul::join('data_ekskuls', 'data_ekskuls.kode', '=', 'informasi_ekskuls.id_data_ekskul')
+            ->get();
 
             return view('prestasi.prestasi', ['prestasi' => $ekskul]);
         } else if (auth()->user()->role == 2) {

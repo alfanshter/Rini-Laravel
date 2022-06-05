@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('tahun_ajaran', 25);
             $table->string('semester', 7);
             $table->string('nama_materi');
-            $table->string('nama_ekskul');
+            $table->string('id_data_ekskul');
+            $table->foreign('id_data_ekskul')->references('kode')->on('data_ekskuls')->onDelete('cascade')->onUpdate('cascade');
             $table->string('kode_pelatih');
             $table->foreign('kode_pelatih')->references('nomor_induk')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

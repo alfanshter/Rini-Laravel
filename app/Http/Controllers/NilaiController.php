@@ -249,8 +249,12 @@ class NilaiController extends Controller
             'nilai' => $request->nilai,
             'semester' => $request->semester
         ]);
+        if (auth()->user()->role ==0) {
+            return redirect("/data_nilai/$request->nama_ekskul")->with('success', 'Nilai berhasil di Edit');
+        }else{
+            return redirect("/nilai")->with('success', 'Nilai berhasil di Edit');
 
-        return redirect("/data_nilai/$request->nama_ekskul")->with('success', 'Nilai berhasil di Edit');
+        }
     }
 
     public function cetakpdf_nilai(Request $request)

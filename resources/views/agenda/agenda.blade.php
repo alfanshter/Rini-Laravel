@@ -21,7 +21,7 @@
                 <form action="/post_agenda" method="POST">
                     @csrf
                     <input type="hidden" name="kode_pelatih" value="{{$pelatih->kode_pelatih}}" id="kode_pelatih">
-                    <input type="hidden" name="nama_ekskul" value="{{$nama_ekskul}}" id="nama_ekskul">
+                    <input type="hidden" name="id_data_ekskul" value="{{$nama_ekskul}}" id="id_data_ekskul">
                     <div class="mb-3">
                         <label for="recipient-name" class="col-form-label">Nama Materi:</label>
                         <input type="text" class="form-control" id="nama_materi" required name="nama_materi" value="{{old('nama_materi')}}">
@@ -78,7 +78,7 @@
                 <form action="/post_agenda" method="POST">
                     @csrf
                     <input type="hidden" name="kode_pelatih" value="{{auth()->user()->nomor_induk}}" id="kode_pelatih">
-                    <input type="hidden" name="nama_ekskul" value="{{$nama_ekskul}}" id="nama_ekskul">
+                    <input type="hidden" name="id_data_ekskul" value="{{$nama_ekskul}}" id="id_data_ekskul">
                     <div class="mb-3">
                         <label for="recipient-name" class="col-form-label">Nama Materi:</label>
                         <input type="text" class="form-control" id="nama_materi" required name="nama_materi" value="{{old('nama_materi')}}">
@@ -225,7 +225,7 @@
                     <tr>
                         <td>{{$loop->iteration}}</td>
                         <td>{{$data->nama_materi}}</td>
-                        <td>{{$data->data_ekskul->nama}}</td>
+                        <td>{{$data->agenda_to_ekskul->nama}}</td>
                         <td>{{$data->users->name}}</td>
                         <td>{{$data->tahun_ajaran}}</td>
                         <td>{{$data->semester}}</td>

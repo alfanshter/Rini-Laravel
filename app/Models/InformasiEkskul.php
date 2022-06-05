@@ -9,4 +9,9 @@ class InformasiEkskul extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function informasiekskul_to_users()
+    {
+        return $this->belongsTo(User::class,'kode_pelatih','nomor_induk');
+    }
 }

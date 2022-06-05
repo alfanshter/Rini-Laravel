@@ -26,7 +26,7 @@
     <input type="hidden" name="id_data_ekskul" value="{{$data_prestasi->id_data_ekskul}}" id="id_data_ekskul">
      <input type="hidden" name="oldImage" value="{{$data_prestasi->foto}}">
     <div class="mb-3">
-        <label for="recipient-name" class="col-form-label">Nama Peserta:</label>
+        <label for="recipient-name" class="col-form-label">Nama:</label>
         <input type="text" class="form-control" disabled value="{{old('nama_peserta',$data_prestasi->user->name)}}">
     </div>
 
